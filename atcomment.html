@@ -1,0 +1,87 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Shin Hwei Tan</title>
+</head>
+<body>
+<h1>@tComment: Testing Javadoc Comments to Detect Comment-Code Inconsistencies</h1>
+<p><b>Abstract: </b>Code comments are important artifacts in software.
+Java has standardized the writing of API specifications
+as Javadoc comments. API developers write Javadoc comments,
+and API users often read these comments to understand the
+API they use, e.g., reading a Javadoc comment for a method
+instead of reading the body of the method. An inconsistency
+between the Javadoc comment and body for a method indicates
+either a fault in the body or, effectively, a fault in the comment
+that can mislead the callers of the method to introduce faults
+in their code.</p><p>
+We present a novel approach, called @tComment, for testing
+Javadoc comments, specifically for testing method properties
+about null values and related exceptions. Our approach consists
+of two components. Given source files for a Java project, the
+first component automatically analyzes the English text in each
+Javadoc comment to infer a set of likely properties for each
+method in the files. The second component generates random
+tests for these methods, checks the inferred properties, and
+reports inconsistencies. We evaluated @tComment on six opensource
+projects and found 24 inconsistencies between Javadoc
+comments and method bodies. We reported all of these
+inconsistencies, and 12 have already been confirmed and fixed
+by the developers.</p>
+<li><b class="paper">
+ @tComment: Testing Javadoc Comments to Detect Comment-Code Inconsistencies
+</b> <br /> Shin Hwei Tan, Darko Marinov, Lin Tan, Gary T. Leaven
+	 <br />
+ International Conference on Software Testing, Verification, and Validation <b class="conf"> (ICST)</b>, <a href="http://icst2012.soccerlab.polymtl.ca/Presentation_Slides/ShinHweiTan.pdf"><b>[ICST Talk]</b></a>,<a href="www.comp.nus.edu.sg/~shinhwei/tcomment.pdf"><b>[ICST Paper]</b></a>, 2012 
+	</li>
+<br />
+<h3>Source Code</h3>
+@tComment is available in <a href="https://github.com/stan6/atComment">github</a>. Refer to "README.md" in github for detailed instruction.
+<br />
+<h3>Bibtex</h3>
+<p>
+@inproceedings{tan2012tcomment,<br />
+  title={@ tcomment: Testing javadoc comments to detect comment-code inconsistencies},<br />
+  author={Tan, Shin Hwei and Marinov, Darko and Tan, Lin and Leavens, Gary T},<br />
+  booktitle={2012 IEEE Fifth International Conference on Software Testing, Verification and Validation},<br />
+  pages={260--269},<br />
+  year={2012},<br />
+  organization={IEEE}<br />
+}
+</p>
+
+<hr>
+
+
+
+<h3><a name="link">Bug Reports Submitted</a></h3>
+<ul>
+	<b>Joda Time</b>
+	<li><h5><a href="http://sourceforge.net/tracker/?func=detail&aid=3413869&group_id=97367&atid=617889">Bug Report 1 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://sourceforge.net/tracker/?func=detail&atid=617889&aid=3413869&group_id=97367">Bug Report 2 - Fixed by Developer</a></h5></li>
+	<b>JFreeChart</b>
+	<li><h5><a href="https://sourceforge.net/tracker/?func=detail&aid=3428870&group_id=15494&atid=115494">Bug Report 1 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://sourceforge.net/tracker/?func=detail&atid=115494&aid=3513099&group_id=15494">Bug Report 2 - Fixed by Developer </a></h5></li>
+	<b>Apache Log4j</b>
+	<li><h5><a href="https://issues.apache.org/bugzilla/show_bug.cgi?id=52095">Bug Report 1</a></h5></li>
+	<b>Apache Commons Collections</b>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-379">Bug Report 1 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-384">Bug Report 2 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-385">Bug Report 3</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-388">Bug Report 4 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-389">Bug Report 5 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-391">Bug Report 6 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-400">Bug Report 7 - Fixed by Developer</a></h5></li>
+	<li><h5><a href="https://issues.apache.org/jira/browse/COLLECTIONS-401">Bug Report 8 - Fixed by Developer</a></h5></li>
+	<b>Glazedlists</b>
+	<li><h5><a href="http://java.net/jira/browse/GLAZEDLISTS-530">Bug Report 1 - Fixed by Developer</a></h5></li>
+	<!--<b>Eclipse</b>
+	<li><h5><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=281953">Bug Report 1</a></h5></li>
+	<li><h5><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=281980">Bug Report 2</a></h5></li>
+	<li><h5><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=281951">Bug Report 3</a></h5></li-->
+</ul>
+</body>
+</html>

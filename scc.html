@@ -1,0 +1,218 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Software Change Contract</title>
+
+<style type="text/css">
+.paper {color:black;}
+.name {color:red;}
+.conf {color:black;}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover 
+{
+     color:blue; 
+     cursor:pointer;  
+}
+#wrapper {
+ width: 900px;
+ margin: 0 auto;
+ text-align: left;
+}
+
+body {
+font-family:Arial;
+font-weight:normal;
+}
+
+ol li {padding:0 0 10px 10px;}
+
+</style>
+<font face="arial"> 
+</font>
+
+
+
+</head>
+
+<body bgcolor="#ffffff">
+<div id="wrapper">
+<a name="top"></a>
+
+<p align=center>
+ 	<h1 align=center><strong><a name="logo">Software Change Contract
+     (<span style="color:#FF0000">S</span><span style="color:#FF4000">C</span><span style="color:#088A08">C</span>)
+      </strong></a>
+    </h1>
+</p>
+<hr />
+<p align =center ><strong><a href="#about">About Software Change Contract</a> | <a href="#survey">Survey</a> |  <a href="#pub">Publications</a> | <a href="#contact">Contact</a>  | <a href="#resources">Resources</a> </strong></p>
+
+<hr />
+
+<p>
+Change contract is a language used to specify intended effect of program changes. Change contract focuses only on the program changes and their intended semantic effect. Program behavior that is unchanged across version does not need to be captured.
+</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<p><h3><strong><a name="survey">Survey</a></strong></p></h3>
+<p> We conducted a survey of 16 final year undergraduate students
+in a senior year course (formal verification of embedded software)
+at the National University of Singapore in 2012. The survey can be downloaded <a href="survey.pdf"><u>here</u></a>. </p>
+<br>
+<p>The responses we obtained from the survey can be downloaded from the table below:
+<p align=center>
+<table border="1">
+<tr>
+<td>
+<a href="1.pdf"><u>student1</u></a>
+</td>
+<td>
+<a href="2.pdf"><u>student2</u></a>
+</td>
+<td>
+<a href="3.pdf"><u>student3</u></a>
+</td>
+<td>
+<a href="4.pdf"><u>student4</u></a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="5.pdf"><u>student5</u></a>
+</td>
+<td>
+<a href="6.pdf"><u>student6</u></a>
+</td>
+<td>
+<a href="7.pdf"><u>student7</u></a>
+</td>
+<td>
+<a href="8.pdf"><u>student8</u></a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="9.pdf"><u>student9</u></a>
+</td>
+<td>
+<a href="10.pdf"><u>student10</u></a>
+</td>
+<td>
+<a href="11.pdf"><u>student11</u></a>
+</td>
+<td>
+<a href="12.pdf"><u>student12</u></a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="13.pdf"><u>student13</u></a>
+</td>
+<td>
+<a href="14.pdf"><u>student14</u></a>
+</td>
+<td>
+<a href="15.pdf"><u>student15</u></a>
+</td>
+<td>
+<a href="16.pdf"><u>student16</u></a>
+</td>
+</tr>
+
+</table>
+</p>
+</p>
+<p><h4><strong><a name="surveyQ">Survey Questionnaire</a></strong></p></h4>
+<p>
+We asked the following three types of questions. Sample answers for the survey questionaire can be downloaded <a href="answers.pdf"><u>here</u></a>
+<ol>
+<li><strong>Read-Modify (RM) </strong>type questions. With this type of questions,
+we show a program and its change contract and then ask respondents
+to modify the program in a way to reflect the change
+contract. This type of questions measures how easy it is to comprehend
+change contracts.
+</li>
+<li><strong>Read-Describe (RD) </strong>type questions. Similarly to the previous
+type questions, we first show a program and its change contract.
+Unlike before, however, we then ask respondents to describe
+the change contract in plain English. This type of questions doublechecks
+the comprehensibility of change contracts.
+</li>
+<li><strong>Write (W) </strong>type questions. With this type of questions, we
+ask respondents to write a proper change contract that they think
+can reflect a given verbal description of desired changes. This type
+of questions measures how easy it is to write change contracts.
+</li>
+</ol>
+</p>
+<p><h4><strong><a name="surveyQ">Tutorial Session</a></strong></p></h4>
+<p> We offered a single tutorial session about change contract to the
+survey participants. Tutorial materials can be downloaded here: <a href="change_contract_tutorial.pdf">(tutorial document)</a>,<a href="slides.pdf">(slides)</a>
+</p>
+
+<p><h4><strong><a name="surveyQ">Survey Result</a></strong></p></h4>
+<p align=center>
+<table class="image">
+<tr><td style="text-align:center"><img src="correctanswerTable.png" alt="survey_result" width="500" height="100">
+</td></tr>
+<tr><td class="caption" style="text-align:center"><i>Table 2: Distribution of correct answer rates depending on the criterion used to categorize questions</i>
+</td></tr>
+<tr><td>
+<p>The table above shows the results of our survey, i.e., the distribution of
+correct answer rates depending on the criterion used to categorize
+questions. The correct answer rate is high throughout all categories,
+forming the overall correct answer rate at 92%.
+</p>
+<p>
+Overall, our survey results indicate that the participants reasonably
+easily learned and used change contracts. Also notice in the results that the correct answer rate was not affected by whether a subject program is artificially made or extracted from a real-life program (i.e., AspectJ). It is also interesting that structural changes were more easily handled than behavioral changes were (97% vs 85%).
+</p>
+</td></tr>
+</table>
+</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<p><h3><strong><a name="pub">Publications</a></strong></p></h3>
+<ul>
+<li><b class="paper">Software Change Contracts<a href="new-idea.pdf">(pdf)</a> </b> <br/> 
+	 Dawei Qi, Jooyong Yi, Abhik Roychoudhury <br />
+   ACM SIGSOFT Symposium on Foundations of Software Engineering, New Ideas and Emerging Results track <b class="conf"> (FSE-NIER)</b>, 2012 
+	</li>
+<!--li><b class="paper"><a href="main.pdf">Expressing and Checking Intended Changes via Software Change Contracts</a> </b> <br/> 
+	 Jooyong Yi, Dawei Qi, Shin Hwei Tan, Abhik Roychoudhury <br />
+   International Symposium in Software Testing and Analysis<b class="conf"> (ISSTA)</b>, 2013 
+	</li-->
+</ul>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<p><h3><strong><a name="contact">Contact</a></strong></p></h3>
+<p><h4><strong><a name="people">People Involved</a></strong></p></h4>
+<ul>
+<li><a href="http://www.comp.nus.edu.sg/~jooyong/">Jooyong Yi (jooyong At comp Dot nus Dot edu Dot sg)</a></li>
+<li><a href="http://www.comp.nus.edu.sg/~dawei/">Dawei Qi (dawei At comp Dot nus Dot edu Dot sg))</a></li>
+<li><a href="http://www.comp.nus.edu.sg/~shinhwei/">Shin Hwei Tan (shinhwei At comp Dot nus Dot edu Dot sg))</a></li>
+<li><a href="http://www.comp.nus.edu.sg/~abhik/">Abhik Roychoudhury (abhik  At comp Dot nus Dot edu Dot sg))</a></li>
+</ul>
+<p><h4><strong><a name="feedback">Feedback</a></strong></p></h4>
+<p>We are very interested in getting feedback on how to
+  improve <a name="top">Software Change Contract</a>. Feedback will be welcomed by any of us.
+<h5><a href="#top">Back to Top</a></h5>
+<hr />
+<!-- p><h3><strong><a name="resources">Resources</a></strong></p></h3>
+<ul>
+<li><a href="slides.pdf">Software Change Contract Slides</a></li>
+<li><a href="answers.pdf">Sample Answers for the Survey Questionnaire</a></li>
+</ul>
+<h5><a href="#top">Back to Top</a></h5-->
+</div>
+</body>
+
+</html>

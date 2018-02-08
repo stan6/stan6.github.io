@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1 style="text-align:center">GenProg versus mGenProg for GenProg benchmarks</h1>
+*Note that the text highlighted in green means addition of statement while the text highlighted in red means removal of statement
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:15px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:9px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Versions</th>
+    <th class="tg-yw4l">Human Patch</th>
+    <th class="tg-yw4l">Modified GP-AE Patch</th>
+    <th class="tg-yw4l">Original GP-AE Patch</th>
+    <th class="tg-yw4l">Delete if-branch</th>
+    <th class="tg-yw4l">Delete while-loop</th>
+    <th class="tg-yw4l">Delete temp-condition</th>
+    <th class="tg-yw4l">Delete-exit</th>
+    <th class="tg-yw4l">Delete return</th>
+    <th class="tg-yw4l">Delete goto</th>
+    <th class="tg-yw4l">Delete error code</th>
+    <th class="tg-yw4l">Insert early return</th>
+    <th class="tg-yw4l">Insert early exit</th>
+    <th class="tg-yw4l">Insert goto</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-307931-307934</td>
+    <td class="tg-yw4l">Add a line:<p style="color:green">SEPARATE_ZVAL(elem);<p></td>
+    <td class="tg-yw4l"><p style="color:green"> Add return (0);</p>Note: Close to actual repair location,a few lines before the location of human fix, Same function as human fix</td>
+    <td class="tg-yw4l">Delete if-statement below, human fix is in different function:<br><p style="color:red">call_result = call_user_function_ex(NULL,                        &amp;us-&gt;object,                        &amp;func_name,                        &amp;retval,                        0, NULL, 0, NULL TSRMLS_CC);<br>if (call_result == SUCCESS &amp;&amp; retval != NULL &amp;&amp; Z_TYPE_P(retval) == IS_ARRAY) <br>{                if (SUCCESS == statbuf_from_array(retval, ssb TSRMLS_CC))                        ret = 0;      }<br> else <br>{                if (call_result == FAILURE) {                        php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_STAT " is not implemented!",                                        us-&gt;wrapper-&gt;classname);                }        }<br></p></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309986-310009</td>
+    <td class="tg-yw4l">Add if and else condition:<p style="color:green">&lt;                         zval_ptr_dtor(&amp;object);<br>---<br>&gt;                         if (EXPECTED(*retval != object)) {<br>&gt;                                 zval_ptr_dtor(&amp;object);<br>&gt;                         } else {<br>&gt;                                 Z_DELREF_P(object);<br>&gt;                         }</p></td>
+    <td class="tg-yw4l"><p style="color:green">Add Z_DELREF_P(object);</p> Note: Patch similar to human patch, both forget to delete reference</td>
+    <td class="tg-yw4l">Delete a branch:<br><p style="color:red">if (PZVAL_IS_REF(object)) <br>{                                SEPARATE_ZVAL(&amp;object);                        }</p></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309111-309159</td>
+    <td class="tg-yw4l">Add check:<p style="color:green">if (pp - s) {<br>&gt;                                 ret-&gt;path = estrndup(s, (pp-s));<br>&gt;php_replace_controlchars_ex(ret-&gt;path, (pp - s));&gt;                         }"</td>
+    <td class="tg-yw4l">Add check:<p style="color:green">if (pp - s) {<br>&gt;                                 ret-&gt;path = estrndup(s, (pp-s));<br>&gt;php_replace_controlchars_ex(ret-&gt;path, (pp - s));&gt;                         }"</td>
+    <td class="tg-yw4l">Add  check:<p style="color:green">if (pp - s) {<br>&gt;                                 ret-&gt;path = estrndup(s, (pp-s));<br>&gt;php_replace_controlchars_ex(ret-&gt;path, (pp - s));&gt;                         }"</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-310011-310050</td>
+    <td class="tg-yw4l">Add one method call:<p style="color:green"> zval_copy_ctor(tmp);</p></td>
+    <td class="tg-yw4l">Delete:<p style="color:red"> zend_hash_copy(tmp_ht, original_ht, (copy_ctor_func_t) zval_add_ref, (void *) &amp;tmp, sizeof(zval *));</p></td>
+    <td class="tg-yw4l">Delete:<p style="color:red"> zend_hash_copy(tmp_ht, original_ht, (copy_ctor_func_t) zval_add_ref, (void *) &amp;tmp, sizeof(zval *));</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-307562-307561</td>
+    <td class="tg-yw4l">Replace one method call with different method call:<p style="color:red">&lt; htmlNodeDumpFormatOutput(buf, docp, node, 0, format);</p><p style="color:green">&gt; xmlNodeDump(buf, docp, node, 0, format);</p></td>
+    <td class="tg-yw4l">Search ends, no repair</td>
+    <td class="tg-yw4l">Search ends, no repair</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-308525-308529</td>
+    <td class="tg-yw4l">Move statement from inside method to before method call:<p style="color:red">&gt;       JSON_G(error_code) = PHP_JSON_ERROR_NONE;</p><p style="color:green">&lt;       JSON_G(error_code) = PHP_JSON_ERROR_NONE;</p></td>
+    <td class="tg-yw4l">Delete: <p style="color:red">JSON_G(error_code) = PHP_JSON_ERROR_NONE;</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> JSON_G(error_code) = PHP_JSON_ERROR_NONE;</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-307302-307307</td>
+    <td class="tg-yw4l">Multiple files change. Diff not shown</td>
+    <td class="tg-yw4l">Delete<p style="color:red"> retval = (unsigned char )(tmp___1 == (int __attribute__((__visibility__("default")))  )0);</p></td>
+    <td class="tg-yw4l">Delete loop:<p style="color:red">while (1) {    __z = return_value;<br>    __z-&gt;value.lval = (long )((int )retval != 0);<br>    __z-&gt;type = (unsigned char)3;<br>    break; <br> }</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-307688-307689</td>
+    <td class="tg-yw4l">Patch turn existing statements into loops</td>
+    <td class="tg-yw4l">Delete <p style="color:red">memcpy tmp___14 = zend_get_std_object_handlers();<br>  memcpy((void */* __restrict  */)(&amp;<br> date_object_handlers_period), (void const   */* __restrict  */)tmp___14, sizeof(zend_object_handlers ));</p></td>
+    <td class="tg-yw4l">Delete the if check that check whether timezone is valid: <p style="color:red">if (php_date_global_timezone_db) {    tmp___1 = (timelib_tzdb const   *)php_date_global_timezone_db;<br>       } else {    tmp___0 = timelib_builtin_db();<br>    tmp___1 = tmp___0;<br>  }  tmp___2 = timelib_timezone_id_is_valid(zone, tmp___1);<br>  if (tmp___2) {  } else {    php_error_docref0((char const   *)((void *)0), 1 &lt;<br>&lt;<br> 3L, "Timezone ID \'%s\' is invalid", zone);</p></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  
+  <tr>
+    <td class="tg-yw4l">php-bug-307914-307915</td>
+    <td class="tg-yw4l">Change error message:<p style="color:green">spprintf(error, 0, "Cannot create phar '%s', file extension (or combination) not recognised or the directory does not exist", fname);</p></td>
+    <td class="tg-yw4l">Delete phar_globals.request_done = 1;<br></td>
+    <td class="tg-yw4l">Delete phar_globals.request_done = 1;<br></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-308262-308315</td>
+    <td class="tg-yw4l">Add a condition:<p style="color:red">1261c1261,1263<br>
+<                                         zend_error(E_NOTICE, "Uninitialized string offset: %ld", Z_LVAL_P(dim));
+</p><p style="color:green">---
+&gt;<br>                                       if (type != BP_VAR_IS) {
+<br>&lt;                                                 zend_error(E_NOTICE, "Uninitialized string offset: %ld", Z_LVAL_P(dim));
+<br>&lt;                                        }</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> expr_ptr = new_expr;</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red">expr_ptr = new_expr;<br></p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-308475-308477</td>
+    <td class="tg-yw4l">Involve many file changes. Diff not shown</td>
+    <td class="tg-yw4l">Delete <p style="color:red">persistent_id = NULL;</p></td>
+    <td class="tg-yw4l">Delete <p style="color:red">persistent_id = NULL;</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-308523-308525</td>
+    <td class="tg-yw4l">adding condition check for overflow in two files:<p style="color:green">if(precision&gt;FORMAT_CONV_MAX_PRECISION) {
+<br>&gt;                                                 precision = FORMAT_CONV_MAX_PRECISION;
+<br>&gt;                                     }</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red">s = ap_php_conv_10(i_num, (*fmt) == 'u', &amp;<br>is_negative,                                &amp;<br>num_buf[NUM_BUF_SIZE], &amp;<br>s_len);</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> s = ap_php_conv_10(i_num, (*fmt) == 'u', &amp;<br>is_negative,                                &amp;<br>num_buf[NUM_BUF_SIZE], &amp;<br>s_len);</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309487-309491</td>
+    <td class="tg-yw4l">Multiple files change. Diff not shown</td>
+    <td class="tg-yw4l">Add<p style="color:green">goto _L;</p></td>
+    <td class="tg-yw4l">Add<p style="color:green">goto _L;</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309516-309535</td>
+    <td class="tg-yw4l">Replace set with method call in multiple places:<p style="color:green">&gt;                 memset(&dateobj->time->relative, 0, sizeof(struct timelib_rel_time));</p>
+<p style="color:red">
+2864,2865d2864
+<br>&lt;              dateobj->time->relative.weekday = 0;
+<br>&lt;              dateobj->time-&gt;relative.have_weekday_relative <br>= 0;
+2904a2904
+<p style="color:green">&gt;        memset(&dateobj->time->relative, 0, sizeof(struct timelib_rel_time));
+2912,2913d2911
+</p>
+<p style="color:red">&lt;        dateobj->time->relative.weekday = 0;
+<br>&lt;        dateobj->time->relative.have_weekday_relative = 0;</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> tmp___0 = timelib_builtin_db();</p></td>
+    <td class="tg-yw4l">Delete whole branch by deleting the statement:<p style="color:red">  tmp=zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;<br>zone, &amp;<br>zone_len) == FAILURE:if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;<br>zone, &amp;<br>zone_len) == FAILURE) {                RETURN_FALSE;<br>        }</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309579-309580</td>
+    <td class="tg-yw4l">Replace condition with another value:<p style="color:red"><         if (isostr_len) {
+</p>---
+<p style="color:green">
+>         if (isostr) {</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> return ((char __attribute__((__visibility__("default")))  *)string);</p></td>
+    <td class="tg-yw4l">Delete<p style="color:red"> return ((char __attribute__((__visibility__("default")))  *)string);</p></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309892-309910</td>
+    <td class="tg-yw4l">vm1</td>
+    <td class="tg-yw4l">delete new_str = (char *) erealloc(new_str, *new_length + 1);<br></td>
+    <td class="tg-yw4l">delete if (len &gt;<br> (long )s1_len - offset) {                                      len = (long )s1_len - offset;<br>                                        }</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-309984-309986</td>
+    <td class="tg-yw4l">vm7</td>
+    <td class="tg-yw4l">delete array_init_size(return_value, zend_hash_num_elements(Z_ARRVAL_P(array)));<br></td>
+    <td class="tg-yw4l">delete  if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zH", &amp;<br>key, &amp;<br>array) == FAILURE) {                return;<br>        }</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-310673-310681</td>
+    <td class="tg-yw4l">vm2</td>
+    <td class="tg-yw4l">delete context = ecalloc(1, sizeof(php_stream_context));<br></td>
+    <td class="tg-yw4l">delete: MAKE_STD_ZVAL(context-&gt;<br>options);<br>        array_init(context-&gt;<br>options);<br> after context = ecalloc(1, sizeof(php_stream_context));<br></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-311164-311141</td>
+    <td class="tg-yw4l">vm3</td>
+    <td class="tg-yw4l">delete *lowercase_name = NULL;<br></td>
+    <td class="tg-yw4l">delete:if (!(c-&gt;<br>flags &amp;<br> CONST_CS)) {                /* keep in mind that c-&gt;<br>name_len already contains the '\0' */                lowercase_name = estrndup(c-&gt;<br>name, c-&gt;<br>name_len-1);<br>                     zend_str_tolower(lowercase_name, c-&gt;<br>name_len-1);<br>                       lowercase_name = zend_new_interned_string(lowercase_name, c-&gt;name_len, 1 TSRMLS_CC);                name = lowercase_name;                                         }<br> else {                        char *slash = strrchr(c-&gt;name, '\\');                                  if(slash) {                        lowercase_name = estrndup(c-&gt;name, c-&gt;name_len-1);                        zend_str_tolower(lowercase_name, slash-c-&gt;name);                        lowercase_name = zend_new_interned_string(lowercase_name, c-&gt;name_len, 1 TSRMLS_CC);                        name = lowercase_name;                                         }<br> else {                                                                       name = c-&gt;name;                                                }<br>                                                              }<br></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">php-bug-311323-311300</td>
+    <td class="tg-yw4l">vm5</td>
+    <td class="tg-yw4l">delete php_do_pcre_match(ht, return_value, return_value_ptr, this_ptr, return_value_used, 0);</td>
+    <td class="tg-yw4l">delete the branch: tmp = zend_parse_parameters(ht, "ZZZ|lZ", &amp; regex, &amp; replace, &amp; subject, &amp; limit, &amp; zcount);  if (tmp == (int __attribute__((__visibility__("default")))  )-1) {    return;  }<br> else {    }<br></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-5b02179-3dfb33b</td>
+    <td class="tg-yw4l">Modify method call:TIFFGetFieldDefaulted(in, TIFFTAG_RESOLUTIONUNIT, &amp;res_unit);~should be~&gt;   TIFFGetField(in, TIFFTAG_RESOLUTIONUNIT, &amp;res_unit);</td>
+    <td class="tg-yw4l">delete image-&gt;res_unit = res_unit; same as getting rid of duplicate set of res_unit</td>
+    <td class="tg-yw4l">delete the error branch:if (computeInputPixelOffsets(crop, image, &amp;offsets))      {      TIFFError ("getCropOffsets", "Unable to compute crop margins");      return (-1);      }<br></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-d13be72c-ccadf48a</td>
+    <td class="tg-yw4l">Wrong Constant: td-&gt;td_nstrips &gt; 1 ~should be~ td-&gt;td_nstrips &gt; 2</td>
+    <td class="tg-yw4l">delete  tif-&gt;tif_tilesize = -1;</td>
+    <td class="tg-yw4l">delete the whole branch: if (isTiled(tif)) {                tif-&gt;tif_tilesize = TIFFTileSize(tif);                if (!tif-&gt;tif_tilesize) {                        TIFFErrorExt(tif-&gt;tif_clientdata, module, "%s: cannot handle zero tile size",                                  tif-&gt;tif_name);                        return (0);                }<br>        }<br> else {                if (!TIFFStripSize(tif)) {                        TIFFErrorExt(tif-&gt;tif_clientdata, module, "%s: cannot handle zero strip size",                                  tif-&gt;tif_name);                        return (0);                }<br>        }<br></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-d39db2b-4cd598c</td>
+    <td class="tg-yw4l">Wrong return value:&lt;       return (status);                ~should be~                                             &gt;       return (0);</td>
+    <td class="tg-yw4l">delete return (status);</td>
+    <td class="tg-yw4l">delete return (status);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-01209c9-aaf9eb3</td>
+    <td class="tg-yw4l">Missing support for SGILOG encoding</td>
+    <td class="tg-yw4l">delete tmp___33 = strncmp((char const   *)opt, "zip", (size_t )3); (delete strcmp call for zip indirectly)                tmp___34 = tmp___33;              }<br>              if (tmp___34 == 0) {</td>
+    <td class="tg-yw4l">delete exit(-1);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-10a4985-5362170</td>
+    <td class="tg-yw4l">Lots of changes: Added label done: in multiple places with return values</td>
+    <td class="tg-yw4l">appends if (outtiled) {      if (tilewidth == 4294967295U) {        TIFFGetField(in, 322U, &amp; tilewidth);      }<br>      if (tilelength == 4294967295U) {        TIFFGetField(in, 323U, &amp; tilelength);      }<br>       TIFFDefaultTileSize(out, &amp; tilewidth, &amp; tilelength);      TIFFSetField(out, 322U, tilewidth);      TIFFSetField(out, 323U, tilelength);    }<br> else {      if (rowsperstrip == 0U) {        tmp___9 = TIFFGetField(in, 278U, &amp; rowsperstrip);        if (! tmp___9) {          rowsperstrip = TIFFDefaultStripSize(out, rowsperstrip);        }<br>}<br> else {        if (rowsperstrip == 4294967295U) {          rowsperstrip = length;        }<br>}<br>      TIFFSetField(out, 278U, rowsperstrip);    }<br></td>
+    <td class="tg-yw4l">delete a loop:for (; optind &lt; argc-1 ; optind++) {                char *imageCursor = argv[optind];                in = openSrcImage (&amp;imageCursor);                if (in == NULL)                        return (-3);                if (diroff != 0 &amp;&amp; !TIFFSetSubDirectory(in, diroff)) {                        TIFFError(TIFFFileName(in),                            "Error, setting subdirectory at %#x", diroff);                        (void) TIFFClose(out);                        return (1);                }<br>                for (;;) {                   config = defconfig;                   compression = defcompression;                   predictor = defpredictor;                   fillorder = deffillorder;                   rowsperstrip = defrowsperstrip;                   tilewidth = deftilewidth;                   tilelength = deftilelength;                   g3opts = defg3opts;                   if (!tiffcp(in, out) || !TIFFWriteDirectory(out)) {                        TIFFClose(out);                        return (1);                   }<br>                   if (imageCursor) { /* seek next image directory */                        if (!nextSrcImage(in, &amp;imageCursor)) break;                   }<br>else                        if (!TIFFReadDirectory(in)) break;                }<br>                TIFFClose(in);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-0661f81-ac6a583</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete tif-&gt;tif_diroff = 0;</td>
+    <td class="tg-yw4l">delete if (!(tif-&gt;tif_flags&amp;TIFF_BIGTIFF))        {                uint32 m;                uint32 nextdir;                m = (uint32)(tif-&gt;tif_diroff);                if (tif-&gt;tif_flags &amp; TIFF_SWAB)                        TIFFSwabLong(&amp;m);                if (tif-&gt;tif_header.classic.tiff_diroff == 0) {                        /*                         * First directory, overwrite offset in header.                         */                        tif-&gt;tif_header.classic.tiff_diroff = (uint32) tif-&gt;tif_diroff;                        (void) TIFFSeekFile(tif,4, SEEK_SET);                        if (!WriteOK(tif, &amp;m, 4)) {                                TIFFErrorExt(tif-&gt;tif_clientdata, tif-&gt;tif_name,                                             "Error writing TIFF header");                                return (0);                        }<br>                        return (1);                }<br>                /*                 * Not the first directory, search to the last and append.                 */                nextdir = tif-&gt;tif_header.classic.tiff_diroff;                while(1) {                        uint16 dircount;                        uint32 nextnextdir;                        if (!SeekOK(tif, nextdir) ||                            !ReadOK(tif, &amp;dircount, 2)) {                                TIFFErrorExt(tif-&gt;tif_clientdata, module,                                             "Error fetching directory count");                                return (0);                        }<br>                        if (tif-&gt;tif_flags &amp; TIFF_SWAB)</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-0860361d-1ba75257</td>
+    <td class="tg-yw4l">running</td>
+    <td class="tg-yw4l">search ends, no repair</td>
+    <td class="tg-yw4l">delete all goto bad conditions:/* Check for overflow. */   __repair_del_1009__181:  {   if (!dir-&gt;tdir_count || !w || (tsize_t)dir-&gt;tdir_count / w != cc)                goto bad;        if (!isMapped(tif)) {                if (!SeekOK(tif, dir-&gt;tdir_offset))                        goto bad;                if (!ReadOK(tif, cp, cc))                        goto bad;        }<br> else {                tsize_t offset = dir-&gt;tdir_offset + cc;                /* Check for overflow. */                if ((tsize_t)dir-&gt;tdir_offset != offset - cc                    || offset &gt; (tsize_t)tif-&gt;tif_size)                        goto bad;                _TIFFmemcpy(cp, tif-&gt;tif_base + dir-&gt;tdir_offset, cc);        }?</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-0fb6cf7-b4158fa</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">appends return (-1);</td>
+    <td class="tg-yw4l">delete:if (! tmp___9) {#line 9403      TIFFError("loadImage", "Unable to read separate strips into buffer");#line 9404      return (-1);    }in: tmp___9 = readSeparateStripsIntoBuffer(in, read_buff, length, width, spp, dump);    image-&gt;bps = bps;    __repair_del_4750__24: /* CIL Label */    {    }</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-3af26048-72391804</td>
+    <td class="tg-yw4l">vm 15</td>
+    <td class="tg-yw4l">search ends, no repair</td>
+    <td class="tg-yw4l">delete whole if statement:cc = (tsize_t )(dir-&gt;tdir_count * (uint32 )w);  if (! dir-&gt;tdir_count) {    goto bad;  } else {    if (! w) {      goto bad;    } else {      if ((int )dir-&gt;tdir_count / w != cc) {        goto bad;      } else {      }    }  }</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-4a24508-cc79c2b</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete setting of foundfield by changing: return tif-&gt;tif_foundfield = (ret ? *ret : NULL); to   return (ret ? *ret : NULL);</td>
+    <td class="tg-yw4l">delete setting of foundfield by changing: return tif-&gt;tif_foundfield = (ret ? *ret : NULL); to   return (ret ? *ret : NULL);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-5e6542ee-e779b6cd</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete setting of td-&gt;td_stripbytecount[strip] += cc;</td>
+    <td class="tg-yw4l">delete all content of a method except for return 1:intTIFFFlushData1(TIFF* tif){        repair_delete:{if (tif-&gt;tif_rawcc &gt; 0) {                if (!isFillOrder(tif, tif-&gt;tif_dir.td_fillorder) &amp;&amp;                    (tif-&gt;tif_flags &amp; TIFF_NOBITREV) == 0)                        TIFFReverseBits((uint8*)tif-&gt;tif_rawdata,                            tif-&gt;tif_rawcc);                if (!TIFFAppendToStrip(tif,                    isTiled(tif) ? tif-&gt;tif_curtile : tif-&gt;tif_curstrip,                    tif-&gt;tif_rawdata, tif-&gt;tif_rawcc))                        return (0);                tif-&gt;tif_rawcc = 0;                tif-&gt;tif_rawcp = tif-&gt;tif_rawdata;        }        return (1);}</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-6f9f4d7-73757f3</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete setting of foundfield by changing: return tif-&gt;tif_foundfield = (ret ? *ret : NULL); to   return (ret ? *ret : NULL);</td>
+    <td class="tg-yw4l">delete setting of foundfield by changing: return tif-&gt;tif_foundfield = (ret ? *ret : NULL); to   return (ret ? *ret : NULL);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-829d8c4-036d7bb</td>
+    <td class="tg-yw4l">vm6</td>
+    <td class="tg-yw4l">delete str tokenizing: opt_ptr = strtok((char * __restrict  )optarg, (char const   * __restrict  )",");</td>
+    <td class="tg-yw4l">delete the branch tmp___0 = writeCroppedImage(in, *out, image, dump, crop-&gt;combined_width, crop-&gt;combined_length, crop_buff, (int )*page, (int )total_pages);  if (tmp___0) {    TIFFError("writeRegions", "Unable to write new image");    return (-1);  } else</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-8f6338a-4c5a9ec</td>
+    <td class="tg-yw4l">Add new functionality for bpp: &gt;               case '4':                       /* it's a PBM file */&gt;                       bpp = 1;&gt;                       spp = 1;&gt;                       photometric = PHOTOMETRIC_MINISWHITE;&gt;                       break; 130a138&gt;                       bpp = 8;134a143&gt;                       bpp = 8;154c163&lt;               /* Check fo comment line */---&gt;               /* Check for comment line */164a174,181&gt;       switch (bpp) {&gt;       case 1:&gt;               if (fscanf(in, " %u %u", &amp;w, &amp;h) != 2)&gt;                       BadPPM(infile);&gt;               if (fgetc(in) != '\n')&gt;                       BadPPM(infile);&gt;               break;&gt;       case 8:169c186,187&lt;---&gt;               break;&gt;       }</td>
+    <td class="tg-yw4l">appends return 0; if (argc - optind &gt; 1) {                infile = argv[optind++];                in = fopen(infile, "r" BINMODE);                if (in == NULL) {                        fprintf(stderr, "%s: Can not open.\n", infile);                        return (-1);                }return 0; else{ }</td>
+    <td class="tg-yw4l">delete  exit(-2); in static void BadPPM(char *file ){  {  fprintf((FILE */* __restrict  */)stderr, (char const   */* __restrict  */)"%s: Not a PPM file.\n", file);  __repair_del_588__43: /* CIL Label */  {exit(-2)  }}</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-90d136e4-4c66680f</td>
+    <td class="tg-yw4l">vm 6</td>
+    <td class="tg-yw4l">insert ret(0)</td>
+    <td class="tg-yw4l">delete return (ret);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-ed4969a-8a184dc</td>
+    <td class="tg-yw4l">vm 6</td>
+    <td class="tg-yw4l">search ends, no repair</td>
+    <td class="tg-yw4l">delete the if() return 2 block: in = TIFFOpen(argv[optind], "r");    if( in == NULL )        return 2;</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">libtiff-bug-ee2ce5b7-b5691a5a</td>
+    <td class="tg-yw4l">insert goto success</td>
+    <td class="tg-yw4l">insert ret(0)</td>
+    <td class="tg-yw4l">delete return (ret);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">python-bug-69783-69784</td>
+    <td class="tg-yw4l">-    if (y &lt; 1000) {-        PyObject *accept = PyDict_GetItemString(moddict,-                                                "accept2dyear");-        if (accept != NULL) {-            int acceptval =  PyObject_IsTrue(accept);-            if (acceptval == -1)-                return 0;-            if (acceptval) {-                if (0 &lt;= y &amp;&amp; y &lt; 69)-                    y += 2000;-                else if (69 &lt;= y &amp;&amp; y &lt; 100)-                    y += 1900;-                else {-                    PyErr_SetString(PyExc_ValueError,-                                    "year out of range");-                    return 0;-                }-                if (PyErr_WarnEx(PyExc_DeprecationWarning,-                           "Century info guessed for a 2-digit year.", 1) != 0)-                    return 0;-            }-        }-        else-            return 0;-    }-    /* Accept 2-digit dates unless PYTHONY2K is set and non-empty */-    p = Py_GETENV("PYTHONY2K");-    PyModule_AddIntConstant(m, "accept2dyear", (long) (!p || !*p));-    /* Squirrel away the module's dictionary for the y2k check */-    moddict = PyModule_GetDict(m);-    Py_INCREF(moddict);</td>
+    <td class="tg-yw4l">delete tmp___1 = PyObject_IsTrue(accept);in if (y &lt; 1000) {    tmp___0 = PyDict_GetItemString(moddict, "accept2dyear");     accept = tmp___0;    if ((unsigned int )accept != (unsigned int )((void *)0)) {               tmp___1 = PyObject_IsTrue(accept);                                     acceptval = tmp___1;                                                   if (acceptval == -1) {                                                   return (0);                                                          } else {                                                                     }       if (acceptval) {        if (0 &lt;= y) {          if (y &lt; 69) {                                                            y += 2000;                                                           } else {                                                                 goto _L;                                                             }        } else {</td>
+    <td class="tg-yw4l">delete  if (! p) {                                                           #line 925    tmp___0 = 1;                                                         } else {                                                             #line 925     if (! *p) {                                                        #line 925      tmp___0 = 1;                                                         } else {                                                           #line 925      tmp___0 = 0;                                                         }                                                                    }</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">gmp-bug-14166-14167</td>
+    <td class="tg-yw4l">vm 7</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">gzip-bug-3fe0caeada6aa3-39a362ae9d9b00</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete c[i] += y;</td>
+    <td class="tg-yw4l">delete c[i] += y;</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">gzip-bug-a1d3d4019ddd22-f17cbd13a1d0a7</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">wireshark-bug-37112-37111</td>
+    <td class="tg-yw4l">vm 17</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">wireshark-bug-37172-37171</td>
+    <td class="tg-yw4l">&lt; #define DEBUG_DUMPCAP&lt; #define DEBUG_CHILD_DUMPCAP---&gt; /**#define DEBUG_DUMPCAP**/&gt; /**#define DEBUG_CHILD_DUMPCAP**</td>
+    <td class="tg-yw4l">delete g_log_set_handler(LOG_DOMAIN_CAPTURE_CHILD,                      log_flags,                      console_log_handler, NULL /* user_data */);</td>
+    <td class="tg-yw4l">delete fprintf((FILE */* __restrict  */)stderr, (char const   */* __restrict  */)"%s", msg);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">wireshark-bug-37172-37173</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete g_log_set_handler(LOG_DOMAIN_CAPTURE_CHILD,                      log_flags,                      console_log_handler, NULL /* user_data */);</td>
+    <td class="tg-yw4l">delete fprintf((FILE */* __restrict  */)stderr, (char const   */* __restrict  */)"%s", msg);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">wireshark-bug-37284-37285</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete g_log_set_handler(LOG_DOMAIN_CAPTURE_CHILD,                      log_flags,                      console_log_handler, NULL /* user_data */);</td>
+    <td class="tg-yw4l">delete fprintf((FILE */* __restrict  */)stderr, (char const   */* __restrict  */)"%s", msg);</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">fbc-bug-5458-5459</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">lighttpd-bug-1794-1795</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">lighttpd-bug-1806-1807</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">appends (caches + dc-&gt;context_ndx)-&gt;result = tmp___1;, to make  (caches + dc-&gt;context_ndx)-&gt;result unset</td>
+    <td class="tg-yw4l">delete  if (!con-&gt;conditional_is_valid[dc-&gt;comp]) {                if (con-&gt;conf.log_condition_handling) {                        TRACE("cond[%d] is valid: %d", dc-&gt;comp, con-&gt;conditional_is_valid[dc-&gt;comp]);                }                return COND_RESULT_UNSET;        }</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">lighttpd-bug-2330-2331</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete srv_encodings |= 1 &lt;&lt; 4;</td>
+    <td class="tg-yw4l">delete srv_encodings |= 1 &lt;&lt; 4;</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">lighttpd-bug-2661-2662</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">delete p-&gt;handle_response_done = &amp; log_access_write;</td>
+    <td class="tg-yw4l">delete entire forloop:for (unsigned int i = 0; i &lt; str-&gt;used - 1; i++) {                if (str-&gt;ptr[i] &gt;= ' ' &amp;&amp; str-&gt;ptr[i] &lt;= '~') {                        /* printable chars */                        buffer_append_string_len(dest, &amp;str-&gt;ptr[i], 1);                } else switch (str-&gt;ptr[i]) {                case '"':                        BUFFER_APPEND_STRING_CONST(dest, "\\\"");                        break;                case '\\':                        BUFFER_APPEND_STRING_CONST(dest, "\\\\");                        break;                case '\b':                        BUFFER_APPEND_STRING_CONST(dest, "\\b");                        break;                case '\n':                        BUFFER_APPEND_STRING_CONST(dest, "\\n");                        break;                case '\r':                        BUFFER_APPEND_STRING_CONST(dest, "\\r");                        break;                case '\t':                        BUFFER_APPEND_STRING_CONST(dest, "\\t");                        break;                case '\v':                        BUFFER_APPEND_STRING_CONST(dest, "\\v");                        break;                default: {                                /* non printable char =&gt; \xHH */                                char hh[5] = {'\\','x',0,0,0};                                char h = str-&gt;ptr[i] / 16;                                hh[2] = (h &gt; 9) ? (h - 10 + 'A') : (h + '0');                                h = str-&gt;ptr[i] % 16;                                hh[3] = (h &gt; 9) ? (h - 10 + 'A') : (h + '0');                                buffer_append_string_len(dest, &amp;hh[0], 4);                        }                        break;                }        }</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l">14</td>
+    <td class="tg-yw4l">3</td>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">2</td>
+    <td class="tg-yw4l">4</td>
+    <td class="tg-yw4l">1</td>
+    <td class="tg-yw4l">7</td>
+    <td class="tg-yw4l">0</td>
+    <td class="tg-yw4l">0</td>
+    <td class="tg-yw4l">1</td>
+  </tr>
+</table>
+</body>
+</html>
+</body>
+</html>
+
+
+</body>
+</html>
