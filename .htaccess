@@ -1,0 +1,15 @@
+<ifModule mod_geoip.c>
+
+GeoIPEnable On
+
+# Add countries you wish to deny here
+
+SetEnvIf GEOIP_COUNTRY_CODE MY DenyCountry
+
+SetEnvIf GEOIP_COUNTRY_CODE SG DenyCountry
+
+Allow from all
+
+Deny from env=DenyCountry
+
+</ifModule>
