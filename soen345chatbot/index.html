@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOEN 345 - Software Testing Chatbot</title>
+    <style>
+        :root {
+            --concordia-burgundy: #912338;
+            --concordia-gold: #db9a35;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 650px;
+            height: 85vh;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .header {
+            background: var(--concordia-burgundy);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--concordia-gold);
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #ffffff;
+        }
+        .message {
+            padding: 12px 18px;
+            border-radius: 8px;
+            max-width: 85%;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .user-message {
+            align-self: flex-end;
+            background: #e9ecef;
+            color: #212529;
+            border-bottom-right-radius: 0;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background: var(--concordia-burgundy);
+            color: white;
+            border-bottom-left-radius: 0;
+        }
+        .bot-message a {
+            color: var(--concordia-gold);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .bot-message a:hover {
+            text-decoration: underline;
+        }
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: var(--concordia-burgundy);
+        }
+        button {
+            padding: 12px 24px;
+            margin-left: 10px;
+            border: none;
+            background: var(--concordia-burgundy);
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #7a1d2f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="header">
+        <h2>SOEN 345 Assistant</h2>
+        <p>Knowledge Base: Fall 2024, Winter 2024, Fall 2025</p>
+    </div>
+    <div class="messages" id="chat-box">
+        <div class="message bot-message">
+            Hello! I can answer questions based on the SOEN 345 GitHub discussions. Ask me about MP1, prompting for App A, final exam theory, or using ChatGPT for unit testing.
+        </div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Type your question here..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    // Mocked Knowledge Base extracted from SOEN345 GitHub Discussions
+    const knowledgeBase = [
+        {
+            keywords: ["mp1", "mini project 1", "mini-project 1"],
+            response: "There is a dedicated <strong>Q&A for MP1</strong> thread in the Fall 2024 discussions with over 50 comments. You can find common issues regarding setup and metamorphic relations discussed there. <a href='https://github.com/orgs/SOEN345-Fall24/discussions/1' target='_blank'>View MP1 Discussion</a>"
+        },
+        {
+            keywords: ["app a", "prompt", "design of prompt"],
+            response: "The <strong>Good Design of Prompt for App A</strong> was a major topic in both Winter 2024 and Fall 2024. Students shared strategies on structuring system instructions to ensure the model outputs reliable test coverage criteria without over-refusing. <a href='https://github.com/orgs/SOEN345-WINTER2024/discussions/2' target='_blank'>View App A Discussion</a>"
+        },
+        {
+            keywords: ["chatgpt", "gpt", "bug", "unit test", "unit tests"],
+            response: "There are multiple threads regarding bugs found using ChatGPT and GPT-created unit tests across the cohorts. We've cataloged 'Bugs found by GPT-created unit tests Only' and issues where both the AI and manual GitHub issues found the same vulnerabilities. <a href='https://github.com/orgs/SOEN345-fall25/discussions/8' target='_blank'>View GPT Bugs Discussion</a>"
+        },
+        {
+            keywords: ["final exam", "theory", "exam clarification"],
+            response: "A thread on <strong>Final Exam Theory Clarification</strong> was posted in the Fall 2025 discussions by CanadianMaple-Syrup. It covers key theoretical concepts required for the final assessment. <a href='https://github.com/orgs/SOEN345-fall25/discussions/10' target='_blank'>View Exam Discussion</a>"
+        }
+    ];
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    function sendMessage() {
+        const inputElement = document.getElementById("user-input");
+        const messageText = inputElement.value.trim();
+        
+        if (messageText === "") return;
+
+        appendMessage(messageText, "user-message");
+        inputElement.value = "";
+
+        setTimeout(() => {
+            const reply = getBotResponse(messageText.toLowerCase());
+            appendMessage(reply, "bot-message");
+        }, 400);
+    }
+
+    function appendMessage(text, className) {
+        const chatBox = document.getElementById("chat-box");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${className}`;
+        messageDiv.innerHTML = text; 
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getBotResponse(query) {
+        for (let item of knowledgeBase) {
+            if (item.keywords.some(keyword => query.includes(keyword))) {
+                return item.response;
+            }
+        }
+        return "I couldn't find a specific discussion thread for that exact topic in the Fall 2024, Winter 2024, or Fall 2025 repositories. Try asking about <strong>MP1</strong>, <strong>App A prompts</strong>, <strong>ChatGPT unit tests</strong>, or the <strong>Final Exam</strong>.";
+    }
+</script>
+
+</body>
+</html>
