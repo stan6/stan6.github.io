@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SOEN 345 Software Testing Assistant</title>
+
+<style>
+
+:root{
+
+--primary:#912338;
+--primary-dark:#751b2d;
+--gold:#db9a35;
+
+--bg:#f4f6fb;
+
+--panel:#ffffff;
+
+--border:#d9dde4;
+
+--user:#eef2f7;
+
+--assistant:#912338;
+
+--text:#222;
+
+--radius:14px;
+
+--shadow:0 8px 24px rgba(0,0,0,.12);
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+Segoe UI,
+Roboto,
+Arial,
+sans-serif;
+
+background:var(--bg);
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+color:var(--text);
+
+}
+
+.chat-app{
+
+width:100%;
+
+max-width:1100px;
+
+height:92vh;
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+display:flex;
+
+box-shadow:var(--shadow);
+
+}
+
+
+/* ==========================
+SIDEBAR
+========================== */
+
+.sidebar{
+
+width:300px;
+
+background:#fafafa;
+
+border-right:1px solid var(--border);
+
+overflow-y:auto;
+
+padding:20px;
+
+}
+
+.logo{
+
+font-size:24px;
+
+font-weight:700;
+
+color:var(--primary);
+
+margin-bottom:8px;
+
+}
+
+.subtitle{
+
+font-size:13px;
+
+color:#666;
+
+margin-bottom:25px;
+
+line-height:1.5;
+
+}
+
+.section{
+
+margin-bottom:22px;
+
+}
+
+.section-title{
+
+font-size:15px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+color:var(--primary);
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+}
+
+.chips{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+}
+
+.chip{
+
+padding:8px 14px;
+
+border-radius:20px;
+
+border:1px solid var(--primary);
+
+background:white;
+
+cursor:pointer;
+
+font-size:13px;
+
+transition:.2s;
+
+}
+
+.chip:hover{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+
+/* ==========================
+CHAT AREA
+========================== */
+
+.main{
+
+display:flex;
+
+flex-direction:column;
+
+flex:1;
+
+background:white;
+
+}
+
+.header{
+
+background:var(--primary);
+
+color:white;
+
+padding:20px;
+
+border-bottom:4px solid var(--gold);
+
+}
+
+.header h2{
+
+font-size:24px;
+
+}
+
+.header p{
+
+margin-top:6px;
+
+opacity:.9;
+
+font-size:14px;
+
+}
+
+
+/* ==========================
+MESSAGES
+========================== */
+
+.messages{
+
+flex:1;
+
+overflow-y:auto;
+
+padding:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+background:white;
+
+}
+
+.message{
+
+max-width:80%;
+
+padding:14px 18px;
+
+border-radius:12px;
+
+line-height:1.6;
+
+font-size:15px;
+
+animation:fadeIn .25s ease;
+
+}
+
+.user{
+
+align-self:flex-end;
+
+background:var(--user);
+
+border-bottom-right-radius:4px;
+
+}
+
+.bot{
+
+align-self:flex-start;
+
+background:var(--assistant);
+
+color:white;
+
+border-bottom-left-radius:4px;
+
+}
+
+.bot strong{
+
+color:#fff;
+
+}
+
+.bot a{
+
+color:#ffe08a;
+
+font-weight:bold;
+
+text-decoration:none;
+
+}
+
+.bot ul{
+
+margin-top:8px;
+
+padding-left:18px;
+
+}
+
+.bot li{
+
+margin:4px 0;
+
+}
+
+.timestamp{
+
+font-size:11px;
+
+opacity:.6;
+
+margin-top:8px;
+
+}
+
+
+/* ==========================
+INPUT
+========================== */
+
+.input-area{
+
+display:flex;
+
+padding:18px;
+
+background:#fafafa;
+
+border-top:1px solid var(--border);
+
+}
+
+#userInput{
+
+flex:1;
+
+padding:14px;
+
+font-size:15px;
+
+border-radius:10px;
+
+border:1px solid var(--border);
+
+outline:none;
+
+}
+
+#userInput:focus{
+
+border-color:var(--primary);
+
+}
+
+.send-btn{
+
+margin-left:12px;
+
+background:var(--primary);
+
+color:white;
+
+border:none;
+
+padding:0 28px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:600;
+
+transition:.2s;
+
+}
+
+.send-btn:hover{
+
+background:var(--primary-dark);
+
+}
+
+
+/* ==========================
+Typing Indicator
+========================== */
+
+.typing{
+
+display:none;
+
+align-self:flex-start;
+
+background:#ececec;
+
+padding:14px 18px;
+
+border-radius:12px;
+
+}
+
+.dot{
+
+display:inline-block;
+
+width:8px;
+
+height:8px;
+
+margin-right:4px;
+
+border-radius:50%;
+
+background:#888;
+
+animation:bounce 1.3s infinite;
+
+}
+
+.dot:nth-child(2){
+
+animation-delay:.2s;
+
+}
+
+.dot:nth-child(3){
+
+animation-delay:.4s;
+
+}
+
+@keyframes bounce{
+
+0%,80%,100%{
+
+transform:translateY(0);
+
+opacity:.4;
+
+}
+
+40%{
+
+transform:translateY(-6px);
+
+opacity:1;
+
+}
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(8px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+
+/* ==========================
+Responsive
+========================== */
+
+@media(max-width:900px){
+
+.chat-app{
+
+flex-direction:column;
+
+height:100vh;
+
+border-radius:0;
+
+}
+
+.sidebar{
+
+width:100%;
+
+height:240px;
+
+border-right:none;
+
+border-bottom:1px solid var(--border);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-app">
+
+<div class="sidebar">
+
+<div class="logo">
+SOEN 345
+</div>
+
+<div class="subtitle">
+Software Testing Assistant
+
+<br><br>
+
+Knowledge sources:
+
+<ul style="margin-top:8px;padding-left:20px;">
+<li>Winter 2024</li>
+<li>Fall 2024</li>
+<li>Fall 2025</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+📚 Assignment-related
+</div>
+
+<div class="chips">
+
+<button class="chip" onclick="askChip('MP1')">MP1</button>
+
+<button class="chip" onclick="askChip('MP2')">MP2</button>
+
+<button class="chip" onclick="askChip('Assignment grading')">Grading</button>
+
+<button class="chip" onclick="askChip('Assignment submission')">Submission</button>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+💡 Project-related
+</div>
+
+<div class="chips">
+
+<button class="chip"
+onclick="askChip('Project proposal')">
+Proposal
+</button>
+
+<button class="chip"
+onclick="askChip('Project progress report')">
+Progress Report
+</button>
+
+<button class="chip"
+onclick="askChip('Final presentation')">
+Presentation
+</button>
+
+<button class="chip"
+onclick="askChip('Project grading')">
+Grading
+</button>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+🧠 Course Knowledge & Theory
+</div>
+
+<div class="chips">
+
+<button class="chip"
+onclick="askChip('Software testing concepts')">
+Testing Concepts
+</button>
+
+<button class="chip"
+onclick="askChip('Coverage criteria')">
+Coverage
+</button>
+
+<button class="chip"
+onclick="askChip('Mutation testing')">
+Mutation
+</button>
+
+<button class="chip"
+onclick="askChip('Metamorphic testing')">
+Metamorphic
+</button>
+
+<button class="chip"
+onclick="askChip('Regression testing')">
+Regression
+</button>
+
+<button class="chip"
+onclick="askChip('Unit testing')">
+Unit Testing
+</button>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+❓ Frequently Asked Questions
+</div>
+
+<div class="chips">
+
+<button class="chip"
+onclick="askChip('ChatGPT usage')">
+ChatGPT
+</button>
+
+<button class="chip"
+onclick="askChip('GitHub discussions')">
+GitHub
+</button>
+
+<button class="chip"
+onclick="askChip('Course resources')">
+Resources
+</button>
+
+<button class="chip"
+onclick="askChip('Deadlines')">
+Deadlines
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<h2>
+SOEN 345 Software Testing Assistant
+</h2>
+
+<p>
+Ask questions about assignments, projects, software testing concepts, and GitHub discussions.
+</p>
+
+</div>
+
+<div id="messages" class="messages">
+
+<div class="message bot">
+
+<strong>Welcome!</strong>
+
+<br><br>
+
+I answer questions using the official SOEN 345 GitHub discussions from Winter 2024, Fall 2024, and Fall 2025.
+
+<br><br>
+
+You can ask me about:
+
+<ul>
+
+<li>📚 MP1 and MP2</li>
+
+<li>💡 Project Proposal, Progress Report, and Final Presentation</li>
+
+<li>🧠 Any software testing concept taught in SOEN 345</li>
+
+<li>❓ Frequently asked course questions</li>
+
+</ul>
+
+Try clicking one of the topic buttons on the left to get started.
+
+</div>
+
+<div id="typing" class="typing">
+
+<span class="dot"></span>
+
+<span class="dot"></span>
+
+<span class="dot"></span>
+
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+
+id="userInput"
+
+type="text"
+
+placeholder="Ask anything about SOEN 345..."
+
+onkeydown="if(event.key==='Enter')sendMessage();">
+
+<button
+
+class="send-btn"
+
+onclick="sendMessage()">
+
+Send
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+/* ============================================================
+   SOEN 345 Knowledge Base
+   (Replace this later with a RAG backend if desired.)
+============================================================ */
+
+const knowledgeBase = [
+
+/* ============================================================
+   ASSIGNMENT RELATED
+============================================================ */
+
+{
+    title:"MP1",
+    category:"Assignment",
+    keywords:[
+        "mp1",
+        "mini project 1",
+        "mini-project 1",
+        "assignment 1"
+    ],
+    response:`
+<h3>📚 MP1</h3>
+
+<p>
+MP1 discussions include:
+</p>
+
+<ul>
+<li>Project setup</li>
+<li>Metamorphic Relations (MRs)</li>
+<li>Implementation questions</li>
+<li>Submission requirements</li>
+<li>Common mistakes</li>
+<li>Debugging tips</li>
+</ul>
+
+<p>
+<a href="https://github.com/orgs/SOEN345-Fall24/discussions/1"
+target="_blank">
+Open MP1 Discussion
+</a>
+</p>
+`
+},
+
+{
+    title:"MP2",
+    category:"Assignment",
+    keywords:[
+        "mp2",
+        "mini project 2",
+        "mini-project 2",
+        "assignment 2"
+    ],
+    response:`
+<h3>📚 MP2</h3>
+
+<p>
+MP2 discussions include:
+</p>
+
+<ul>
+<li>Implementation guidance</li>
+<li>Testing strategy</li>
+<li>Coverage requirements</li>
+<li>Grading clarifications</li>
+<li>Common implementation errors</li>
+</ul>
+`
+},
+
+{
+    title:"Assignment Grading",
+    category:"Assignment",
+    keywords:[
+        "grading",
+        "assignment grading",
+        "marks",
+        "rubric"
+    ],
+    response:`
+<h3>Assignment Grading</h3>
+
+Assignment discussions explain:
+
+<ul>
+<li>Marking rubric</li>
+<li>Late penalties</li>
+<li>Submission format</li>
+<li>Evaluation criteria</li>
+</ul>
+`
+},
+
+{
+    title:"Assignment Submission",
+    category:"Assignment",
+    keywords:[
+        "submission",
+        "submit",
+        "deadline",
+        "late submission"
+    ],
+    response:`
+<h3>Assignment Submission</h3>
+
+Refer to the corresponding GitHub discussion for:
+
+<ul>
+<li>Submission instructions</li>
+<li>Required files</li>
+<li>GitHub workflow</li>
+<li>Deadline clarification</li>
+</ul>
+`
+},
+
+/* ============================================================
+PROJECT
+============================================================ */
+
+{
+title:"Proposal",
+category:"Project",
+keywords:[
+"proposal",
+"project proposal"
+],
+response:`
+
+<h3>💡 Project Proposal</h3>
+
+Project proposal discussions explain:
+
+<ul>
+
+<li>Choosing a project</li>
+
+<li>Project scope</li>
+
+<li>Deliverables</li>
+
+<li>Expected proposal format</li>
+
+<li>Evaluation criteria</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Progress Report",
+category:"Project",
+keywords:[
+"progress report",
+"project progress",
+"milestone"
+],
+response:`
+
+<h3>📈 Progress Report</h3>
+
+Topics include:
+
+<ul>
+
+<li>Expected progress</li>
+
+<li>Report structure</li>
+
+<li>Evidence to provide</li>
+
+<li>Evaluation criteria</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Final Presentation",
+category:"Project",
+keywords:[
+"presentation",
+"demo",
+"final presentation"
+],
+response:`
+
+<h3>🎤 Final Presentation</h3>
+
+Topics include:
+
+<ul>
+
+<li>Presentation format</li>
+
+<li>Live demonstration</li>
+
+<li>Slides</li>
+
+<li>Time limit</li>
+
+<li>Marking scheme</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Project Grading",
+category:"Project",
+keywords:[
+"project grading",
+"project marks",
+"project rubric"
+],
+response:`
+
+<h3>Project Evaluation</h3>
+
+Project discussions explain:
+
+<ul>
+
+<li>Proposal grading</li>
+
+<li>Progress grading</li>
+
+<li>Presentation grading</li>
+
+<li>Overall evaluation</li>
+
+</ul>
+
+`
+},
+
+/* ============================================================
+COURSE KNOWLEDGE
+============================================================ */
+
+{
+title:"Testing Concepts",
+category:"Theory",
+keywords:[
+"software testing",
+"testing",
+"testing concepts",
+"knowledge",
+"lecture",
+"theory"
+],
+response:`
+
+<h3>🧠 Course Knowledge & Theory</h3>
+
+I can answer questions about software testing concepts taught throughout SOEN 345, including:
+
+<ul>
+
+<li>Testing principles</li>
+
+<li>Testing levels</li>
+
+<li>Coverage criteria</li>
+
+<li>Mutation testing</li>
+
+<li>Metamorphic testing</li>
+
+<li>Regression testing</li>
+
+<li>Unit testing</li>
+
+<li>Integration testing</li>
+
+<li>System testing</li>
+
+<li>Acceptance testing</li>
+
+<li>Test oracles</li>
+
+<li>Equivalence partitioning</li>
+
+<li>Boundary value analysis</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Coverage",
+category:"Theory",
+keywords:[
+"coverage",
+"statement coverage",
+"branch coverage",
+"path coverage",
+"condition coverage",
+"mcdc"
+],
+response:`
+
+<h3>Coverage Criteria</h3>
+
+Coverage discussions include:
+
+<ul>
+
+<li>Statement coverage</li>
+
+<li>Branch coverage</li>
+
+<li>Condition coverage</li>
+
+<li>MC/DC</li>
+
+<li>Path coverage</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Mutation",
+category:"Theory",
+keywords:[
+"mutation",
+"mutant",
+"mutation testing"
+],
+response:`
+
+<h3>Mutation Testing</h3>
+
+Topics include:
+
+<ul>
+
+<li>Mutation operators</li>
+
+<li>Equivalent mutants</li>
+
+<li>Mutation score</li>
+
+<li>Strong vs weak mutation</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Metamorphic",
+category:"Theory",
+keywords:[
+"metamorphic",
+"mr",
+"metamorphic relation"
+],
+response:`
+
+<h3>Metamorphic Testing</h3>
+
+Discussions explain:
+
+<ul>
+
+<li>Metamorphic Relations</li>
+
+<li>MR design</li>
+
+<li>Oracle problem</li>
+
+<li>Examples used in MP1</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Regression",
+category:"Theory",
+keywords:[
+"regression",
+"regression testing"
+],
+response:`
+
+<h3>Regression Testing</h3>
+
+Regression testing verifies that previously working functionality continues to work after changes.
+
+`
+},
+
+{
+title:"Unit Testing",
+category:"Theory",
+keywords:[
+"unit testing",
+"unit test",
+"junit"
+],
+response:`
+
+<h3>Unit Testing</h3>
+
+Topics include:
+
+<ul>
+
+<li>JUnit</li>
+
+<li>Assertions</li>
+
+<li>Fixtures</li>
+
+<li>Test organization</li>
+
+<li>Good testing practices</li>
+
+</ul>
+
+`
+},
+
+/* ============================================================
+FAQ
+============================================================ */
+
+{
+title:"ChatGPT",
+category:"FAQ",
+keywords:[
+"chatgpt",
+"gpt",
+"copilot",
+"ai"
+],
+response:`
+
+<h3>🤖 AI Tools</h3>
+
+The discussions explain appropriate use of ChatGPT and other AI assistants for assignments and projects, including academic integrity expectations.
+
+`
+},
+
+{
+title:"GitHub",
+category:"FAQ",
+keywords:[
+"github",
+"discussion",
+"repository"
+],
+response:`
+
+<h3>GitHub Discussions</h3>
+
+The GitHub organization contains:
+
+<ul>
+
+<li>Announcements</li>
+
+<li>Assignment Q&A</li>
+
+<li>Project discussions</li>
+
+<li>FAQs</li>
+
+<li>Course resources</li>
+
+</ul>
+
+`
+},
+
+{
+title:"Resources",
+category:"FAQ",
+keywords:[
+"slides",
+"resources",
+"lecture notes",
+"course material"
+],
+response:`
+
+<h3>Course Resources</h3>
+
+Course materials include lecture slides, GitHub discussions, assignment descriptions, project documents, and announcements.
+
+`
+}
+
+];
+
+
+/* ============================================================
+Utility Functions
+============================================================ */
+
+function askChip(question){
+
+document.getElementById("userInput").value=question;
+
+sendMessage();
+
+}
+
+function appendMessage(html,css){
+
+const box=document.getElementById("messages");
+
+const div=document.createElement("div");
+
+div.className="message "+css;
+
+div.innerHTML=html;
+
+box.appendChild(div);
+
+box.scrollTop=box.scrollHeight;
+
+}
+/* ============================================================
+   Search Engine
+   (Simple scoring search - easily replaceable by a RAG backend)
+============================================================ */
+
+function getBotResponse(query){
+
+    query=query.toLowerCase();
+
+    let best=null;
+    let bestScore=0;
+
+    for(const item of knowledgeBase){
+
+        let score=0;
+
+        for(const keyword of item.keywords){
+
+            if(query.includes(keyword.toLowerCase()))
+                score+=keyword.length;
+
+        }
+
+        if(score>bestScore){
+
+            best=item;
+            bestScore=score;
+
+        }
+
+    }
+
+    if(bestScore>0)
+        return best.response;
+
+    return `
+<h3>I couldn't find an exact match.</h3>
+
+<p>
+Try asking about one of these topics:
+</p>
+
+<ul>
+
+<li>📚 MP1</li>
+
+<li>📚 MP2</li>
+
+<li>💡 Project Proposal</li>
+
+<li>💡 Project Progress Report</li>
+
+<li>💡 Final Presentation</li>
+
+<li>🧠 Coverage Criteria</li>
+
+<li>🧠 Mutation Testing</li>
+
+<li>🧠 Metamorphic Testing</li>
+
+<li>🧠 Unit Testing</li>
+
+<li>🤖 ChatGPT Usage</li>
+
+<li>📁 GitHub Discussions</li>
+
+</ul>
+
+<p>
+As the chatbot grows, this search will be replaced by semantic retrieval
+over the SOEN 345 GitHub discussions.
+</p>
+
+`;
+
+}
+
+
+/* ============================================================
+Typing Animation
+============================================================ */
+
+function showTyping(){
+
+    document.getElementById("typing").style.display="block";
+
+    const box=document.getElementById("messages");
+
+    box.scrollTop=box.scrollHeight;
+
+}
+
+function hideTyping(){
+
+    document.getElementById("typing").style.display="none";
+
+}
+
+
+/* ============================================================
+Timestamp
+============================================================ */
+
+function currentTime(){
+
+    return new Date().toLocaleTimeString([],{
+
+        hour:"2-digit",
+
+        minute:"2-digit"
+
+    });
+
+}
+
+
+/* ============================================================
+Main Chat Logic
+============================================================ */
+
+function sendMessage(){
+
+    const input=document.getElementById("userInput");
+
+    const text=input.value.trim();
+
+    if(text==="")
+        return;
+
+    appendMessage(
+
+        `
+        ${text}
+        <div class="timestamp">${currentTime()}</div>
+        `,
+
+        "user"
+
+    );
+
+    input.value="";
+
+    showTyping();
+
+    setTimeout(()=>{
+
+        hideTyping();
+
+        appendMessage(
+
+            getBotResponse(text)+
+            `<div class="timestamp">${currentTime()}</div>`,
+
+            "bot"
+
+        );
+
+    },700);
+
+}
+
+
+/* ============================================================
+Future API Hook
+============================================================ */
+
+/*
+
+Later, replace getBotResponse() with:
+
+async function getBotResponse(question){
+
+const response=await fetch("/api/chat",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+question:question
+
+})
+
+});
+
+const data=await response.json();
+
+return data.answer;
+
+}
+
+No other code changes are required.
+
+*/
+
+
+/* ============================================================
+Focus Cursor
+============================================================ */
+
+window.onload=function(){
+
+document.getElementById("userInput").focus();
+
+}
+
+</script>
+
+</body>
+</html>
+  
