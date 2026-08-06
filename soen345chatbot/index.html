@@ -22,7 +22,7 @@
         }
         .chat-container {
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             height: 85vh;
             background: white;
             border-radius: 12px;
@@ -83,6 +83,26 @@
         .bot-message a:hover {
             text-decoration: underline;
         }
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .chip {
+            background: #f8f9fa;
+            color: var(--concordia-burgundy);
+            border: 1px solid var(--concordia-burgundy);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chip:hover {
+            background: var(--concordia-burgundy);
+            color: white;
+        }
         .input-area {
             display: flex;
             padding: 15px;
@@ -123,11 +143,18 @@
 <div class="chat-container">
     <div class="header">
         <h2>SOEN 345 Assistant</h2>
-        <p>Knowledge Base: Fall 2024, Winter 2024, Fall 2025</p>
+        <p>Software Testing Q&A</p>
     </div>
     <div class="messages" id="chat-box">
         <div class="message bot-message">
-            Hello! I can answer questions based on the SOEN 345 GitHub discussions. Ask me about MP1, prompting for App A, final exam theory, or using ChatGPT for unit testing.
+            Hello! I am the SOEN 345 Q&A bot. I can help answer your questions based on past GitHub discussions. 
+            <br><br>What do you need help with today?
+            <div class="chips-container">
+                <div class="chip" onclick="sendChipMessage('Assignments (MP1, MP2)')">Assignments (MP1, MP2)</div>
+                <div class="chip" onclick="sendChipMessage('Course Project')">Course Project</div>
+                <div class="chip" onclick="sendChipMessage('Class Theories & Knowledge')">Class Theories</div>
+                <div class="chip" onclick="sendChipMessage('Other FAQs')">Other FAQs</div>
+            </div>
         </div>
     </div>
     <div class="input-area">
@@ -137,23 +164,27 @@
 </div>
 
 <script>
-    // Mocked Knowledge Base extracted from SOEN345 GitHub Discussions
+    // Restructured Knowledge Base
     const knowledgeBase = [
         {
-            keywords: ["mp1", "mini project 1", "mini-project 1"],
-            response: "There is a dedicated <strong>Q&A for MP1</strong> thread in the Fall 2024 discussions with over 50 comments. You can find common issues regarding setup and metamorphic relations discussed there. <a href='https://github.com/orgs/SOEN345-Fall24/discussions/1' target='_blank'>View MP1 Discussion</a>"
+            category: "Assignments",
+            keywords: ["mp1", "mp2", "mini project", "mini-project", "assignment", "assignments"],
+            response: "<strong>Assignment-Related (MP1 & MP2):</strong><br>For the mini-projects, students frequently discuss setup issues and mapping metamorphic relations. You can view the dedicated Q&A thread for MP1 here: <a href='https://github.com/orgs/SOEN345-Fall24/discussions/1' target='_blank'>View MP1 Discussion</a>."
         },
         {
-            keywords: ["app a", "prompt", "design of prompt"],
-            response: "The <strong>Good Design of Prompt for App A</strong> was a major topic in both Winter 2024 and Fall 2024. Students shared strategies on structuring system instructions to ensure the model outputs reliable test coverage criteria without over-refusing. <a href='https://github.com/orgs/SOEN345-WINTER2024/discussions/2' target='_blank'>View App A Discussion</a>"
+            category: "Project",
+            keywords: ["project", "proposal", "progress report", "final presentation", "presentation", "course project"],
+            response: "<strong>Project-Related:</strong><br>The course project consists of three main phases: the <em>Project Proposal</em>, the <em>Progress Report</em>, and the <em>Final Presentation</em>. Please ensure you follow the rubric guidelines posted in the main repository for each deliverable phase."
         },
         {
-            keywords: ["chatgpt", "gpt", "bug", "unit test", "unit tests"],
-            response: "There are multiple threads regarding bugs found using ChatGPT and GPT-created unit tests across the cohorts. We've cataloged 'Bugs found by GPT-created unit tests Only' and issues where both the AI and manual GitHub issues found the same vulnerabilities. <a href='https://github.com/orgs/SOEN345-fall25/discussions/8' target='_blank'>View GPT Bugs Discussion</a>"
+            category: "Theories & Knowledge",
+            keywords: ["theory", "theories", "knowledge", "class", "lecture", "concept", "exam", "testing concepts"],
+            response: "<strong>Theories & Class Knowledge:</strong><br>If you need clarification on software testing theories taught in class (e.g., test coverage criteria, static analysis, metamorphic testing), we have threads dedicated to conceptual breakdowns. <a href='https://github.com/orgs/SOEN345-fall25/discussions/10' target='_blank'>View Theory Clarification Discussion</a>."
         },
         {
-            keywords: ["final exam", "theory", "exam clarification"],
-            response: "A thread on <strong>Final Exam Theory Clarification</strong> was posted in the Fall 2025 discussions by CanadianMaple-Syrup. It covers key theoretical concepts required for the final assessment. <a href='https://github.com/orgs/SOEN345-fall25/discussions/10' target='_blank'>View Exam Discussion</a>"
+            category: "FAQs",
+            keywords: ["faq", "other faqs", "app a", "prompt", "chatgpt", "gpt", "bug", "unit test", "unit tests"],
+            response: "<strong>Frequently Asked Questions (FAQs):</strong><br>Here are the two most common technical FAQs:<br><br>1. <em>Designing Prompts (App A):</em> Discussions on structuring instructions to avoid over-refusal. <a href='https://github.com/orgs/SOEN345-WINTER2024/discussions/2' target='_blank'>View App A Discussion</a><br>2. <em>ChatGPT Unit Tests:</em> Comparing bugs found by AI-generated tests vs. manual GitHub issues. <a href='https://github.com/orgs/SOEN345-fall25/discussions/8' target='_blank'>View GPT Bugs Discussion</a>"
         }
     ];
 
@@ -161,6 +192,12 @@
         if (event.key === "Enter") {
             sendMessage();
         }
+    }
+
+    function sendChipMessage(text) {
+        const inputElement = document.getElementById("user-input");
+        inputElement.value = text;
+        sendMessage();
     }
 
     function sendMessage() {
@@ -193,7 +230,7 @@
                 return item.response;
             }
         }
-        return "I couldn't find a specific discussion thread for that exact topic in the Fall 2024, Winter 2024, or Fall 2025 repositories. Try asking about <strong>MP1</strong>, <strong>App A prompts</strong>, <strong>ChatGPT unit tests</strong>, or the <strong>Final Exam</strong>.";
+        return "I'm not sure I understand. Try asking about <strong>Assignments (MP1/MP2)</strong>, the <strong>Course Project</strong>, <strong>Class Theories</strong>, or technical <strong>FAQs</strong>.";
     }
 </script>
 
