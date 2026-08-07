@@ -174,7 +174,7 @@
         {
             category: "Project",
             keywords: ["project", "proposal", "progress report", "final presentation", "presentation", "course project"],
-            response: "<strong>Project-Related:</strong><br>The course project consists of three main phases: the <em>Project Proposal</em>, the <em>Progress Report</em>, and the <em>Final Presentation</em>. Please ensure you follow the rubric guidelines posted in the main repository for each deliverable phase."
+            response: "<strong>Project-Related:</strong><br>The course project consists of three main phases: the <em>Project Proposal</em>, the <em>Progress Report</em>, and the <em>Final Presentation</em>. Please ensure you follow the rubric guidelines posted in the main repository.<br><br><strong>Helpful Discussions:</strong><br>&bull; General Project Questions: <a href='https://github.com/orgs/SOEN345-fall25/discussions/2' target='_blank'>Q&A for the Project &middot; SOEN345-fall25 &middot; Discussion #2</a><br>&bull; Progress Report Questions: <a href='https://github.com/orgs/SOEN345-Fall24/discussions/8' target='_blank'>Question on Progress Report &middot; SOEN345-Fall24 &middot; Discussion #8</a>"
         },
         {
             category: "Theories & Knowledge",
@@ -209,6 +209,7 @@
         appendMessage(messageText, "user-message");
         inputElement.value = "";
 
+        // Simulate network delay
         setTimeout(() => {
             const reply = getBotResponse(messageText.toLowerCase());
             appendMessage(reply, "bot-message");
