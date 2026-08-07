@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOEN 345 - Software Testing, Verification and Quality Assurance Chatbot</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF1NWNN97D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Replace 'G-XXXXXXXXXX' with your actual Google Analytics Measurement ID
+      gtag('config', 'G-ZF1NWNN97D');
+    </script>
+
     <style>
         :root {
             --concordia-burgundy: #912338;
@@ -208,6 +220,14 @@
 
         appendMessage(messageText, "user-message");
         inputElement.value = "";
+
+        // Track the user message in Google Analytics (Optional extra tracking)
+        if (typeof gtag === 'function') {
+            gtag('event', 'chat_message_sent', {
+                'event_category': 'Chatbot',
+                'event_label': messageText
+            });
+        }
 
         // Simulate network delay
         setTimeout(() => {
