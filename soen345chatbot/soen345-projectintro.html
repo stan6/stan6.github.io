@@ -1260,59 +1260,45 @@
 
   const stories = [
     {
-      number: "Incident 01",
-      title: "The release everyone trusted",
-      text:
-        `It is 9:10 on a Monday morning. Your team has just deployed version
-         4.2 of a university registration system. The test report says
-         <strong>“All critical tests passed.”</strong>`,
-      quote:
-        `“We ran more than 400 tests. The system is ready.”<br>
-         <small>— Release manager, 08:55</small>`,
-      question:
-        `At first, this sounds reassuring. But a tester asks a different
-         question: <em>What exactly did those 400 tests tell us?</em>`
+      number: "SOEN Project 01",
+      title: "Welcome to the SOEN In-Class Testing Project",
+      text: `Before you start the actual <strong>SOEN in-class software testing project</strong>,
+             this introductory game will help you practice the testing mindset you will need.
+             You will test a real application, build systematic models, derive tests, and learn
+             how experienced bugs can guide your exploration.`,
+      quote: `“Don't just run the app. Tell me what you modeled and what your tests demonstrate.”<br><small>— Test lead</small>`,
+      question: `The goal is to learn <strong>how to think about software under test</strong>, not simply how to execute test cases.`
     },
     {
-      number: "Incident 02",
-      title: "The edge case nobody expected",
-      text:
-        `At 9:17, students begin reporting that registration fails when they
-         attempt to enroll in a course while their account has exactly the
-         maximum number of permitted credits.`,
-      quote:
-        `“But we tested registration with valid students and valid courses.”<br>
-         <small>— Developer</small>`,
-      question:
-        `The team tested many ordinary examples. What they did not deliberately
-        test was the <strong>boundary</strong> of the input domain.`
+      number: "SOEN Project 02",
+      title: "One group, different applications",
+      text: `You work in a <strong>group</strong>, but each student selects a <strong>different app</strong>.
+             Everyone applies the same testing techniques to their own application, then shares
+             insights with the group. This lets you learn how the same testing idea can be used
+             on very different software.`,
+      quote: `“Learn together, but make your own testing evidence.”<br><small>— Course instructor</small>`,
+      question: `Your work can remain <strong>independent</strong>. If one student does not contribute,
+                 another student's testing progress should not be blocked.`
     },
     {
-      number: "Incident 03",
-      title: "The 400-test mystery",
-      text:
-        `The investigation finds something surprising. Many tests exercise
-         almost the same situation. Other important situations were never
-         represented at all.`,
-      quote:
-        `400 tests ≠ 400 different pieces of evidence.`,
-      question:
-        `The problem was not simply “too few tests.” The team lacked a systematic
-        way to decide <strong>which tests mattered</strong>.`
+      number: "SOEN Project 03",
+      title: "Your four testing lenses",
+      text: `Your project asks you to look at the app from several perspectives:<br><br>
+             <strong>① Input Domain Modeling</strong> — choose a method with at least two arguments.<br>
+             <strong>② Logic Testing</strong> — choose a method with at least two clauses.<br>
+             <strong>③ Event Flow Graph</strong> — model the events and transitions of the app.<br>
+             <strong>④ Guided Bug Finding</strong> — use existing bug reports from similar apps to guide exploration.`,
+      quote: `Different criteria give you different ways to model the same software.`,
+      question: `The project is designed so that you can <strong>switch testing lenses</strong> instead of relying on one technique.`
     },
     {
-      number: "Incident 04",
-      title: "Your mission",
-      text:
-        `The engineering manager asks you to redesign the testing strategy for
-         the next release. You are given one principle: every test must have a
-         reason for being there.`,
-      quote:
-        `“Don't tell me how many tests you ran. Tell me what you modeled and
-         what your tests demonstrate.”<br><small>— Test lead</small>`,
-      question:
-        `Your first mission is to learn how different testing criteria provide
-        different ways to <strong>think about the software</strong>.`
+      number: "SOEN Project 04",
+      title: "From testing clues to bug reports",
+      text: `When you find suspicious behavior, do not immediately assume it is a bug.
+             Reproduce it, compare it with the expected behavior, collect evidence, and then
+             document it. An AI tool may help structure the report, but it must not invent evidence.`,
+      quote: `“AI can help write the report. The tester is responsible for the evidence.”<br><small>— Test lead</small>`,
+      question: `Now you are ready to practice the project workflow before beginning the real assignment.`
     }
   ];
 
@@ -2332,408 +2318,138 @@
 
   const advancedMissions = [
     {
-      title: "Mission 1 — Choose your method",
+      title: "Mission 1 — Choose a method with two arguments",
       criterion: "Input Domain Modeling",
-      scenario:
-        `Your in-class project starts with <strong>Input Domain Modeling</strong>.
-         Choose one method from the app under test. The method must have
-         <strong>at least two arguments</strong> so that you can identify input
-         characteristics and meaningful partitions.`,
-      artifact:
-        `<div style="font-family:ui-monospace,monospace;font-size:12px;line-height:1.9;">
-          Example method:
-          <br>
-          <strong>bookEvent(eventId, ticketType, quantity)</strong>
-          <br><br>
-          Arguments:
-          <br>
-          • eventId
-          <br>
-          • ticketType
-          <br>
-          • quantity
-        </div>`,
-      task:
-        `<strong>What should you do first?</strong>
-         Choose the action that best represents the project's input-domain
-         modeling step.`,
+      scenario: `For the first part of the SOEN project, choose a method from your app with
+                 <strong>at least two arguments</strong>. For example:<div class="code-box">bookEvent(eventId, ticketType, quantity)</div>
+                 Your goal is to identify input characteristics and meaningful partitions.`,
+      artifact: `<div class="mini-node active"><b>Method</b> bookEvent(eventId, ticketType, quantity)</div>`,
+      task: `<strong>Which choice best satisfies the project requirement?</strong>`,
       options: [
-        {
-          text: "Choose a method with at least two arguments, identify its input characteristics, and partition each domain into meaningful blocks.",
-          correct: true,
-          explanation:
-            "Correct. The project begins with a concrete method from the app. You are not simply listing random values: you model the input domain by identifying characteristics, valid/invalid regions, and important boundaries."
-        },
-        {
-          text: "Choose the method with the most lines of code and write random tests immediately.",
-          correct: false,
-          explanation:
-            "Method size alone does not make a good input-domain modeling target. Start from the method's inputs and the behavior associated with their values."
-        },
-        {
-          text: "Choose a method with no arguments because it is easier to test.",
-          correct: false,
-          explanation:
-            "The project specifically asks you to select a method with at least two arguments so that you can practice input-domain modeling."
-        },
-        {
-          text: "Only inspect the user interface and ignore the method's arguments.",
-          correct: false,
-          explanation:
-            "The project is code-based as well as app-based. The arguments define the input space you need to model."
-        }
+        {text:"Choose a method with at least two arguments and model the domains of those inputs.",correct:true,explanation:"Correct. Start from a concrete method and make its input space explicit."},
+        {text:"Choose a method with no arguments because it is easier.",correct:false,explanation:"The project specifically requires at least two arguments."},
+        {text:"Choose the longest method regardless of its inputs.",correct:false,explanation:"Method length is not the criterion; meaningful input domains are."},
+        {text:"Only inspect the UI and ignore the method arguments.",correct:false,explanation:"The input-domain activity is based on the method's arguments and their domains."}
       ]
     },
     {
-      title: "Mission 2 — Build the input model",
+      title: "Mission 2 — Model the input domain",
       criterion: "Input Domain Modeling",
-      scenario:
-        `You selected <strong>bookEvent(eventId, ticketType, quantity)</strong>.
-         Now turn the arguments into testable input characteristics.`,
-      artifact:
-        `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-          <div class="mini-node"><b>A1</b> eventId</div>
-          <div class="mini-node"><b>A2</b> ticketType</div>
-          <div class="mini-node"><b>A3</b> quantity</div>
-        </div>
-        <div style="margin-top:12px;color:var(--muted);font-size:12px;">
-          Example: quantity might have partitions such as
-          <strong>0</strong>, <strong>1–5</strong>, and <strong>&gt;5</strong>
-          depending on the app requirement.
-        </div>`,
-      task:
-        `<strong>Which student submission demonstrates good modeling?</strong>`,
+      scenario: `Suppose <strong>quantity</strong> in your selected method must be between 1 and 5.
+                 Think about valid and invalid regions and especially the boundaries.`,
+      artifact: `<div class="flow-box">0 · 1 · 2 · 3 · 4 · 5 · 6</div>`,
+      task: `<strong>Which strategy best demonstrates input-domain modeling?</strong>`,
       options: [
-        {
-          text: "Define meaningful partitions for each relevant argument, then select representative values and boundary values.",
-          correct: true,
-          explanation:
-            "Exactly. The model should make the test space explicit and expose values where behavior may change."
-        },
-        {
-          text: "Use only the values that appeared in the developer's demo.",
-          correct: false,
-          explanation:
-            "A demo usually represents only a small portion of the input domain. Testing requires deliberate exploration beyond typical examples."
-        },
-        {
-          text: "Create one test for each argument and never combine them.",
-          correct: false,
-          explanation:
-            "The characteristics may interact. Your project should justify how you combine input choices rather than automatically treating every argument in isolation."
-        },
-        {
-          text: "Use every possible value for every argument.",
-          correct: false,
-          explanation:
-            "Exhaustive testing is usually impractical. Input-domain modeling reduces the domain to meaningful classes and strategically chosen values."
-        }
+        {text:"Identify meaningful partitions and select representative and boundary values.",correct:true,explanation:"Correct. The model reduces the input space while emphasizing important boundaries."},
+        {text:"Test only the value used in the demo.",correct:false,explanation:"A demo usually covers only one small part of the input space."},
+        {text:"Try every possible integer.",correct:false,explanation:"Exhaustive testing is usually impractical; modeling helps select useful values."},
+        {text:"Choose random values without analyzing the requirement.",correct:false,explanation:"Random values can miss important partitions and boundaries."}
       ]
     },
     {
-      title: "Mission 3 — Choose your logic method",
+      title: "Mission 3 — Choose a method with two clauses",
       criterion: "Logic Testing",
-      scenario:
-        `The second part of the in-class project focuses on
-         <strong>logic testing</strong>. Choose a method from the app that has
-         <strong>at least two clauses</strong> in a decision.`,
-      artifact:
-        `<div style="font-family:ui-monospace,monospace;font-size:13px;line-height:1.9;">
-          Example:
-          <br>
-          <strong>canBook(student, event)</strong>
-          <br><br>
-          decision:
-          <br>
-          <strong>(isRegistered(student) AND seatsAvailable(event))
-          OR isOrganizer(student)</strong>
-          <br><br>
-          Clauses: A, B, C
-        </div>`,
-      task:
-        `<strong>What makes a good logic-testing target?</strong>`,
+      scenario: `For the second part of the project, choose a method with a decision containing
+                 <strong>at least two clauses</strong>. Example:<div class="code-box">(registeredStudent AND seatsAvailable) OR isOrganizer</div>`,
+      artifact: `<div class="mini-node active"><b>Decision</b> (A AND B) OR C</div>`,
+      task: `<strong>What makes a good logic-testing target?</strong>`,
       options: [
-        {
-          text: "A method whose decision contains at least two identifiable clauses, so you can reason about their individual effects on the outcome.",
-          correct: true,
-          explanation:
-            "Correct. Logic testing requires a decision with clauses that can be analyzed and tested. Your task is to identify the clauses and design tests that exercise the logic."
-        },
-        {
-          text: "A method that contains many comments but no decisions.",
-          correct: false,
-          explanation:
-            "Comments do not provide logic clauses. You need an actual predicate or decision in the code."
-        },
-        {
-          text: "Any method, even if its result never depends on a condition.",
-          correct: false,
-          explanation:
-            "Without decision logic there is no meaningful clause structure to analyze."
-        },
-        {
-          text: "Only the longest method in the application.",
-          correct: false,
-          explanation:
-            "Length is not the selection criterion. The important requirement is a method with at least two clauses in its logic."
-        }
+        {text:"A method whose decision contains at least two identifiable clauses.",correct:true,explanation:"Correct. You need a decision structure whose clauses can be analyzed and tested."},
+        {text:"A method with no decisions.",correct:false,explanation:"Without a decision there are no clauses to analyze."},
+        {text:"The longest method in the app.",correct:false,explanation:"Length is not the selection criterion."},
+        {text:"A screen with many buttons but no method logic.",correct:false,explanation:"UI size does not define a logic-testing target."}
       ]
     },
     {
-      title: "Mission 4 — Make the clauses matter",
+      title: "Mission 4 — Test the clauses",
       criterion: "Logic Testing",
-      scenario:
-        `You found the decision
-         <strong>(A AND B) OR C</strong> in the app. Your job is to create
-         tests that demonstrate how the clauses affect the decision.`,
-      artifact:
-        `<div style="font-family:ui-monospace,monospace;text-align:center;
-                    font-size:17px;padding:12px;">
-          <strong>(A AND B) OR C</strong>
-          <div style="font-size:11px;color:var(--muted);margin-top:8px;">
-            A = registered student · B = seats available · C = organizer
-          </div>
-        </div>`,
-      task:
-        `<strong>Which question best captures the goal of logic testing?</strong>`,
+      scenario: `Your selected method contains <strong>(A AND B) OR C</strong>.
+                 Think about how changing one clause can influence the decision when the others are controlled.`,
+      artifact: `<div class="code-box">A = registered student<br>B = seats available<br>C = organizer</div>`,
+      task: `<strong>What should your logic tests investigate?</strong>`,
       options: [
-        {
-          text: "Can a change in an individual clause affect the decision when the other clauses are controlled appropriately?",
-          correct: true,
-          explanation:
-            "Correct. Logic testing is about understanding the structure of decisions and designing tests that demonstrate the influence of clauses."
-        },
-        {
-          text: "Have we clicked every button in the application?",
-          correct: false,
-          explanation:
-            "That may contribute to UI testing, but it does not directly demonstrate clause-level logic reasoning."
-        },
-        {
-          text: "Have we used every possible student name?",
-          correct: false,
-          explanation:
-            "That is an input-domain question, not a logic-testing objective."
-        },
-        {
-          text: "Have we generated a mutant for every line?",
-          correct: false,
-          explanation:
-            "That is mutation-oriented thinking. Logic testing starts by modeling the decision and its clauses."
-        }
+        {text:"Whether an individual clause can affect the decision under appropriate conditions.",correct:true,explanation:"Correct. Clause-level reasoning is central to logic testing."},
+        {text:"Whether every button was clicked.",correct:false,explanation:"That does not specifically test the decision's logical structure."},
+        {text:"Whether every username was used.",correct:false,explanation:"That is unrelated to clause-level logic."},
+        {text:"Whether the method has many lines.",correct:false,explanation:"Code size is not the objective of logic testing."}
       ]
     },
     {
       title: "Mission 5 — Draw the event flow graph",
       criterion: "Event Flow Graph",
-      scenario:
-        `Now switch from individual methods to the <strong>whole app</strong>.
-         Your project asks you to model the app's behavior as an
-         <strong>event flow graph</strong>.`,
-      artifact:
-        `<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;
-                    font-family:ui-monospace,monospace;font-size:11px;">
-          <span class="block-chip">Launch</span> →
-          <span class="block-chip">Login</span> →
-          <span class="block-chip">Browse</span> →
-          <span class="block-chip">Select Event</span> →
-          <span class="block-chip">Book</span> →
-          <span class="block-chip">Confirm</span>
-        </div>
-        <div style="text-align:center;margin-top:10px;color:var(--muted);font-size:11px;">
-          Possible events also include Login failure, Cancel booking, Payment failure, Retry.
-        </div>`,
-      task:
-        `<strong>What belongs in the event flow graph?</strong>`,
+      scenario: `Now model the <strong>whole application</strong>. Identify important events and transitions,
+                 including normal, alternate, failure, cancellation, and retry paths.`,
+      artifact: `<div class="flow-box">Launch → Login → Browse → Select → Book → Confirm<br><small>↘ Login failure · Cancel · Payment failure · Retry</small></div>`,
+      task: `<strong>What belongs in the event flow graph?</strong>`,
       options: [
-        {
-          text: "Important app events and the possible transitions between them, including meaningful alternate and error flows.",
-          correct: true,
-          explanation:
-            "Correct. The graph represents how users and the system move through observable events. Include normal paths as well as important alternatives such as failure, retry, and cancellation."
-        },
-        {
-          text: "Only the source-code line numbers.",
-          correct: false,
-          explanation:
-            "Line numbers describe implementation structure. The event flow graph here is about the app's observable behavior and event transitions."
-        },
-        {
-          text: "Only the happy path from launch to confirmation.",
-          correct: false,
-          explanation:
-            "The interesting testing opportunities often occur in alternate paths such as failed login, cancellation, and retry."
-        },
-        {
-          text: "Only screenshots of each screen.",
-          correct: false,
-          explanation:
-            "Screenshots can document the UI, but the graph must capture relationships and transitions between events."
-        }
+        {text:"Important app events and transitions, including meaningful alternate and error flows.",correct:true,explanation:"Correct. The graph models how the application can move between events."},
+        {text:"Only the successful path.",correct:false,explanation:"Alternate and failure paths are important testing opportunities."},
+        {text:"Only source-code line numbers.",correct:false,explanation:"The event flow graph represents app behavior and transitions."},
+        {text:"Only screenshots.",correct:false,explanation:"Screenshots do not describe the transitions between events."}
       ]
     },
     {
-      title: "Mission 6 — Hunt bugs using existing bug reports",
-      criterion: "Guided Collaborative Bug Finding",
-      scenario:
-        `Instead of asking students to guess what kinds of bugs might exist,
-         the project provides <strong>existing bug reports from similar apps</strong>.
-         Your group uses these reports as testing inspiration: What behavior
-         was wrong? What input or event exposed it? What test could reveal a
-         similar problem in your selected app?`,
-      artifact:
-        `<div style="padding:13px;border:1px solid var(--line);border-radius:11px;
-                    font-size:12px;line-height:1.8;">
-          <strong>Example bug report from a similar app</strong><br>
-          "Changing the quantity after returning from the confirmation screen
-          updates the displayed quantity but not the total price."
-          <br><br>
-          <span style="color:var(--muted);">
-            Challenge: transform this historical bug into a
-            <strong>test idea</strong> for your own app.
-          </span>
-        </div>`,
-      task:
-        `<strong>What is the best way to use existing bug reports?</strong>`,
+      title: "Mission 6 — Use existing bug reports as clues",
+      criterion: "Guided Bug Finding",
+      scenario: `The project provides <strong>existing bug reports from similar apps</strong>.
+                 They are not bugs you can automatically claim exist in your app. They are clues that
+                 help you identify realistic failure patterns.`,
+      artifact: `<div class="bug-report"><strong>Historical bug:</strong><br>Changing ticket quantity after returning to a booking screen changes the displayed quantity but not the total price.</div>`,
+      task: `<strong>How should you use this historical bug?</strong>`,
       options: [
-        {
-          text: "Extract the underlying bug pattern, adapt it to your app, design a test, and verify whether similar behavior occurs.",
-          correct: true,
-          explanation:
-            "Correct. Existing bugs act as testing clues. They help students learn realistic failure modes without assuming that the same defect exists in the new app."
-        },
-        {
-          text: "Copy the old bug report and submit it as a bug in your app.",
-          correct: false,
-          explanation:
-            "A historical bug is only a testing clue. You must independently reproduce and verify the behavior in your own app."
-        },
-        {
-          text: "Only test the exact steps from the old report.",
-          correct: false,
-          explanation:
-            "The goal is to learn the underlying failure pattern and adapt it to a different app and context."
-        },
-        {
-          text: "Ignore existing bug reports because testing must always start from scratch.",
-          correct: false,
-          explanation:
-            "Historical defects are valuable testing knowledge. They can guide exploration toward realistic failure modes."
-        }
-      ]
-    },
-        {
-          text: "Everyone performs exactly the same five clicks.",
-          correct: false,
-          explanation:
-            "That creates unnecessary duplication and reduces the diversity of exploration."
-        },
-        {
-          text: "Report every surprising result immediately without reproduction.",
-          correct: false,
-          explanation:
-            "An observation may be a misunderstanding, expected behavior, or environment issue. Reproduction and checking the requirement are essential."
-        },
-        {
-          text: "Let one student test while everyone else waits.",
-          correct: false,
-          explanation:
-            "The purpose of collaboration is to increase exploration, discussion, and independent perspectives."
-        }
+        {text:"Extract the failure pattern, adapt it to your app, design a test, and verify the result.",correct:true,explanation:"Correct. Historical bugs guide exploration without replacing actual testing."},
+        {text:"Copy the report and submit it as your own bug.",correct:false,explanation:"You must reproduce and verify the behavior in your own app."},
+        {text:"Only repeat the exact old steps.",correct:false,explanation:"The goal is to understand and adapt the underlying pattern."},
+        {text:"Ignore historical bugs.",correct:false,explanation:"Existing defects can provide valuable testing knowledge."}
       ]
     },
     {
-      title: "Mission 7 — Let AI help write the bug report",
+      title: "Mission 7 — Learn from your group",
+      criterion: "Independent + Collaborative Testing",
+      scenario: `Each group member tests a different app. One student may discover a useful boundary,
+                 another a navigation failure, and another a way to adapt a historical bug report.
+                 Share those insights, but keep your own testing work independent.`,
+      artifact: `<div class="mini-node active"><b>Group</b> Share techniques → compare apps → improve your own testing</div>`,
+      task: `<strong>What is the strongest group workflow?</strong>`,
+      options: [
+        {text:"Each student tests their own app, then shares techniques, discoveries, and lessons.",correct:true,explanation:"Exactly. Collaboration provides learning without making one student's work dependent on another."},
+        {text:"Everyone tests the same app and submits identical results.",correct:false,explanation:"That removes the benefit of comparing different applications."},
+        {text:"One student does all testing for the group.",correct:false,explanation:"That prevents independent learning and creates dependency."},
+        {text:"Students never discuss their testing.",correct:false,explanation:"Discussion helps students compare how criteria apply to different apps."}
+      ]
+    },
+    {
+      title: "Mission 8 — Use AI responsibly",
       criterion: "AI-Assisted Bug Reporting",
-      scenario:
-        `After adapting an existing bug pattern and reproducing suspicious behavior, a student has evidence for a possible defect. An AI tool can help
-         turn the observation into a structured bug report. The AI should
-         <strong>assist</strong>, not invent evidence.`,
-      artifact:
-        `<div style="padding:13px;border:1px solid var(--line);border-radius:11px;
-                    font-size:12px;line-height:1.8;">
-          <strong>Raw observation</strong><br>
-          "I selected 5 tickets, changed the quantity to 6, went back,
-          then the confirmation showed 5 tickets but the total price was for 6."
-          <br><br>
-          <span style="color:var(--muted);">
-            AI suggestion: generate a concise report with title, environment,
-            steps to reproduce, expected result, actual result, and evidence.
-          </span>
-        </div>`,
-      task:
-        `<strong>What is the best use of AI here?</strong>`,
+      scenario: `After reproducing a suspicious behavior and collecting evidence, you may use an AI tool
+                 to help structure the bug report. AI should assist with communication, not invent evidence.`,
+      artifact: `<div class="story-card warning"><strong>Rule:</strong> AI can help write the report; the tester is responsible for the evidence.</div>`,
+      task: `<strong>What is the best use of AI?</strong>`,
       options: [
-        {
-          text: "Give the AI the verified observation and evidence, then use it to organize and improve the bug report while checking every generated claim.",
-          correct: true,
-          explanation:
-            "Correct. AI can reduce the writing burden and suggest missing report fields, but the tester remains responsible for accuracy, reproduction steps, and evidence."
-        },
-        {
-          text: "Ask the AI to invent expected and actual results if they are unclear.",
-          correct: false,
-          explanation:
-            "A bug report must be grounded in observed evidence. AI should not fabricate facts."
-        },
-        {
-          text: "Submit the AI-generated report without reproducing the bug.",
-          correct: false,
-          explanation:
-            "The tester must validate the behavior. AI-generated prose is not evidence."
-        },
-        {
-          text: "Ask AI to decide whether the bug is real without checking the app.",
-          correct: false,
-          explanation:
-            "AI can help reason about a report, but the project requires empirical verification of the app behavior."
-        }
+        {text:"Give AI verified observations and evidence, then check every generated claim.",correct:true,explanation:"Correct. AI can help organize the report while the tester remains responsible for accuracy."},
+        {text:"Ask AI to invent the expected result.",correct:false,explanation:"Expected behavior must come from requirements or verified behavior."},
+        {text:"Submit an AI report without reproducing the problem.",correct:false,explanation:"A bug report requires evidence and reproducibility."},
+        {text:"Let AI decide whether a bug exists without testing.",correct:false,explanation:"AI cannot replace empirical testing."}
       ]
     },
     {
-      title: "FINAL MISSION — Put the project together",
-      criterion: "Integrated App Testing Project",
-      scenario:
-        `You are ready to complete the <strong>in-class app testing project</strong>.
-         Your deliverable should demonstrate that you can move from code to
-         models, from models to tests, and from observations to actionable
-         bug reports.`,
-      artifact:
-        `<div style="display:grid;gap:8px;font-size:12px;">
-          <div class="mini-node"><b>1</b> Select a method with ≥ 2 arguments → Input Domain Modeling</div>
-          <div class="mini-node"><b>2</b> Select a method with ≥ 2 clauses → Logic Testing</div>
-          <div class="mini-node"><b>3</b> Model the app → Event Flow Graph</div>
-          <div class="mini-node"><b>4</b> Use existing bug reports from similar apps → Guide exploration</div>
-          <div class="mini-node"><b>5</b> Reproduce and verify → Find bugs</div>
-          <div class="mini-node"><b>6</b> Optional AI assistance → Generate useful bug reports</div>
-        </div>`,
-      task:
-        `<strong>Which project plan best demonstrates the intended testing thinking?</strong>`,
+      title: "FINAL MISSION — Start the real project",
+      criterion: "Integrated Testing Thinking",
+      scenario: `Your SOEN project workflow is now clear:<div class="mission-list">
+        <div>① Method with ≥ 2 arguments → Input Domain Modeling</div>
+        <div>② Method with ≥ 2 clauses → Logic Testing</div>
+        <div>③ Whole app → Event Flow Graph</div>
+        <div>④ Similar-app bug reports → Guided bug finding</div>
+        <div>⑤ Reproduce, verify, document → Evidence-based bug report</div>
+        <div>⑥ Group discussion → Learn from different apps</div>
+      </div>`,
+      artifact: `<div class="mini-node active"><b>Tester mindset</b> Model → Design → Explore → Verify → Communicate</div>`,
+      task: `<strong>Which plan best demonstrates the intended testing mindset?</strong>`,
       options: [
-        {
-          text: "Choose the required methods, build the input and logic models, draw the event flow graph, execute justified tests, collaborate on bug finding, and use AI only as an assistant for evidence-based bug reports.",
-          correct: true,
-          explanation:
-            "Excellent. This is the complete testing-thinking workflow: model the program, derive tests, model app behavior, explore beyond the obvious paths, validate bugs, and communicate evidence clearly."
-        },
-        {
-          text: "Pick random methods, run a few tests, and ask AI to create the final report from screenshots.",
-          correct: false,
-          explanation:
-            "This skips the required modeling activities and risks producing reports without sufficient evidence."
-        },
-        {
-          text: "Focus only on achieving high code coverage and ignore discovered bugs.",
-          correct: false,
-          explanation:
-            "Coverage is only one source of evidence. The project explicitly connects criteria-based testing with bug finding and reporting."
-        },
-        {
-          text: "Draw the event graph but do not execute tests because the graph proves the app works.",
-          correct: false,
-          explanation:
-            "A model helps design tests; it does not prove that the implementation behaves correctly."
-        }
+        {text:"Build models, derive justified tests, use historical bugs to guide exploration, validate findings, and report evidence clearly.",correct:true,explanation:"Excellent. You are thinking systematically rather than simply running random tests."},
+        {text:"Run random tests and ask AI to create everything afterward.",correct:false,explanation:"This skips the modeling and reasoning the project is designed to teach."},
+        {text:"Focus only on high code coverage.",correct:false,explanation:"Coverage is evidence, not proof that important behaviors and faults have been tested."},
+        {text:"Draw the event graph and assume the app is correct.",correct:false,explanation:"A model helps design tests; it does not prove implementation correctness."}
       ]
     }
   ];
@@ -2919,7 +2635,7 @@
       <strong>AppTest Quest completed.</strong>
       <div style="margin-top:8px;color:var(--muted);font-size:13px;">
         You have practiced input-domain modeling, logic testing, event-flow modeling,
-        collaborative bug finding, and AI-assisted bug reporting.
+        guided bug finding using existing reports, and AI-assisted bug reporting.
       </div>
     `;
 
@@ -2947,7 +2663,7 @@
       <div class="mini-node active"><b>✓</b> Input Domain</div>
       <div class="mini-node active"><b>✓</b> Logic Testing</div>
       <div class="mini-node active"><b>✓</b> Event Flow Graph</div>
-      <div class="mini-node active"><b>✓</b> Collaborative Bugs</div>
+      <div class="mini-node active"><b>✓</b> Guided Bug Finding</div>
       <div class="mini-node active"><b>✓</b> AI Bug Reports</div>
     `;
   }
