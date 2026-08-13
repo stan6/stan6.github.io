@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AppTest Quest — Software App Testing Adventure</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --panel: #131b31;
+    --panel2: #1a2540;
+    --text: #edf2ff;
+    --muted: #aab6d3;
+    --accent: #6ea8fe;
+    --accent2: #7ee2b8;
+    --warning: #ffd166;
+    --danger: #ff7b7b;
+    --line: #2b395c;
+    --shadow: 0 18px 50px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(110,168,254,.12), transparent 30%),
+      radial-gradient(circle at 85% 20%, rgba(126,226,184,.08), transparent 28%),
+      var(--bg);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", sans-serif;
+    line-height: 1.55;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .app {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 60px;
+  }
+
+  /* ---------- Header ---------- */
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: linear-gradient(145deg, #1c2b4d, #11192d);
+    box-shadow: var(--shadow);
+    font-size: 22px;
+  }
+
+  .brand h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -.02em;
+  }
+
+  .brand p {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pill {
+    border: 1px solid var(--line);
+    background: rgba(19,27,49,.75);
+    border-radius: 999px;
+    padding: 7px 12px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .pill strong { color: var(--text); }
+
+  /* ---------- Progress ---------- */
+
+  .progress-wrap {
+    margin-bottom: 24px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+
+  .progress {
+    height: 7px;
+    overflow: hidden;
+    background: #0e1528;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .progress > div {
+    height: 100%;
+    width: 8%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .35s ease;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero-main,
+  .hero-side,
+  .panel {
+    border: 1px solid var(--line);
+    background: linear-gradient(145deg, rgba(26,37,64,.94), rgba(16,24,43,.94));
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .hero-main {
+    padding: 38px;
+    min-height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    color: var(--accent2);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    margin-bottom: 12px;
+  }
+
+  .hero h2 {
+    margin: 0 0 14px;
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .hero h2 span {
+    color: var(--accent);
+  }
+
+  .hero-main > p {
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0 0 24px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 11px 16px;
+    color: var(--text);
+    background: #17213a;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    border-color: #48618e;
+    background: #1d2b49;
+  }
+
+  .btn.primary {
+    background: #376bb5;
+    border-color: #5689d5;
+  }
+
+  .btn.primary:hover {
+    background: #427bcf;
+  }
+
+  .btn.ghost {
+    background: transparent;
+  }
+
+  .hero-side {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mission-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(8,14,28,.38);
+  }
+
+  .mission-card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+
+  .mission-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .mini-map {
+    margin-top: 18px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .mini-node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.025);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .mini-node.active {
+    color: var(--text);
+    background: rgba(110,168,254,.09);
+    border: 1px solid rgba(110,168,254,.2);
+  }
+
+  .mini-node b {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #223252;
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  /* ---------- Main learning panel ---------- */
+
+  .panel {
+    padding: 28px;
+    margin-top: 20px;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+
+  .panel-header h2 {
+    margin: 0 0 5px;
+    font-size: 24px;
+    letter-spacing: -.025em;
+  }
+
+  .panel-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .section-tag {
+    white-space: nowrap;
+    padding: 6px 9px;
+    border-radius: 8px;
+    color: var(--accent2);
+    border: 1px solid rgba(126,226,184,.2);
+    background: rgba(126,226,184,.05);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* ---------- Story ---------- */
+
+  .story-layout {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 24px;
+  }
+
+  .story-rail {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+  }
+
+  .chapter {
+    text-align: left;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 11px 12px;
+    background: transparent;
+    color: var(--muted);
+  }
+
+  .chapter.active {
+    color: var(--text);
+    background: #1a2948;
+    border-color: #3e5b88;
+  }
+
+  .chapter small {
+    display: block;
+    margin-top: 2px;
+    opacity: .7;
+    font-size: 10px;
+  }
+
+  .story-card {
+    min-height: 360px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 30px;
+    background:
+      linear-gradient(135deg, rgba(110,168,254,.05), transparent 45%),
+      rgba(7,13,26,.36);
+  }
+
+  .story-number {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .story-card h3 {
+    margin: 8px 0 16px;
+    font-size: 29px;
+    letter-spacing: -.03em;
+  }
+
+  .story-card p {
+    color: #d2daed;
+    max-width: 760px;
+    font-size: 16px;
+  }
+
+  .quote {
+    margin: 24px 0;
+    padding: 16px 18px;
+    border-left: 3px solid var(--accent);
+    background: rgba(110,168,254,.06);
+    color: #dfe8ff;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .story-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  /* ---------- Criteria overview ---------- */
+
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 14px;
+  }
+
+  .criteria-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    background: rgba(7,13,26,.35);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+
+  .criteria-card:hover {
+    border-color: #405982;
+    transform: translateY(-2px);
+  }
+
+  .criteria-icon {
+    font-size: 25px;
+    margin-bottom: 12px;
+  }
+
+  .criteria-card h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+  }
+
+  .criteria-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .criteria-card .question {
+    margin-top: 13px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    color: #dce5fa;
+    font-size: 12px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footer {
+    margin-top: 24px;
+    text-align: center;
+    color: #72809e;
+    font-size: 11px;
+  }
+
+  /* ---------- Utility ---------- */
+
+  .hidden { display: none !important; }
+
+  .fade-in {
+    animation: fadeIn .3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 800px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-main {
+      padding: 28px;
+      min-height: 330px;
+    }
+
+    .story-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .story-rail {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .criteria-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .status .pill:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .app {
+      width: min(100% - 20px, 1180px);
+      padding-top: 15px;
+    }
+
+    .topbar {
+      align-items: flex-start;
+    }
+
+    .brand p {
+      display: none;
+    }
+
+    .hero h2 {
+      font-size: 35px;
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .story-rail {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">🐞</div>
+      <div>
+        <h1>AppTest Quest</h1>
+        <p>Software App Testing Adventure · Undergraduate Edition</p>
+      </div>
+    </div>
+
+    <div class="status">
+      <div class="pill">Level <strong id="level">1</strong></div>
+      <div class="pill">XP <strong id="xp">0</strong></div>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="progressLabel">Mission progress</span>
+      <span id="progressPercent">8%</span>
+    </div>
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PART 1 — INTRODUCTION + STORY MODE + CRITERIA MAP
+       ========================================================= -->
+
+  <section class="hero" id="home">
+    <div class="hero-main">
+      <div class="eyebrow">Mission briefing</div>
+
+      <h2>Don't just test the software.<br><span>Think about how it can fail.</span></h2>
+
+      <p>
+        You are joining a software team as a test engineer. Your first task is
+        not to write a test script. It is to decide <strong>how to model the
+        software</strong> so that your tests have a reason to exist.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn primary" onclick="startStory()">🎧 Start the story</button>
+        <button class="btn" onclick="showOverview()">🧭 Explore testing criteria</button>
+      </div>
+    </div>
+
+    <aside class="hero-side">
+      <div>
+        <div class="mission-card">
+          <h3>Your role</h3>
+          <p>
+            Junior test engineer on a production software project.
+            Your decisions will determine whether hidden faults are discovered.
+          </p>
+        </div>
+
+        <div class="mini-map">
+          <div class="mini-node active"><b>01</b> Why criteria matter</div>
+          <div class="mini-node"><b>02</b> Model the app inputs</div>
+          <div class="mini-node"><b>03</b> Draw event flow as a graph</div>
+          <div class="mini-node"><b>04</b> Test logic clauses and logic</div>
+        </div>
+      </div>
+
+      <div style="color:var(--muted);font-size:11px;margin-top:20px;">
+        Part 1 of 4 · Introduction and motivation
+      </div>
+    </aside>
+  </section>
+
+  <!-- STORY MODE -->
+  <section class="panel hidden" id="storySection">
+    <div class="panel-header">
+      <div>
+        <h2>🎧 Incident Report: Release 4.2</h2>
+        <p>
+          Listen to the story, then decide what kind of thinking could have
+          prevented the failure.
+        </p>
+      </div>
+      <div class="section-tag">STORY MODE</div>
+    </div>
+
+    <div class="story-layout">
+      <div class="story-rail">
+        <button class="chapter active" onclick="storyGo(0)">
+          01 · Release
+          <small>The incident begins</small>
+        </button>
+        <button class="chapter" onclick="storyGo(1)">
+          02 · Failure
+          <small>Something was missed</small>
+        </button>
+        <button class="chapter" onclick="storyGo(2)">
+          03 · Investigation
+          <small>What went wrong?</small>
+        </button>
+        <button class="chapter" onclick="storyGo(3)">
+          04 · Mission
+          <small>Your role begins</small>
+        </button>
+      </div>
+
+      <article class="story-card fade-in" id="storyCard">
+        <div class="story-number" id="storyNumber">Incident 01</div>
+        <h3 id="storyTitle">The release everyone trusted</h3>
+
+        <p id="storyText">
+          It is 9:10 on a Monday morning. Your team has just deployed version
+          4.2 of a university registration system. The test report says
+          <strong>“All critical tests passed.”</strong>
+        </p>
+
+        <div class="quote" id="storyQuote">
+          “We ran more than 400 tests. The system is ready.”
+          <br><small>— Release manager, 08:55</small>
+        </div>
+
+        <p id="storyQuestion">
+          At first, this sounds reassuring. But a tester asks a different
+          question: <em>What exactly did those 400 tests tell us?</em>
+        </p>
+
+        <div class="story-controls">
+          <button class="btn ghost" id="storyBack" onclick="storyBack()" disabled>
+            ← Previous
+          </button>
+          <button class="btn primary" id="storyNext" onclick="storyNext()">
+            Continue →
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CRITERIA OVERVIEW -->
+  <section class="panel hidden" id="overviewSection">
+    <div class="panel-header">
+      <div>
+        <h2>🧭 Different questions require different models</h2>
+        <p>
+          There is no single “best” way to test a program. Criteria give you
+          systematic ways to decide what should be exercised.
+        </p>
+      </div>
+      <div class="section-tag">CRITERIA MAP</div>
+    </div>
+
+    <div class="criteria-grid">
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🧩</div>
+        <h3>Input Space Partitioning</h3>
+        <p>
+          Model the possible inputs as characteristics and blocks. Choose
+          representative values instead of trying every possible input.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “What different kinds of input behavior exist?”
+        </div>
+      </article>
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🗺️</div>
+        <h3>Graph Coverage</h3>
+        <p>
+          Model software as nodes, edges, and paths. Tests are selected to
+          exercise required elements or paths in the model.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “What behaviors or transitions must the system traverse?”
+        </div>
+      </article>
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🧠</div>
+        <h3>Logic Coverage</h3>
+        <p>
+          Test logic clauses as predicates and clauses. Investigate how individual
+          conditions influence the overall decision.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “Which conditions can actually change the decision?”
+        </div>
+      </article>
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🔍</div>
+        <h3>Data Flow Coverage</h3>
+        <p>
+          Model where values are defined and where they are subsequently used.
+          Tests target important definition-use relationships.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “Where does this value come from, and where does it go?”
+        </div>
+      </article>
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🧬</div>
+        <h3>Syntax-Based / Mutation Testing</h3>
+        <p>
+          Model likely faults through systematic program changes, then ask
+          whether the test suite can distinguish the original from the mutant.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “Could my tests detect a plausible change in the program?”
+        </div>
+      </article>
+
+      <article class="criteria-card">
+        <div class="criteria-icon">🐞</div>
+        <h3>Fault-Oriented Thinking</h3>
+        <p>
+          Start from ways the software might be wrong and design tests capable
+          of exposing those failures.
+        </p>
+        <div class="question">
+          <strong>Tester question:</strong>
+          “What mistake could a developer realistically have made?”
+        </div>
+      </article>
+
+    </div>
+
+    <div style="margin-top:20px;padding:18px;border:1px solid var(--line);
+                border-radius:16px;background:rgba(110,168,254,.045);">
+      <strong>💡 The big idea</strong>
+      <p style="margin:7px 0 0;color:var(--muted);font-size:14px;">
+        A testing criterion is a way of <strong>modeling the problem</strong>.
+        The model determines what counts as a testing requirement, and those
+        requirements guide the tests you construct.
+      </p>
+    </div>
+
+    <div style="margin-top:18px;display:flex;justify-content:flex-end;">
+      <button class="btn primary" onclick="beginThinkingGame()">
+        🎮 Start the Thinking Game →
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PART 2 — TESTING THINKING GAME
+       "How should you model the software?"
+       ========================================================= -->
+
+  <section class="panel hidden" id="thinkingSection">
+    <div class="panel-header">
+      <div>
+        <h2>🎮 Testing Thinking Game</h2>
+        <p>
+          Before choosing a test, choose a useful <strong>model</strong>.
+          Different views of the same software reveal different testing
+          requirements.
+        </p>
+      </div>
+      <div class="section-tag">MODEL FIRST</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px;" id="thinkingLayout">
+
+      <div>
+        <div id="thinkingCard" class="story-card" style="min-height:420px;">
+          <div class="story-number" id="thinkingRound">MISSION 01</div>
+          <h3 id="thinkingTitle">Choose your lens</h3>
+          <p id="thinkingScenario"></p>
+
+          <div id="thinkingArtifact"
+               style="margin:20px 0;padding:18px;border:1px solid var(--line);
+                      border-radius:14px;background:rgba(7,13,26,.45);">
+          </div>
+
+          <div style="margin-top:20px;">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:9px;">
+              Which model gives you the strongest starting point?
+            </div>
+
+            <div id="modelChoices"
+                 style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;">
+            </div>
+          </div>
+
+          <div id="thinkingFeedback"
+               class="hidden"
+               style="margin-top:18px;padding:15px;border-radius:12px;
+                      border:1px solid var(--line);">
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;">
+            <button class="btn ghost" onclick="restartThinkingGame()">
+              ↻ Restart
+            </button>
+            <button class="btn primary hidden" id="thinkingNext"
+                    onclick="nextThinkingRound()">
+              Next mission →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="mission-card">
+          <h3>🧠 Your testing lens</h3>
+          <p>
+            A criterion does more than measure coverage. It tells you what
+            to look at when deciding which tests are worth creating.
+          </p>
+        </div>
+
+        <div style="margin-top:12px;" class="mission-card">
+          <h3>Current toolkit</h3>
+          <div id="toolkit"
+               style="display:grid;gap:7px;margin-top:10px;">
+            <div class="mini-node"><b>IN</b> Input space</div>
+            <div class="mini-node"><b>GR</b> Graph / behavior</div>
+            <div class="mini-node"><b>LO</b> Logic / decisions</div>
+            <div class="mini-node"><b>DF</b> Data flow</div>
+            <div class="mini-node"><b>MU</b> Mutations / faults</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;" class="mission-card">
+          <h3>Round score</h3>
+          <div style="display:flex;justify-content:space-between;margin-top:10px;
+                      color:var(--muted);font-size:12px;">
+            <span>Correct choices</span>
+            <strong id="thinkingScore" style="color:var(--text);">0 / 0</strong>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width:800px) {
+      #thinkingLayout {
+        grid-template-columns:1fr !important;
+      }
+    }
+  </style>
+
+  <!-- =========================================================
+       PART 3 — INPUT SPACE PARTITIONING LAB
+       Students construct partitions and boundary tests.
+       ========================================================= -->
+
+  <section class="panel hidden" id="partitionSection">
+    <div class="panel-header">
+      <div>
+        <h2>🧩 Input Space Lab</h2>
+        <p>
+          Now stop choosing a model. Build one. Your goal is to turn a messy
+          input domain into meaningful testing requirements.
+        </p>
+      </div>
+      <div class="section-tag">BUILD THE MODEL</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;"
+         id="partitionLayout">
+
+      <main>
+        <div class="story-card" style="min-height:470px;">
+
+          <div class="story-number" id="partitionRound">LAB 01</div>
+          <h3 id="partitionTitle">Partition Architect</h3>
+
+          <p id="partitionScenario"></p>
+
+          <div id="partitionSpec"
+               style="margin:18px 0;padding:17px;border:1px solid var(--line);
+                      border-radius:14px;background:rgba(7,13,26,.42);">
+          </div>
+
+          <div id="partitionTask"
+               style="margin:18px 0;padding:15px;border-radius:12px;
+                      background:rgba(110,168,254,.05);
+                      border:1px solid rgba(110,168,254,.16);">
+          </div>
+
+          <div id="partitionChoices"></div>
+
+          <div id="partitionFeedback" class="hidden"
+               style="margin-top:18px;padding:15px;border-radius:12px;
+                      border:1px solid var(--line);">
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;">
+            <button class="btn ghost" onclick="restartPartitionLab()">↻ Restart lab</button>
+            <button class="btn primary hidden" id="partitionNext"
+                    onclick="nextPartitionMission()">Next challenge →</button>
+          </div>
+        </div>
+      </main>
+
+      <aside>
+        <div class="mission-card">
+          <h3>🧠 Modeling checklist</h3>
+          <div style="display:grid;gap:8px;margin-top:11px;font-size:12px;">
+            <div id="checkCharacteristic" class="mini-node">
+              <b>1</b> Identify characteristics
+            </div>
+            <div id="checkBlocks" class="mini-node">
+              <b>2</b> Create blocks
+            </div>
+            <div id="checkBoundary" class="mini-node">
+              <b>3</b> Inspect boundaries
+            </div>
+            <div id="checkCombination" class="mini-node">
+              <b>4</b> Combine characteristics
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-card" style="margin-top:12px;">
+          <h3>🏅 Lab score</h3>
+          <div style="margin-top:10px;font-size:25px;font-weight:800;"
+               id="partitionScore">0</div>
+          <div style="color:var(--muted);font-size:11px;">
+            points earned in this lab
+          </div>
+        </div>
+
+        <div class="mission-card" style="margin-top:12px;">
+          <h3>Tester principle</h3>
+          <p>
+            A good partition is not simply a list of values. It represents
+            a meaningful region of the input space where you expect similar
+            behavior.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <style>
+    .partition-option {
+      width:100%;
+      text-align:left;
+      margin-top:9px;
+      padding:13px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.025);
+      color:var(--text);
+      transition:.15s ease;
+    }
+
+    .partition-option:hover:not(:disabled) {
+      border-color:#48618e;
+      background:#1b2947;
+      transform:translateY(-1px);
+    }
+
+    .partition-option:disabled {
+      cursor:default;
+    }
+
+    .boundary-values {
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:7px;
+      margin-top:14px;
+    }
+
+    .boundary-value {
+      border:1px solid var(--line);
+      border-radius:9px;
+      padding:9px 5px;
+      text-align:center;
+      background:rgba(255,255,255,.025);
+      color:var(--text);
+      cursor:pointer;
+    }
+
+    .boundary-value:hover {
+      border-color:#48618e;
+    }
+
+    .boundary-value.selected {
+      border-color:rgba(126,226,184,.7);
+      background:rgba(126,226,184,.09);
+    }
+
+    .block-chip {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 9px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      margin:4px 4px 0 0;
+      background:rgba(255,255,255,.025);
+      color:#dce5fa;
+      font-size:12px;
+    }
+
+    .block-chip.good {
+      border-color:rgba(126,226,184,.45);
+      background:rgba(126,226,184,.06);
+    }
+
+    .block-chip.bad {
+      border-color:rgba(255,123,123,.45);
+      background:rgba(255,123,123,.05);
+    }
+
+    @media (max-width:800px) {
+      #partitionLayout {
+        grid-template-columns:1fr !important;
+      }
+      .boundary-values {
+        grid-template-columns:repeat(4,minmax(0,1fr));
+      }
+    }
+  </style>
+
+  <!-- =========================================================
+       PART 4 — ADVANCED CRITERIA + FINAL TESTER MISSION
+       ========================================================= -->
+
+  <section class="panel hidden" id="advancedSection">
+    <div class="panel-header">
+      <div>
+        <h2>🎓 Introductory Game for the SOEN In-Class Project</h2>
+        <p>
+          You have learned to choose a model and partition an input space.
+          Now combine several criteria to reason about behavior, decisions,
+          data, and faults.
+        </p>
+      </div>
+      <div class="section-tag">FINAL MISSION</div>
+    </div>
+
+
+    <div style="margin:0 0 20px;padding:18px;border:1px solid var(--line);
+                border-radius:15px;background:rgba(110,168,254,.045);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div>
+          <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:800;">
+            SOEN PROJECT SETUP
+          </div>
+          <h3 style="margin:7px 0 8px;">👥 Learn together, test independently</h3>
+          <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.65;">
+            You work in a <strong>group</strong>, but each student selects a
+            <strong>different app</strong>. Everyone practices the same testing
+            techniques while seeing how they apply to different apps.
+          </p>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);font-weight:800;">
+            INDIVIDUAL CONTRIBUTION
+          </div>
+          <h3 style="margin:7px 0 8px;">🧑‍💻 Your work can stand on its own</h3>
+          <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.65;">
+            Each student can complete their testing activities independently.
+            Group discussion is for <strong>sharing insights and comparing
+            approaches</strong>, so one student's progress does not depend on
+            another student's contribution.
+          </p>
+        </div>
+      </div>
+      <div style="margin-top:15px;padding:12px 14px;border-radius:11px;
+                  background:rgba(126,226,184,.055);
+                  border:1px solid rgba(126,226,184,.18);
+                  color:#d7e7e2;font-size:12px;line-height:1.6;">
+        <strong>Why this structure?</strong>
+        If a group member contributes little or not at all, another student's
+        progress is not blocked. Students who actively collaborate can still
+        learn from how their peers test different apps.
+      </div>
+    </div>
+    <div id="advancedLayout"
+         style="display:grid;grid-template-columns:1fr 300px;gap:20px;">
+
+      <main>
+        <div class="story-card" style="min-height:500px;">
+
+          <div class="story-number" id="advancedRound">ARENA 01</div>
+          <h3 id="advancedTitle">Choose the evidence</h3>
+          <p id="advancedScenario"></p>
+
+          <div id="advancedArtifact"
+               style="margin:18px 0;padding:17px;border:1px solid var(--line);
+                      border-radius:14px;background:rgba(7,13,26,.42);">
+          </div>
+
+          <div id="advancedTask"
+               style="margin:18px 0;padding:15px;border-radius:12px;
+                      background:rgba(110,168,254,.05);
+                      border:1px solid rgba(110,168,254,.16);">
+          </div>
+
+          <div id="advancedChoices"></div>
+
+          <div id="advancedFeedback" class="hidden"
+               style="margin-top:18px;padding:15px;border-radius:12px;">
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;">
+            <button class="btn ghost" onclick="restartAdvancedArena()">
+              ↻ Restart
+            </button>
+            <button class="btn primary hidden" id="advancedNext"
+                    onclick="nextAdvancedMission()">
+              Next mission →
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <aside>
+        <div class="mission-card">
+          <h3>🧰 Criteria toolbox</h3>
+          <div id="criteriaToolbox"
+               style="display:grid;gap:7px;margin-top:10px;">
+            <div class="mini-node"><b>1</b> Input Domain</div>
+            <div class="mini-node"><b>2</b> Logic Testing</div>
+            <div class="mini-node"><b>3</b> Event Flow Graph</div>
+            <div class="mini-node"><b>4</b> Guided Bug Finding</div>
+            <div class="mini-node"><b>5</b> AI Bug Reports</div>
+          </div>
+        </div>
+
+        <div class="mission-card" style="margin-top:12px;">
+          <h3>🏆 Arena score</h3>
+          <div id="advancedScore"
+               style="font-size:25px;font-weight:800;margin-top:8px;">0</div>
+          <div style="color:var(--muted);font-size:11px;">
+            points earned
+          </div>
+        </div>
+
+        <div class="mission-card" style="margin-top:12px;">
+          <h3>Tester mindset</h3>
+          <p>
+            Coverage is evidence, not a guarantee. Ask what the criterion
+            exposes — and what it can still miss.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <style>
+    .advanced-option {
+      width:100%;
+      text-align:left;
+      margin-top:9px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.025);
+      color:var(--text);
+      transition:.15s ease;
+    }
+
+    .advanced-option:hover:not(:disabled) {
+      border-color:#48618e;
+      background:#1b2947;
+      transform:translateY(-1px);
+    }
+
+    .advanced-option:disabled {
+      cursor:default;
+    }
+
+    .coverage-grid {
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:7px;
+      margin-top:13px;
+    }
+
+    .coverage-cell {
+      min-height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line);
+      border-radius:8px;
+      font-family:ui-monospace,monospace;
+      font-size:11px;
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+    }
+
+    .coverage-cell.hit {
+      color:var(--text);
+      border-color:rgba(126,226,184,.45);
+      background:rgba(126,226,184,.07);
+    }
+
+    .coverage-cell.miss {
+      color:#ffb7b7;
+      border-color:rgba(255,123,123,.35);
+      background:rgba(255,123,123,.05);
+    }
+
+    @media (max-width:800px) {
+      #advancedLayout {
+        grid-template-columns:1fr !important;
+      }
+      .coverage-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+  </style>
+
+  <div class="footer">
+    AppTest Quest · Software App Testing Adventure · Complete
+  </div>
+
+</div>
+
+<script>
+  /* =========================================================
+     PART 1 JAVASCRIPT
+     Later parts can extend this state and navigation system.
+     ========================================================= */
+
+  const state = {
+    xp: 0,
+    level: 1,
+    progress: 8,
+    storyIndex: 0
+  };
+
+  const stories = [
+    {
+      number: "Incident 01",
+      title: "The release everyone trusted",
+      text:
+        `It is 9:10 on a Monday morning. Your team has just deployed version
+         4.2 of a university registration system. The test report says
+         <strong>“All critical tests passed.”</strong>`,
+      quote:
+        `“We ran more than 400 tests. The system is ready.”<br>
+         <small>— Release manager, 08:55</small>`,
+      question:
+        `At first, this sounds reassuring. But a tester asks a different
+         question: <em>What exactly did those 400 tests tell us?</em>`
+    },
+    {
+      number: "Incident 02",
+      title: "The edge case nobody expected",
+      text:
+        `At 9:17, students begin reporting that registration fails when they
+         attempt to enroll in a course while their account has exactly the
+         maximum number of permitted credits.`,
+      quote:
+        `“But we tested registration with valid students and valid courses.”<br>
+         <small>— Developer</small>`,
+      question:
+        `The team tested many ordinary examples. What they did not deliberately
+        test was the <strong>boundary</strong> of the input domain.`
+    },
+    {
+      number: "Incident 03",
+      title: "The 400-test mystery",
+      text:
+        `The investigation finds something surprising. Many tests exercise
+         almost the same situation. Other important situations were never
+         represented at all.`,
+      quote:
+        `400 tests ≠ 400 different pieces of evidence.`,
+      question:
+        `The problem was not simply “too few tests.” The team lacked a systematic
+        way to decide <strong>which tests mattered</strong>.`
+    },
+    {
+      number: "Incident 04",
+      title: "Your mission",
+      text:
+        `The engineering manager asks you to redesign the testing strategy for
+         the next release. You are given one principle: every test must have a
+         reason for being there.`,
+      quote:
+        `“Don't tell me how many tests you ran. Tell me what you modeled and
+         what your tests demonstrate.”<br><small>— Test lead</small>`,
+      question:
+        `Your first mission is to learn how different testing criteria provide
+        different ways to <strong>think about the software</strong>.`
+    }
+  ];
+
+  function updateStatus() {
+    document.getElementById("xp").textContent = state.xp;
+    document.getElementById("level").textContent = state.level;
+    document.getElementById("progressBar").style.width = state.progress + "%";
+    document.getElementById("progressPercent").textContent = state.progress + "%";
+  }
+
+  function startStory() {
+    document.getElementById("storySection").classList.remove("hidden");
+    document.getElementById("overviewSection").classList.add("hidden");
+    document.getElementById("storySection").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function showOverview() {
+    document.getElementById("overviewSection").classList.remove("hidden");
+    document.getElementById("storySection").classList.add("hidden");
+    document.getElementById("overviewSection").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function renderStory() {
+    const s = stories[state.storyIndex];
+
+    const card = document.getElementById("storyCard");
+    card.classList.remove("fade-in");
+    void card.offsetWidth;
+    card.classList.add("fade-in");
+
+    document.getElementById("storyNumber").textContent = s.number;
+    document.getElementById("storyTitle").textContent = s.title;
+    document.getElementById("storyText").innerHTML = s.text;
+    document.getElementById("storyQuote").innerHTML = s.quote;
+    document.getElementById("storyQuestion").innerHTML = s.question;
+
+    document.getElementById("storyBack").disabled =
+      state.storyIndex === 0;
+
+    document.getElementById("storyNext").textContent =
+      state.storyIndex === stories.length - 1
+        ? "See the criteria map →"
+        : "Continue →";
+
+    document.querySelectorAll(".chapter").forEach((button, i) => {
+      button.classList.toggle("active", i === state.storyIndex);
+    });
+  }
+
+  function storyGo(index) {
+    state.storyIndex = index;
+    renderStory();
+  }
+
+  function storyNext() {
+    if (state.storyIndex < stories.length - 1) {
+      state.storyIndex++;
+      state.xp += 10;
+      state.progress = Math.min(25, state.progress + 4);
+      updateStatus();
+      renderStory();
+    } else {
+      state.xp += 20;
+      state.progress = 25;
+      updateStatus();
+      showOverview();
+    }
+  }
+
+  function storyBack() {
+    if (state.storyIndex > 0) {
+      state.storyIndex--;
+      renderStory();
+    }
+  }
+
+
+  /* =========================================================
+     PART 2 GAME LOGIC
+     ========================================================= */
+
+  const thinkingMissions = [
+    {
+      title: "The course registration boundary",
+      scenario:
+        `A university registration system accepts a student's requested
+         credit load. The requirement says a student may register for
+         <strong>3 to 18 credits</strong> in a semester.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;color:#dfe8ff;font-size:14px;">
+          requestedCredits ∈ {3, 4, 5, ..., 18}
+          <br><br>
+          <span style="color:var(--muted);">Question:</span>
+          What kinds of input should your tests represent?
+        </div>`,
+      answer: "input",
+      explanation:
+        `<strong>Input Space Partitioning</strong> is the strongest starting
+         lens. The important question is how the input domain can be divided
+         into meaningful blocks and where its boundaries occur.
+         <br><br>
+         A tester should immediately think about values below, at, and above
+         the allowed boundaries.`
+    },
+    {
+      title: "The payment workflow",
+      scenario:
+        `An online store moves an order through several states:
+         <strong>Created → Paid → Shipped → Delivered</strong>.
+         A payment failure can return an order to the payment step, and a
+         cancellation is possible before shipment.`,
+      artifact:
+        `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+                    font-size:12px;">
+          <span class="mini-node active">Created</span>
+          <span>→</span>
+          <span class="mini-node active">Paid</span>
+          <span>→</span>
+          <span class="mini-node active">Shipped</span>
+          <span>→</span>
+          <span class="mini-node active">Delivered</span>
+          <span style="width:100%;color:var(--muted);">
+            Failure and cancellation create additional transitions.
+          </span>
+        </div>`,
+      answer: "graph",
+      explanation:
+        `<strong>Graph Coverage</strong> is the natural lens because the
+         important structure is behavioral: states and transitions.
+         <br><br>
+         Tests can be selected to cover nodes, edges, edge pairs, or paths
+         through the model.`
+    },
+    {
+      title: "The access-control decision",
+      scenario:
+        `A system grants access when:
+         <strong>(validPassword AND activeAccount) OR administrator</strong>.
+         The team wants to know whether each individual condition can affect
+         the final access decision.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;font-size:15px;text-align:center;
+                    padding:12px;">
+          (A <span style="color:var(--accent);">AND</span> B)
+          <span style="color:var(--accent);">OR</span> C
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;">
+            A = valid password · B = active account · C = administrator
+          </div>
+        </div>`,
+      answer: "logic",
+      explanation:
+        `<strong>Logic Coverage</strong> is the appropriate lens.
+         The tester needs to reason about predicates, clauses, and whether
+         individual clauses can determine the outcome.
+         <br><br>
+         This leads naturally toward predicate coverage, clause coverage,
+         and active-clause techniques.`
+    },
+    {
+      title: "Where did this value come from?",
+      scenario:
+        `A billing program calculates a customer's total. A variable called
+         <strong>discount</strong> is assigned in several branches and is
+         later used when the final amount is calculated.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;font-size:13px;line-height:1.9;">
+          1  discount = 0
+          <br>
+          2  if premium:
+          <br>
+          3      discount = price * 0.10
+          <br>
+          4  total = price - discount
+          <br>
+          5  return total
+        </div>`,
+      answer: "data",
+      explanation:
+        `<strong>Data Flow Coverage</strong> is useful because the testing
+         question is about definitions and uses of a value.
+         <br><br>
+         The tester asks which definitions of <code>discount</code> can reach
+         its uses and which definition-use relationships need to be exercised.`
+    },
+    {
+      title: "Can your tests catch this change?",
+      scenario:
+        `A developer writes a function that checks whether a customer is
+         eligible for free shipping. You want to evaluate whether the test
+         suite would detect a plausible programming mistake.`,
+      artifact:
+        `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="padding:12px;border:1px solid var(--line);border-radius:10px;">
+            <div style="font-size:11px;color:var(--muted);">Original</div>
+            <code>weight &lt;= 5</code>
+          </div>
+          <div style="padding:12px;border:1px solid var(--line);border-radius:10px;">
+            <div style="font-size:11px;color:var(--muted);">Mutant</div>
+            <code>weight &lt; 5</code>
+          </div>
+        </div>`,
+      answer: "mutation",
+      explanation:
+        `<strong>Mutation testing</strong> gives you a fault-oriented lens.
+         Instead of asking only whether the tests cover the program, ask
+         whether they can distinguish the correct program from a plausible
+         faulty version.`
+    },
+    {
+      title: "A tester's first question",
+      scenario:
+        `You receive a new feature with incomplete documentation. Before
+         choosing a coverage criterion, you need to decide what you are
+         actually trying to understand about the software.`,
+      artifact:
+        `<div style="padding:14px;border-radius:12px;background:rgba(126,226,184,.05);
+                    border:1px solid rgba(126,226,184,.18);">
+          <strong>Tester mindset:</strong>
+          <div style="margin-top:8px;color:var(--muted);">
+            “What aspect of this system could hide important faults?”
+          </div>
+        </div>`,
+      answer: "fault",
+      explanation:
+        `<strong>Fault-oriented thinking</strong> starts from plausible ways
+         the software could be wrong. This can guide which model and criterion
+         you choose next.
+         <br><br>
+         Professional testers often switch between models rather than treating
+         one criterion as universally sufficient.`
+    }
+  ];
+
+  let thinkingIndex = 0;
+  let thinkingCorrect = 0;
+  let thinkingAnswered = false;
+
+  const modelLabels = {
+    input: {
+      icon: "🧩",
+      name: "Input Space",
+      description: "Model characteristics, partitions, and boundaries."
+    },
+    graph: {
+      icon: "🗺️",
+      name: "Graph / Behavior",
+      description: "Model states, transitions, nodes, edges, and paths."
+    },
+    logic: {
+      icon: "🧠",
+      name: "Logic",
+      description: "Model predicates, clauses, and decisions."
+    },
+    data: {
+      icon: "🔍",
+      name: "Data Flow",
+      description: "Model definitions, uses, and data dependencies."
+    },
+    mutation: {
+      icon: "🧬",
+      name: "Mutation / Faults",
+      description: "Model plausible faults and distinguish mutants."
+    },
+    fault: {
+      icon: "🐞",
+      name: "Fault-Oriented",
+      description: "Start from plausible mistakes and failure modes."
+    }
+  };
+
+  function beginThinkingGame() {
+    document.getElementById("overviewSection").classList.add("hidden");
+    document.getElementById("storySection").classList.add("hidden");
+    document.getElementById("thinkingSection").classList.remove("hidden");
+
+    thinkingIndex = 0;
+    thinkingCorrect = 0;
+    thinkingAnswered = false;
+
+    state.progress = Math.max(state.progress, 25);
+    updateStatus();
+    renderThinkingMission();
+
+    document.getElementById("thinkingSection").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function renderThinkingMission() {
+    const mission = thinkingMissions[thinkingIndex];
+
+    thinkingAnswered = false;
+
+    document.getElementById("thinkingRound").textContent =
+      `MISSION ${String(thinkingIndex + 1).padStart(2, "0")}`;
+
+    document.getElementById("thinkingTitle").textContent = mission.title;
+    document.getElementById("thinkingScenario").innerHTML = mission.scenario;
+    document.getElementById("thinkingArtifact").innerHTML = mission.artifact;
+
+    const choices = Object.entries(modelLabels)
+      .map(([key, model]) => `
+        <button class="model-choice"
+                data-model="${key}"
+                onclick="answerThinking('${key}')"
+                style="
+                  text-align:left;
+                  padding:14px;
+                  border:1px solid var(--line);
+                  border-radius:13px;
+                  background:rgba(255,255,255,.025);
+                  color:var(--text);
+                  transition:.15s ease;
+                ">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span style="font-size:22px;">${model.icon}</span>
+            <span>
+              <strong style="display:block;font-size:13px;">${model.name}</strong>
+              <span style="display:block;margin-top:3px;color:var(--muted);font-size:11px;">
+                ${model.description}
+              </span>
+            </span>
+          </div>
+        </button>
+      `).join("");
+
+    document.getElementById("modelChoices").innerHTML = choices;
+
+    document.getElementById("thinkingFeedback").classList.add("hidden");
+    document.getElementById("thinkingNext").classList.add("hidden");
+
+    document.getElementById("thinkingScore").textContent =
+      `${thinkingCorrect} / ${thinkingIndex}`;
+
+    document.querySelectorAll(".model-choice").forEach(btn => {
+      btn.onmouseenter = () => {
+        if (!thinkingAnswered) {
+          btn.style.borderColor = "#48618e";
+          btn.style.background = "#1b2947";
+          btn.style.transform = "translateY(-1px)";
+        }
+      };
+      btn.onmouseleave = () => {
+        if (!thinkingAnswered) {
+          btn.style.borderColor = "var(--line)";
+          btn.style.background = "rgba(255,255,255,.025)";
+          btn.style.transform = "translateY(0)";
+        }
+      };
+    });
+  }
+
+  function answerThinking(choice) {
+    if (thinkingAnswered) return;
+
+    thinkingAnswered = true;
+
+    const mission = thinkingMissions[thinkingIndex];
+    const correct = choice === mission.answer;
+
+    if (correct) {
+      thinkingCorrect++;
+      state.xp += 25;
+      state.progress = Math.min(65, state.progress + 6);
+    } else {
+      state.xp += 5;
+    }
+
+    if (state.xp >= 100) {
+      state.level = 2;
+    }
+
+    updateStatus();
+
+    document.querySelectorAll(".model-choice").forEach(btn => {
+      btn.disabled = true;
+      btn.style.cursor = "default";
+
+      const key = btn.dataset.model;
+
+      if (key === mission.answer) {
+        btn.style.borderColor = "rgba(126,226,184,.65)";
+        btn.style.background = "rgba(126,226,184,.08)";
+      } else if (key === choice && !correct) {
+        btn.style.borderColor = "rgba(255,123,123,.65)";
+        btn.style.background = "rgba(255,123,123,.07)";
+      }
+    });
+
+    const feedback = document.getElementById("thinkingFeedback");
+    feedback.classList.remove("hidden");
+
+    if (correct) {
+      feedback.style.borderColor = "rgba(126,226,184,.35)";
+      feedback.style.background = "rgba(126,226,184,.06)";
+      feedback.innerHTML =
+        `<strong style="color:var(--accent2);">✓ Good testing judgment</strong>
+         <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+           ${mission.explanation}
+         </div>`;
+    } else {
+      feedback.style.borderColor = "rgba(255,123,123,.35)";
+      feedback.style.background = "rgba(255,123,123,.05)";
+      const correctName = modelLabels[mission.answer].name;
+      feedback.innerHTML =
+        `<strong style="color:var(--danger);">Not the strongest first lens.</strong>
+         <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+           A stronger starting point here is
+           <strong>${correctName}</strong>.
+           <br><br>
+           ${mission.explanation}
+         </div>`;
+    }
+
+    document.getElementById("thinkingNext").classList.remove("hidden");
+    document.getElementById("thinkingScore").textContent =
+      `${thinkingCorrect} / ${thinkingIndex + 1}`;
+  }
+
+  function nextThinkingRound() {
+    if (thinkingIndex < thinkingMissions.length - 1) {
+      thinkingIndex++;
+      renderThinkingMission();
+    } else {
+      finishThinkingGame();
+    }
+  }
+
+  function finishThinkingGame() {
+    const total = thinkingMissions.length;
+    const percentage = Math.round((thinkingCorrect / total) * 100);
+
+    document.getElementById("thinkingRound").textContent = "MISSION COMPLETE";
+    document.getElementById("thinkingTitle").textContent =
+      "You have learned to switch lenses.";
+
+    document.getElementById("thinkingScenario").innerHTML =
+      `You completed the model-selection challenge with
+       <strong>${thinkingCorrect}/${total}</strong> correct first-choice decisions.`;
+
+    document.getElementById("thinkingArtifact").innerHTML = `
+      <div style="text-align:center;padding:18px;">
+        <div style="font-size:42px;">${percentage >= 80 ? "🏆" : "🧭"}</div>
+        <div style="font-size:25px;font-weight:800;margin-top:8px;">
+          ${percentage}% Testing Lens Score
+        </div>
+        <div style="color:var(--muted);margin-top:7px;font-size:13px;">
+          The important lesson is not to memorize criteria.
+          It is to recognize <strong>what needs to be modeled</strong>.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("modelChoices").innerHTML = `
+      <div style="grid-column:1/-1;padding:15px;border:1px solid var(--line);
+                  border-radius:13px;background:rgba(110,168,254,.05);">
+        <strong>Next challenge:</strong>
+        <div style="color:var(--muted);font-size:13px;margin-top:5px;">
+          In Part 3, you will stop choosing a model and start
+          <strong>building one</strong> — beginning with Input Space
+          Partitioning.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("thinkingFeedback").classList.add("hidden");
+    document.getElementById("thinkingNext").classList.add("hidden");
+
+    state.progress = 65;
+    state.xp += 40;
+    state.level = Math.max(state.level, 2);
+    updateStatus();
+  }
+
+  function restartThinkingGame() {
+    thinkingIndex = 0;
+    thinkingCorrect = 0;
+    state.progress = 25;
+    renderThinkingMission();
+    updateStatus();
+  }
+
+  /* =========================================================
+     PART 3 GAME LOGIC — INPUT SPACE PARTITIONING
+     ========================================================= */
+
+  const partitionMissions = [
+    {
+      type: "choose-blocks",
+      title: "Build the age partitions",
+      scenario:
+        `A university gym gives membership access according to age.
+         The requirement is: <strong>students must be at least 18 years old
+         and no older than 30</strong>.`,
+      spec:
+        `<div style="font-family:ui-monospace,monospace;line-height:1.8;">
+          age &lt; 18 → not eligible<br>
+          18 ≤ age ≤ 30 → eligible<br>
+          age &gt; 30 → not eligible
+        </div>`,
+      task:
+        `<strong>Your task:</strong> Which set of blocks gives a useful,
+         complete, and non-overlapping partition of the input domain?`,
+      options: [
+        {
+          text: "A: 18–30 only",
+          correct: false,
+          explanation:
+            "This misses the invalid regions below 18 and above 30. A partition should account for the relevant input domain, not only the expected valid inputs."
+        },
+        {
+          text: "B: below 18 · 18–30 · above 30",
+          correct: true,
+          explanation:
+            "Correct. These blocks represent distinct expected behaviors, cover the relevant age domain, and do not overlap."
+        },
+        {
+          text: "C: 0–18 · 18–30 · 30–100",
+          correct: false,
+          explanation:
+            "The boundaries overlap at 18 and 30. That makes the blocks ambiguous unless you explicitly define which side owns each boundary."
+        },
+        {
+          text: "D: 18 · 19 · 20 · 21 · ... · 30",
+          correct: false,
+          explanation:
+            "This is unnecessarily fine-grained. The requirement does not imply that every individual age has different behavior."
+        }
+      ]
+    },
+    {
+      type: "boundary",
+      title: "Boundary Hunter",
+      scenario:
+        `An API accepts a file only when its size is between
+         <strong>1 MB and 10 MB inclusive</strong>.`,
+      spec:
+        `<div style="font-family:ui-monospace,monospace;text-align:center;
+                    font-size:16px;">
+          1 MB ≤ fileSize ≤ 10 MB
+        </div>`,
+      task:
+        `<strong>Your task:</strong> Select the values that give the strongest
+         boundary-focused test set. Choose exactly five.`,
+      values: ["0", "1", "2", "5", "9", "10", "11"],
+      correct: ["0", "1", "2", "9", "10"],
+      explanation:
+        "A boundary-focused suite deliberately tests just outside and at both boundaries. Here the important values are 0, 1, 2 and 9, 10. The upper outside value 11 is also important; choose it instead of an interior value if you want symmetric boundary coverage."
+    },
+    {
+      type: "repair-partition",
+      title: "Partition Police",
+      scenario:
+        `A developer proposes the following password-length partitions for
+         an account system.`,
+      spec:
+        `<div style="display:flex;flex-wrap:wrap;gap:7px;">
+          <span class="block-chip bad">1–8 characters</span>
+          <span class="block-chip bad">8–15 characters</span>
+          <span class="block-chip good">16–30 characters</span>
+        </div>
+        <div style="margin-top:12px;color:var(--muted);font-size:12px;">
+          CampusGo requires passwords to be between 1 and 30 characters.
+        </div>`,
+      task:
+        `<strong>Your task:</strong> Identify the main modeling problem.`,
+      options: [
+        {
+          text: "The blocks are too small.",
+          correct: false,
+          explanation:
+            "The problem is not that the blocks are small. The first two blocks overlap at length 8."
+        },
+        {
+          text: "The blocks overlap at 8 characters.",
+          correct: true,
+          explanation:
+            "Correct. A clean partition should not assign the same input to multiple blocks. A possible repair is 1–7, 8–15, 16–30."
+        },
+        {
+          text: "There are too many valid inputs.",
+          correct: false,
+          explanation:
+            "Many possible inputs are expected. Partitioning exists precisely to represent large input domains with a manageable number of meaningful blocks."
+        },
+        {
+          text: "Only valid inputs should be modeled.",
+          correct: false,
+          explanation:
+            "Invalid inputs are often especially valuable because they can expose validation and error-handling faults."
+        }
+      ]
+    },
+    {
+      type: "each-choice",
+      title: "The smallest useful suite",
+      scenario:
+        `A search feature has two independent characteristics:
+         <strong>platform</strong> and <strong>account type</strong>.`,
+      spec:
+        `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <strong>Platform</strong>
+            <div style="margin-top:7px;color:var(--muted);">
+              Web · Android · iOS
+            </div>
+          </div>
+          <div>
+            <strong>Account</strong>
+            <div style="margin-top:7px;color:var(--muted);">
+              Free · Premium
+            </div>
+          </div>
+        </div>`,
+      task:
+        `<strong>Your task:</strong> Under an <em>each-choice</em> strategy,
+         what must your suite guarantee?`,
+      options: [
+        {
+          text: "Every possible combination: 3 × 2 = 6 tests.",
+          correct: false,
+          explanation:
+            "That is closer to exhaustive combination testing. Each-choice only requires every value of every characteristic to appear at least once."
+        },
+        {
+          text: "Every platform and every account type appears at least once.",
+          correct: true,
+          explanation:
+            "Correct. Each-choice requires every block/value of every characteristic to be represented in at least one test."
+        },
+        {
+          text: "Only one platform and one account type are necessary.",
+          correct: false,
+          explanation:
+            "That would leave values of the characteristics completely untested."
+        },
+        {
+          text: "Every pair of platform values must occur together.",
+          correct: false,
+          explanation:
+            "A pairwise strategy is about combinations of values across characteristics. Each-choice is the simpler requirement of representing every individual choice."
+        }
+      ]
+    },
+    {
+      type: "base-choice",
+      title: "Base-choice strategy",
+      scenario:
+        `A booking form has three characteristics:
+         <strong>seat class</strong>, <strong>trip type</strong>, and
+         <strong>passenger type</strong>.`,
+      spec:
+        `<div style="display:grid;gap:7px;font-size:12px;">
+          <div>Ticket: Standard · VIP · Free</div>
+          <div>Event: Workshop · Club Event</div>
+          <div>Student: Undergraduate · Graduate · Staff</div>
+        </div>`,
+      task:
+        `<strong>Your task:</strong> Which plan best describes a
+         base-choice strategy?`,
+      options: [
+        {
+          text: "Choose one valid base test, then vary one characteristic at a time while keeping the others at their base values.",
+          correct: true,
+          explanation:
+            "Exactly. Base-choice testing establishes a representative base test and systematically changes one characteristic at a time."
+        },
+        {
+          text: "Test every possible combination of all values.",
+          correct: false,
+          explanation:
+            "That is exhaustive combination testing, not base-choice."
+        },
+        {
+          text: "Choose only boundary values.",
+          correct: false,
+          explanation:
+            "That describes boundary-oriented thinking, not the base-choice combination strategy."
+        },
+        {
+          text: "Choose one random value for each characteristic and stop.",
+          correct: false,
+          explanation:
+            "A base choice is only the starting point. The strategy then varies one characteristic at a time."
+        }
+      ]
+    }
+  ];
+
+  let partitionIndex = 0;
+  let partitionPoints = 0;
+  let boundarySelected = [];
+
+  function startPartitionLab() {
+    document.getElementById("thinkingSection").classList.add("hidden");
+    document.getElementById("partitionSection").classList.remove("hidden");
+
+    partitionIndex = 0;
+    partitionPoints = 0;
+    boundarySelected = [];
+
+    state.progress = Math.max(state.progress, 65);
+    updateStatus();
+    renderPartitionMission();
+
+    document.getElementById("partitionSection").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function renderPartitionMission() {
+    const m = partitionMissions[partitionIndex];
+
+    boundarySelected = [];
+
+    document.getElementById("partitionRound").textContent =
+      `LAB ${String(partitionIndex + 1).padStart(2, "0")}`;
+
+    document.getElementById("partitionTitle").textContent = m.title;
+    document.getElementById("partitionScenario").innerHTML = m.scenario;
+    document.getElementById("partitionSpec").innerHTML = m.spec;
+    document.getElementById("partitionTask").innerHTML = m.task;
+
+    document.getElementById("partitionFeedback").classList.add("hidden");
+    document.getElementById("partitionNext").classList.add("hidden");
+
+    if (m.type === "boundary") {
+      renderBoundaryChallenge(m);
+    } else {
+      renderPartitionOptions(m);
+    }
+
+    document.getElementById("partitionScore").textContent = partitionPoints;
+    updatePartitionChecklist();
+  }
+
+  function renderPartitionOptions(m) {
+    document.getElementById("partitionChoices").innerHTML =
+      m.options.map((option, index) => `
+        <button class="partition-option"
+                data-option="${index}"
+                onclick="answerPartitionOption(${index})">
+          <strong>${String.fromCharCode(65 + index)}.</strong>
+          ${option.text}
+        </button>
+      `).join("");
+  }
+
+  function answerPartitionOption(index) {
+    const m = partitionMissions[partitionIndex];
+    const option = m.options[index];
+
+    document.querySelectorAll(".partition-option").forEach((button, i) => {
+      button.disabled = true;
+      if (m.options[i].correct) {
+        button.style.borderColor = "rgba(126,226,184,.65)";
+        button.style.background = "rgba(126,226,184,.08)";
+      }
+      if (i === index && !option.correct) {
+        button.style.borderColor = "rgba(255,123,123,.65)";
+        button.style.background = "rgba(255,123,123,.07)";
+      }
+    });
+
+    if (option.correct) {
+      partitionPoints += 25;
+      state.xp += 25;
+      state.progress = Math.min(100, state.progress + 5);
+    } else {
+      state.xp += 5;
+    }
+
+    showPartitionFeedback(
+      option.correct,
+      option.explanation,
+      option.correct
+        ? "✓ Strong modeling decision"
+        : "The model needs another look"
+    );
+
+    document.getElementById("partitionNext").classList.remove("hidden");
+    updateStatus();
+    document.getElementById("partitionScore").textContent = partitionPoints;
+    updatePartitionChecklist();
+  }
+
+  function renderBoundaryChallenge(m) {
+    document.getElementById("partitionChoices").innerHTML = `
+      <div style="color:var(--muted);font-size:12px;">
+        Selected: <strong id="boundaryCount">0</strong> / 5
+      </div>
+
+      <div class="boundary-values">
+        ${m.values.map(value => `
+          <button class="boundary-value"
+                  data-value="${value}"
+                  onclick="toggleBoundary('${value}')">
+            ${value} MB
+          </button>
+        `).join("")}
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:14px;">
+        <button class="btn primary" onclick="submitBoundary()">
+          Evaluate test set
+        </button>
+      </div>
+    `;
+  }
+
+  function toggleBoundary(value) {
+    if (boundarySelected.includes(value)) {
+      boundarySelected = boundarySelected.filter(v => v !== value);
+    } else if (boundarySelected.length < 5) {
+      boundarySelected.push(value);
+    }
+
+    document.querySelectorAll(".boundary-value").forEach(button => {
+      button.classList.toggle(
+        "selected",
+        boundarySelected.includes(button.dataset.value)
+      );
+    });
+
+    document.getElementById("boundaryCount").textContent =
+      boundarySelected.length;
+  }
+
+  function submitBoundary() {
+    const m = partitionMissions[partitionIndex];
+
+    if (boundarySelected.length !== 5) {
+      showPartitionFeedback(
+        false,
+        "Choose exactly five values before evaluating your test set.",
+        "Five tests required"
+      );
+      return;
+    }
+
+    /*
+      We award full credit for the strongest conventional boundary set:
+      0, 1, 2, 9, 10. We then explain that 11 is an important outside
+      boundary and that a stronger 5-test choice could instead use 11.
+      The point is to make the trade-off explicit rather than pretend there
+      is only one possible test suite.
+    */
+    const expected = ["0", "1", "2", "9", "10"];
+    const matches = boundarySelected.filter(v => expected.includes(v)).length;
+
+    if (matches >= 4) {
+      partitionPoints += 25;
+      state.xp += 25;
+      state.progress = Math.min(100, state.progress + 6);
+
+      showPartitionFeedback(
+        true,
+        `<strong>Good boundary reasoning.</strong>
+         You selected ${matches}/5 values from the strongest conventional
+         set. The key idea is to target values at and immediately around
+         the domain boundaries rather than arbitrary interior values.
+         <br><br>
+         <strong>Important nuance:</strong> with only five tests, there is a
+         trade-off between checking both sides of both boundaries and adding
+         a second value just inside a boundary. Good testers can justify the
+         choice.`,
+        "✓ Boundary thinking activated"
+      );
+    } else {
+      state.xp += 5;
+      showPartitionFeedback(
+        false,
+        `Your set contains only ${matches}/5 strong boundary-oriented values.
+         Look for values <strong>at the boundary</strong> and immediately
+         <strong>inside or outside</strong> it.`,
+        "Look closer at the edges"
+      );
+    }
+
+    document.querySelectorAll(".boundary-value").forEach(b => {
+      b.disabled = true;
+    });
+
+    document.getElementById("partitionNext").classList.remove("hidden");
+    updateStatus();
+    document.getElementById("partitionScore").textContent = partitionPoints;
+    updatePartitionChecklist();
+  }
+
+  function showPartitionFeedback(correct, message, heading) {
+    const box = document.getElementById("partitionFeedback");
+    box.classList.remove("hidden");
+
+    if (correct) {
+      box.style.borderColor = "rgba(126,226,184,.35)";
+      box.style.background = "rgba(126,226,184,.06)";
+      box.innerHTML = `
+        <strong style="color:var(--accent2);">${heading}</strong>
+        <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+          ${message}
+        </div>`;
+    } else {
+      box.style.borderColor = "rgba(255,123,123,.35)";
+      box.style.background = "rgba(255,123,123,.05)";
+      box.innerHTML = `
+        <strong style="color:var(--danger);">${heading}</strong>
+        <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+          ${message}
+        </div>`;
+    }
+  }
+
+  function updatePartitionChecklist() {
+    const step = Math.min(4, partitionIndex + 1);
+
+    ["checkCharacteristic", "checkBlocks", "checkBoundary", "checkCombination"]
+      .forEach((id, index) => {
+        const el = document.getElementById(id);
+        if (index < step) {
+          el.classList.add("active");
+          el.style.color = "var(--text)";
+        } else {
+          el.classList.remove("active");
+          el.style.color = "var(--muted)";
+        }
+      });
+  }
+
+  function nextPartitionMission() {
+    if (partitionIndex < partitionMissions.length - 1) {
+      partitionIndex++;
+      renderPartitionMission();
+    } else {
+      finishPartitionLab();
+    }
+  }
+
+  function finishPartitionLab() {
+    document.getElementById("partitionRound").textContent = "LAB COMPLETE";
+    document.getElementById("partitionTitle").textContent =
+      "You built your first input-space models.";
+
+    document.getElementById("partitionScenario").innerHTML =
+      `You completed the Input Space Lab with
+       <strong>${partitionPoints} points</strong>.`;
+
+    document.getElementById("partitionSpec").innerHTML = `
+      <div style="padding:8px 0;">
+        <div style="font-size:22px;">🧩 → 🎯 → 🐞</div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px;">
+          Partitioning is not about generating many values. It is about
+          deciding which <strong>regions of the input space</strong> deserve
+          evidence.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("partitionTask").innerHTML = `
+      <strong>What you should now be thinking about:</strong>
+      <div style="margin-top:8px;color:var(--muted);font-size:13px;">
+        Characteristics → blocks → boundaries → combinations → tests.
+      </div>
+    `;
+
+    document.getElementById("partitionChoices").innerHTML = `
+      <div style="padding:15px;border:1px solid var(--line);border-radius:12px;
+                  background:rgba(110,168,254,.05);">
+        <strong>Next:</strong>
+        <div style="margin-top:6px;color:var(--muted);font-size:13px;">
+          Part 4 will turn the same thinking into an integrated challenge:
+          graph coverage, logic coverage, data flow, mutation testing, and
+          a final test-suite mission.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("partitionFeedback").classList.add("hidden");
+    document.getElementById("partitionNext").classList.add("hidden");
+
+    state.progress = 100;
+    state.xp += 50;
+    state.level = Math.max(state.level, 3);
+    updateStatus();
+  }
+
+  function restartPartitionLab() {
+    partitionIndex = 0;
+    partitionPoints = 0;
+    boundarySelected = [];
+    state.progress = 65;
+    renderPartitionMission();
+    updateStatus();
+  }
+
+  /* Make Part 2's completion button launch Part 3. */
+  const originalFinishThinkingGame = finishThinkingGame;
+  finishThinkingGame = function() {
+    originalFinishThinkingGame();
+
+    const oldNext = document.getElementById("thinkingNext");
+    oldNext.classList.remove("hidden");
+    oldNext.textContent = "Enter Input Space Lab →";
+    oldNext.onclick = startPartitionLab;
+  };
+
+  /* =========================================================
+     PART 4 GAME LOGIC — ADVANCED CRITERIA + FINAL MISSION
+     ========================================================= */
+
+  const advancedMissions = [
+    {
+      title: "Mission 1 — Choose your method",
+      criterion: "Input Domain Modeling",
+      scenario:
+        `Your in-class project starts with <strong>Input Domain Modeling</strong>.
+         Choose one method from the app under test. The method must have
+         <strong>at least two arguments</strong> so that you can identify input
+         characteristics and meaningful partitions.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;font-size:12px;line-height:1.9;">
+          Example method:
+          <br>
+          <strong>bookEvent(eventId, ticketType, quantity)</strong>
+          <br><br>
+          Arguments:
+          <br>
+          • eventId
+          <br>
+          • ticketType
+          <br>
+          • quantity
+        </div>`,
+      task:
+        `<strong>What should you do first?</strong>
+         Choose the action that best represents the project's input-domain
+         modeling step.`,
+      options: [
+        {
+          text: "Choose a method with at least two arguments, identify its input characteristics, and partition each domain into meaningful blocks.",
+          correct: true,
+          explanation:
+            "Correct. The project begins with a concrete method from the app. You are not simply listing random values: you model the input domain by identifying characteristics, valid/invalid regions, and important boundaries."
+        },
+        {
+          text: "Choose the method with the most lines of code and write random tests immediately.",
+          correct: false,
+          explanation:
+            "Method size alone does not make a good input-domain modeling target. Start from the method's inputs and the behavior associated with their values."
+        },
+        {
+          text: "Choose a method with no arguments because it is easier to test.",
+          correct: false,
+          explanation:
+            "The project specifically asks you to select a method with at least two arguments so that you can practice input-domain modeling."
+        },
+        {
+          text: "Only inspect the user interface and ignore the method's arguments.",
+          correct: false,
+          explanation:
+            "The project is code-based as well as app-based. The arguments define the input space you need to model."
+        }
+      ]
+    },
+    {
+      title: "Mission 2 — Build the input model",
+      criterion: "Input Domain Modeling",
+      scenario:
+        `You selected <strong>bookEvent(eventId, ticketType, quantity)</strong>.
+         Now turn the arguments into testable input characteristics.`,
+      artifact:
+        `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+          <div class="mini-node"><b>A1</b> eventId</div>
+          <div class="mini-node"><b>A2</b> ticketType</div>
+          <div class="mini-node"><b>A3</b> quantity</div>
+        </div>
+        <div style="margin-top:12px;color:var(--muted);font-size:12px;">
+          Example: quantity might have partitions such as
+          <strong>0</strong>, <strong>1–5</strong>, and <strong>&gt;5</strong>
+          depending on the app requirement.
+        </div>`,
+      task:
+        `<strong>Which student submission demonstrates good modeling?</strong>`,
+      options: [
+        {
+          text: "Define meaningful partitions for each relevant argument, then select representative values and boundary values.",
+          correct: true,
+          explanation:
+            "Exactly. The model should make the test space explicit and expose values where behavior may change."
+        },
+        {
+          text: "Use only the values that appeared in the developer's demo.",
+          correct: false,
+          explanation:
+            "A demo usually represents only a small portion of the input domain. Testing requires deliberate exploration beyond typical examples."
+        },
+        {
+          text: "Create one test for each argument and never combine them.",
+          correct: false,
+          explanation:
+            "The characteristics may interact. Your project should justify how you combine input choices rather than automatically treating every argument in isolation."
+        },
+        {
+          text: "Use every possible value for every argument.",
+          correct: false,
+          explanation:
+            "Exhaustive testing is usually impractical. Input-domain modeling reduces the domain to meaningful classes and strategically chosen values."
+        }
+      ]
+    },
+    {
+      title: "Mission 3 — Choose your logic method",
+      criterion: "Logic Testing",
+      scenario:
+        `The second part of the in-class project focuses on
+         <strong>logic testing</strong>. Choose a method from the app that has
+         <strong>at least two clauses</strong> in a decision.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;font-size:13px;line-height:1.9;">
+          Example:
+          <br>
+          <strong>canBook(student, event)</strong>
+          <br><br>
+          decision:
+          <br>
+          <strong>(isRegistered(student) AND seatsAvailable(event))
+          OR isOrganizer(student)</strong>
+          <br><br>
+          Clauses: A, B, C
+        </div>`,
+      task:
+        `<strong>What makes a good logic-testing target?</strong>`,
+      options: [
+        {
+          text: "A method whose decision contains at least two identifiable clauses, so you can reason about their individual effects on the outcome.",
+          correct: true,
+          explanation:
+            "Correct. Logic testing requires a decision with clauses that can be analyzed and tested. Your task is to identify the clauses and design tests that exercise the logic."
+        },
+        {
+          text: "A method that contains many comments but no decisions.",
+          correct: false,
+          explanation:
+            "Comments do not provide logic clauses. You need an actual predicate or decision in the code."
+        },
+        {
+          text: "Any method, even if its result never depends on a condition.",
+          correct: false,
+          explanation:
+            "Without decision logic there is no meaningful clause structure to analyze."
+        },
+        {
+          text: "Only the longest method in the application.",
+          correct: false,
+          explanation:
+            "Length is not the selection criterion. The important requirement is a method with at least two clauses in its logic."
+        }
+      ]
+    },
+    {
+      title: "Mission 4 — Make the clauses matter",
+      criterion: "Logic Testing",
+      scenario:
+        `You found the decision
+         <strong>(A AND B) OR C</strong> in the app. Your job is to create
+         tests that demonstrate how the clauses affect the decision.`,
+      artifact:
+        `<div style="font-family:ui-monospace,monospace;text-align:center;
+                    font-size:17px;padding:12px;">
+          <strong>(A AND B) OR C</strong>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;">
+            A = registered student · B = seats available · C = organizer
+          </div>
+        </div>`,
+      task:
+        `<strong>Which question best captures the goal of logic testing?</strong>`,
+      options: [
+        {
+          text: "Can a change in an individual clause affect the decision when the other clauses are controlled appropriately?",
+          correct: true,
+          explanation:
+            "Correct. Logic testing is about understanding the structure of decisions and designing tests that demonstrate the influence of clauses."
+        },
+        {
+          text: "Have we clicked every button in the application?",
+          correct: false,
+          explanation:
+            "That may contribute to UI testing, but it does not directly demonstrate clause-level logic reasoning."
+        },
+        {
+          text: "Have we used every possible student name?",
+          correct: false,
+          explanation:
+            "That is an input-domain question, not a logic-testing objective."
+        },
+        {
+          text: "Have we generated a mutant for every line?",
+          correct: false,
+          explanation:
+            "That is mutation-oriented thinking. Logic testing starts by modeling the decision and its clauses."
+        }
+      ]
+    },
+    {
+      title: "Mission 5 — Draw the event flow graph",
+      criterion: "Event Flow Graph",
+      scenario:
+        `Now switch from individual methods to the <strong>whole app</strong>.
+         Your project asks you to model the app's behavior as an
+         <strong>event flow graph</strong>.`,
+      artifact:
+        `<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;
+                    font-family:ui-monospace,monospace;font-size:11px;">
+          <span class="block-chip">Launch</span> →
+          <span class="block-chip">Login</span> →
+          <span class="block-chip">Browse</span> →
+          <span class="block-chip">Select Event</span> →
+          <span class="block-chip">Book</span> →
+          <span class="block-chip">Confirm</span>
+        </div>
+        <div style="text-align:center;margin-top:10px;color:var(--muted);font-size:11px;">
+          Possible events also include Login failure, Cancel booking, Payment failure, Retry.
+        </div>`,
+      task:
+        `<strong>What belongs in the event flow graph?</strong>`,
+      options: [
+        {
+          text: "Important app events and the possible transitions between them, including meaningful alternate and error flows.",
+          correct: true,
+          explanation:
+            "Correct. The graph represents how users and the system move through observable events. Include normal paths as well as important alternatives such as failure, retry, and cancellation."
+        },
+        {
+          text: "Only the source-code line numbers.",
+          correct: false,
+          explanation:
+            "Line numbers describe implementation structure. The event flow graph here is about the app's observable behavior and event transitions."
+        },
+        {
+          text: "Only the happy path from launch to confirmation.",
+          correct: false,
+          explanation:
+            "The interesting testing opportunities often occur in alternate paths such as failed login, cancellation, and retry."
+        },
+        {
+          text: "Only screenshots of each screen.",
+          correct: false,
+          explanation:
+            "Screenshots can document the UI, but the graph must capture relationships and transitions between events."
+        }
+      ]
+    },
+    {
+      title: "Mission 6 — Hunt bugs using existing bug reports",
+      criterion: "Guided Collaborative Bug Finding",
+      scenario:
+        `Instead of asking students to guess what kinds of bugs might exist,
+         the project provides <strong>existing bug reports from similar apps</strong>.
+         Your group uses these reports as testing inspiration: What behavior
+         was wrong? What input or event exposed it? What test could reveal a
+         similar problem in your selected app?`,
+      artifact:
+        `<div style="padding:13px;border:1px solid var(--line);border-radius:11px;
+                    font-size:12px;line-height:1.8;">
+          <strong>Example bug report from a similar app</strong><br>
+          "Changing the quantity after returning from the confirmation screen
+          updates the displayed quantity but not the total price."
+          <br><br>
+          <span style="color:var(--muted);">
+            Challenge: transform this historical bug into a
+            <strong>test idea</strong> for your own app.
+          </span>
+        </div>`,
+      task:
+        `<strong>What is the best way to use existing bug reports?</strong>`,
+      options: [
+        {
+          text: "Extract the underlying bug pattern, adapt it to your app, design a test, and verify whether similar behavior occurs.",
+          correct: true,
+          explanation:
+            "Correct. Existing bugs act as testing clues. They help students learn realistic failure modes without assuming that the same defect exists in the new app."
+        },
+        {
+          text: "Copy the old bug report and submit it as a bug in your app.",
+          correct: false,
+          explanation:
+            "A historical bug is only a testing clue. You must independently reproduce and verify the behavior in your own app."
+        },
+        {
+          text: "Only test the exact steps from the old report.",
+          correct: false,
+          explanation:
+            "The goal is to learn the underlying failure pattern and adapt it to a different app and context."
+        },
+        {
+          text: "Ignore existing bug reports because testing must always start from scratch.",
+          correct: false,
+          explanation:
+            "Historical defects are valuable testing knowledge. They can guide exploration toward realistic failure modes."
+        }
+      ]
+    },
+        {
+          text: "Everyone performs exactly the same five clicks.",
+          correct: false,
+          explanation:
+            "That creates unnecessary duplication and reduces the diversity of exploration."
+        },
+        {
+          text: "Report every surprising result immediately without reproduction.",
+          correct: false,
+          explanation:
+            "An observation may be a misunderstanding, expected behavior, or environment issue. Reproduction and checking the requirement are essential."
+        },
+        {
+          text: "Let one student test while everyone else waits.",
+          correct: false,
+          explanation:
+            "The purpose of collaboration is to increase exploration, discussion, and independent perspectives."
+        }
+      ]
+    },
+    {
+      title: "Mission 7 — Let AI help write the bug report",
+      criterion: "AI-Assisted Bug Reporting",
+      scenario:
+        `After adapting an existing bug pattern and reproducing suspicious behavior, a student has evidence for a possible defect. An AI tool can help
+         turn the observation into a structured bug report. The AI should
+         <strong>assist</strong>, not invent evidence.`,
+      artifact:
+        `<div style="padding:13px;border:1px solid var(--line);border-radius:11px;
+                    font-size:12px;line-height:1.8;">
+          <strong>Raw observation</strong><br>
+          "I selected 5 tickets, changed the quantity to 6, went back,
+          then the confirmation showed 5 tickets but the total price was for 6."
+          <br><br>
+          <span style="color:var(--muted);">
+            AI suggestion: generate a concise report with title, environment,
+            steps to reproduce, expected result, actual result, and evidence.
+          </span>
+        </div>`,
+      task:
+        `<strong>What is the best use of AI here?</strong>`,
+      options: [
+        {
+          text: "Give the AI the verified observation and evidence, then use it to organize and improve the bug report while checking every generated claim.",
+          correct: true,
+          explanation:
+            "Correct. AI can reduce the writing burden and suggest missing report fields, but the tester remains responsible for accuracy, reproduction steps, and evidence."
+        },
+        {
+          text: "Ask the AI to invent expected and actual results if they are unclear.",
+          correct: false,
+          explanation:
+            "A bug report must be grounded in observed evidence. AI should not fabricate facts."
+        },
+        {
+          text: "Submit the AI-generated report without reproducing the bug.",
+          correct: false,
+          explanation:
+            "The tester must validate the behavior. AI-generated prose is not evidence."
+        },
+        {
+          text: "Ask AI to decide whether the bug is real without checking the app.",
+          correct: false,
+          explanation:
+            "AI can help reason about a report, but the project requires empirical verification of the app behavior."
+        }
+      ]
+    },
+    {
+      title: "FINAL MISSION — Put the project together",
+      criterion: "Integrated App Testing Project",
+      scenario:
+        `You are ready to complete the <strong>in-class app testing project</strong>.
+         Your deliverable should demonstrate that you can move from code to
+         models, from models to tests, and from observations to actionable
+         bug reports.`,
+      artifact:
+        `<div style="display:grid;gap:8px;font-size:12px;">
+          <div class="mini-node"><b>1</b> Select a method with ≥ 2 arguments → Input Domain Modeling</div>
+          <div class="mini-node"><b>2</b> Select a method with ≥ 2 clauses → Logic Testing</div>
+          <div class="mini-node"><b>3</b> Model the app → Event Flow Graph</div>
+          <div class="mini-node"><b>4</b> Use existing bug reports from similar apps → Guide exploration</div>
+          <div class="mini-node"><b>5</b> Reproduce and verify → Find bugs</div>
+          <div class="mini-node"><b>6</b> Optional AI assistance → Generate useful bug reports</div>
+        </div>`,
+      task:
+        `<strong>Which project plan best demonstrates the intended testing thinking?</strong>`,
+      options: [
+        {
+          text: "Choose the required methods, build the input and logic models, draw the event flow graph, execute justified tests, collaborate on bug finding, and use AI only as an assistant for evidence-based bug reports.",
+          correct: true,
+          explanation:
+            "Excellent. This is the complete testing-thinking workflow: model the program, derive tests, model app behavior, explore beyond the obvious paths, validate bugs, and communicate evidence clearly."
+        },
+        {
+          text: "Pick random methods, run a few tests, and ask AI to create the final report from screenshots.",
+          correct: false,
+          explanation:
+            "This skips the required modeling activities and risks producing reports without sufficient evidence."
+        },
+        {
+          text: "Focus only on achieving high code coverage and ignore discovered bugs.",
+          correct: false,
+          explanation:
+            "Coverage is only one source of evidence. The project explicitly connects criteria-based testing with bug finding and reporting."
+        },
+        {
+          text: "Draw the event graph but do not execute tests because the graph proves the app works.",
+          correct: false,
+          explanation:
+            "A model helps design tests; it does not prove that the implementation behaves correctly."
+        }
+      ]
+    }
+  ];
+
+  let advancedIndex = 0;
+  let advancedPoints = 0;
+  let advancedAnswered = false;
+
+  function startAdvancedArena() {
+    document.getElementById("partitionSection").classList.add("hidden");
+    document.getElementById("advancedSection").classList.remove("hidden");
+
+    advancedIndex = 0;
+    advancedPoints = 0;
+    advancedAnswered = false;
+
+    state.progress = Math.max(state.progress, 80);
+    updateStatus();
+    renderAdvancedMission();
+
+    document.getElementById("advancedSection").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function renderAdvancedMission() {
+    const m = advancedMissions[advancedIndex];
+
+    advancedAnswered = false;
+
+    document.getElementById("advancedRound").textContent =
+      `ARENA ${String(advancedIndex + 1).padStart(2, "0")}`;
+
+    document.getElementById("advancedTitle").textContent = m.title;
+    document.getElementById("advancedScenario").innerHTML = m.scenario;
+    document.getElementById("advancedArtifact").innerHTML = m.artifact;
+    document.getElementById("advancedTask").innerHTML = m.task;
+
+    document.getElementById("advancedChoices").innerHTML =
+      m.options.map((option, index) => `
+        <button class="advanced-option"
+                data-option="${index}"
+                onclick="answerAdvanced(${index})">
+          <strong>${String.fromCharCode(65 + index)}.</strong>
+          ${option.text}
+        </button>
+      `).join("");
+
+    document.getElementById("advancedFeedback").classList.add("hidden");
+    document.getElementById("advancedNext").classList.add("hidden");
+    document.getElementById("advancedScore").textContent = advancedPoints;
+
+    document.querySelectorAll(".advanced-option").forEach(button => {
+      button.onmouseenter = () => {
+        if (!advancedAnswered) {
+          button.style.borderColor = "#48618e";
+          button.style.background = "#1b2947";
+        }
+      };
+      button.onmouseleave = () => {
+        if (!advancedAnswered) {
+          button.style.borderColor = "var(--line)";
+          button.style.background = "rgba(255,255,255,.025)";
+        }
+      };
+    });
+  }
+
+  function answerAdvanced(index) {
+    if (advancedAnswered) return;
+
+    advancedAnswered = true;
+
+    const m = advancedMissions[advancedIndex];
+    const option = m.options[index];
+
+    document.querySelectorAll(".advanced-option").forEach((button, i) => {
+      button.disabled = true;
+
+      if (m.options[i].correct) {
+        button.style.borderColor = "rgba(126,226,184,.65)";
+        button.style.background = "rgba(126,226,184,.08)";
+      }
+
+      if (i === index && !option.correct) {
+        button.style.borderColor = "rgba(255,123,123,.65)";
+        button.style.background = "rgba(255,123,123,.07)";
+      }
+    });
+
+    if (option.correct) {
+      advancedPoints += advancedIndex === advancedMissions.length - 1 ? 50 : 25;
+      state.xp += advancedIndex === advancedMissions.length - 1 ? 50 : 25;
+      state.progress = Math.min(100, state.progress + 4);
+    } else {
+      state.xp += 5;
+    }
+
+    updateAdvancedFeedback(option.correct, option.explanation);
+
+    document.getElementById("advancedNext").classList.remove("hidden");
+    document.getElementById("advancedScore").textContent = advancedPoints;
+
+    updateStatus();
+  }
+
+  function updateAdvancedFeedback(correct, explanation) {
+    const box = document.getElementById("advancedFeedback");
+    box.classList.remove("hidden");
+
+    if (correct) {
+      box.style.borderColor = "rgba(126,226,184,.35)";
+      box.style.background = "rgba(126,226,184,.06)";
+      box.innerHTML = `
+        <strong style="color:var(--accent2);">
+          ✓ Strong testing reasoning
+        </strong>
+        <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+          ${explanation}
+        </div>
+      `;
+    } else {
+      box.style.borderColor = "rgba(255,123,123,.35)";
+      box.style.background = "rgba(255,123,123,.05)";
+      box.innerHTML = `
+        <strong style="color:var(--danger);">
+          Think about what the criterion can reveal
+        </strong>
+        <div style="margin-top:7px;color:#d4deef;font-size:13px;">
+          ${explanation}
+        </div>
+      `;
+    }
+  }
+
+  function nextAdvancedMission() {
+    if (advancedIndex < advancedMissions.length - 1) {
+      advancedIndex++;
+      renderAdvancedMission();
+    } else {
+      finishAdvancedArena();
+    }
+  }
+
+  function finishAdvancedArena() {
+    const maxPoints = 175;
+    const percentage = Math.round((advancedPoints / maxPoints) * 100);
+
+    document.getElementById("advancedRound").textContent = "TESTER CERTIFIED";
+    document.getElementById("advancedTitle").textContent =
+      "You completed AppTest Quest.";
+
+    document.getElementById("advancedScenario").innerHTML =
+      `Your final arena score is <strong>${advancedPoints}/${maxPoints}</strong>.
+       The real achievement is learning to switch between testing lenses while thinking like an app tester.`;
+
+    document.getElementById("advancedArtifact").innerHTML = `
+      <div style="text-align:center;padding:18px;">
+        <div style="font-size:50px;">
+          ${percentage >= 80 ? "🏆" : percentage >= 60 ? "🎓" : "🧭"}
+        </div>
+
+        <div style="font-size:27px;font-weight:850;margin-top:8px;">
+          ${percentage}% Tester Score
+        </div>
+
+        <div style="max-width:600px;margin:12px auto 0;color:var(--muted);
+                    font-size:13px;line-height:1.7;">
+          A strong app tester does not ask only
+          <em>“Did the app seem to work?”</em>.
+          They ask:
+          <br>
+          <strong style="color:var(--text);">
+            What should I model? Which inputs and clauses matter? What event paths can occur?
+            Can I reproduce the bug? What evidence would convince another tester?
+          </strong>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("advancedTask").innerHTML = `
+      <strong>AppTest Quest completed.</strong>
+      <div style="margin-top:8px;color:var(--muted);font-size:13px;">
+        You have practiced input-domain modeling, logic testing, event-flow modeling,
+        collaborative bug finding, and AI-assisted bug reporting.
+      </div>
+    `;
+
+    document.getElementById("advancedChoices").innerHTML = `
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+                  gap:9px;">
+        <div class="mini-node active"><b>✓</b> Model the app inputs</div>
+        <div class="mini-node active"><b>✓</b> Draw event flow</div>
+        <div class="mini-node active"><b>✓</b> Test logic clauses</div>
+        <div class="mini-node active"><b>✓</b> Find & report bugs</div>
+        <div class="mini-node active"><b>✓</b> Validate evidence</div>
+        <div class="mini-node active"><b>✓</b> Question the evidence</div>
+      </div>
+    `;
+
+    document.getElementById("advancedFeedback").classList.add("hidden");
+    document.getElementById("advancedNext").classList.add("hidden");
+
+    state.progress = 100;
+    state.level = Math.max(state.level, 4);
+    state.xp += 75;
+    updateStatus();
+
+    document.getElementById("criteriaToolbox").innerHTML = `
+      <div class="mini-node active"><b>✓</b> Input Domain</div>
+      <div class="mini-node active"><b>✓</b> Logic Testing</div>
+      <div class="mini-node active"><b>✓</b> Event Flow Graph</div>
+      <div class="mini-node active"><b>✓</b> Collaborative Bugs</div>
+      <div class="mini-node active"><b>✓</b> AI Bug Reports</div>
+    `;
+  }
+
+  function restartAdvancedArena() {
+    advancedIndex = 0;
+    advancedPoints = 0;
+    advancedAnswered = false;
+    state.progress = 80;
+    renderAdvancedMission();
+    updateStatus();
+  }
+
+  /*
+    Connect Part 3's final button to Part 4.
+    startAdvancedArena() is deliberately installed after Part 3 has
+    created its final screen.
+  */
+  const previousFinishPartitionLab = finishPartitionLab;
+  finishPartitionLab = function() {
+    previousFinishPartitionLab();
+
+    const next = document.getElementById("partitionNext");
+    next.classList.remove("hidden");
+    next.textContent = "Enter Advanced Testing Arena →";
+    next.onclick = startAdvancedArena;
+  };
+
+  updateStatus();
+  renderStory();
+</script>
+
+</body>
+</html>
