@@ -1,92 +1,763 @@
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#08091b;color:#f5f5ff;line-height:1.5}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 5%;background:rgba(8,9,27,.88);backdrop-filter:blur(16px);border-bottom:1px solid #252747}.brand{font-weight:800;font-size:20px;white-space:nowrap}nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}nav a{padding:8px 11px;border-radius:999px;color:#b9bad0;font-size:14px}nav a:hover,nav .active{background:#22244b;color:#fff}.hero{min-height:650px;position:relative;overflow:hidden;padding:110px 7%;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 75% 40%,#34246c 0,#15183c 25%,#08091b 58%)}.eyebrow,.progress{color:#9e8cff;font-weight:800;letter-spacing:.12em;font-size:12px}.hero h1,.page h1{font-size:clamp(48px,8vw,92px);line-height:.95;margin:18px 0}.hero h1 span,.page h1 span{color:#b99cff}.lead{max-width:680px;color:#bfc0d5;font-size:20px}.hero-actions{display:flex;gap:12px;margin-top:25px}.button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#c084fc);color:white;font-weight:800;padding:14px 20px;cursor:pointer;box-shadow:0 10px 30px #0005}.button.secondary{background:#1d2040;border:1px solid #3a3d69}.orb-wrap{position:absolute;right:10%;top:24%;width:300px;height:300px}.orb{position:absolute;inset:75px;display:grid;place-items:center;border-radius:50%;font-size:70px;background:radial-gradient(circle,#d9c5ff,#7448d8 45%,#28135d);box-shadow:0 0 70px #9b6cffaa;animation:pulse 2.8s infinite}.orbit{position:absolute;inset:30px;border:1px solid #8f7cff55;border-radius:50%;animation:spin 10s linear infinite}.o2{inset:0;transform:rotate(70deg);animation-duration:14s}.section{padding:80px 7%;max-width:1200px;margin:auto}.section h2{font-size:42px;margin:10px 0 35px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:25px;border:1px solid #2a2d52;border-radius:20px;background:#10122a;min-height:150px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#7358c9}.card b{font-size:18px}.card p{color:#aaaec8}.locked{opacity:.65}footer{padding:40px 7%;color:#777b9c;border-top:1px solid #20223e}.page{max-width:950px;margin:auto;padding:70px 5% 100px}.experiment{margin:45px 0;padding:45px;border:1px solid #30335c;border-radius:28px;background:linear-gradient(145deg,#131632,#0d0f25);text-align:center;box-shadow:0 20px 60px #0004}.bit-display,.big-q{font-size:100px;font-weight:900;color:#c7b2ff;text-shadow:0 0 40px #9d7bff}.coin{font-size:110px;margin-bottom:20px}.spin{animation:coinflip .8s ease}.result{margin:25px 0;font-size:26px;font-weight:800;color:#ded5ff}.lesson{padding:30px;border-left:3px solid #8b5cf6;background:#11132b;border-radius:0 18px 18px 0;margin:25px 0}.lesson h2{margin-top:0}.lesson p{color:#b9bbd0}.choice{display:flex;justify-content:center;gap:12px}.choice button,.control{padding:13px 20px;border-radius:12px;border:1px solid #454873;background:#1b1e3c;color:white;font-weight:800;cursor:pointer}.sequence{display:flex;justify-content:center;gap:14px;font-size:36px;margin:20px}.sequence span,.sequence strong{padding:15px 20px;border-radius:15px;background:#1a1c39}.feedback{margin-top:18px;color:#d4c8ff;font-weight:800}.next{text-align:center;margin-top:40px}.stats,.scoreboard{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.stats>div,.scoreboard>div,.target{padding:20px;text-align:center;border:1px solid #30335c;border-radius:16px;background:#10122a}.stats strong,.scoreboard strong{display:block;font-size:32px;color:#c9b6ff}.qubit-orb{font-size:100px;margin-bottom:25px;filter:drop-shadow(0 0 25px #9e72ff)}.slider-row{display:grid;grid-template-columns:120px 1fr 120px;align-items:center;gap:12px;margin:30px 0;color:#aaaec8}.slider-row input{accent-color:#a277ff}.prob-bars{display:grid;gap:12px}.prob-bars>div{display:flex;align-items:center;gap:12px}.prob-bars span{width:20px}.prob-bars i{height:18px;border-radius:99px;background:linear-gradient(90deg,#7047d7,#c08cff);display:block;transition:.3s}.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.robot-card{padding:35px;border:1px solid #30335c;border-radius:24px;background:#10122a;text-align:center}.robot{font-size:90px}.path{font-size:24px;margin:20px}.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px}.control.selected{background:#754de0;border-color:#a889ff}.target{margin-top:20px}.target strong{display:block;font-size:35px;color:#c9b6ff}@keyframes pulse{50%{transform:scale(1.06)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes coinflip{50%{transform:rotateY(900deg) scale(.7)}}
-@media(max-width:850px){header{align-items:flex-start;flex-direction:column}nav{justify-content:flex-start}.orb-wrap{opacity:.35;right:-70px}.cards{grid-template-columns:1fr}.challenge-grid{grid-template-columns:1fr}.hero{padding-top:70px}.slider-row{grid-template-columns:1fr}.slider-row label{text-align:center}}
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #08091b;
+    color: #f5f5ff;
+
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   HEADER / NAVIGATION
+========================================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 18px 5%;
+
+    background: rgba(8, 9, 27, .88);
+
+    backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid #252747;
+}
+
+.brand {
+    font-weight: 800;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+nav a {
+    padding: 8px 11px;
+
+    border-radius: 999px;
+
+    color: #b9bad0;
+
+    font-size: 14px;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+nav a:hover,
+nav .active {
+    background: #22244b;
+    color: #fff;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 650px;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 110px 7%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 75% 40%,
+            #34246c 0,
+            #15183c 25%,
+            #08091b 58%
+        );
+}
+
+.eyebrow,
+.progress {
+    color: #9e8cff;
+
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+    font-size: 12px;
+}
+
+.hero h1,
+.page h1 {
+    font-size: clamp(48px, 8vw, 92px);
+
+    line-height: .95;
+
+    margin: 18px 0;
+}
+
+.hero h1 span,
+.page h1 span {
+    color: #b99cff;
+}
+
+.lead {
+    max-width: 680px;
+
+    color: #bfc0d5;
+
+    font-size: 20px;
+}
+
+.hero-actions {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #c084fc
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    padding: 14px 20px;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px #0005;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button:disabled {
+    opacity: .55;
+    cursor: default;
+    transform: none;
+}
+
+.button.secondary {
+    background: #1d2040;
+
+    border: 1px solid #3a3d69;
+}
+
+
+/* =========================================================
+   HERO ORB
+========================================================= */
+
+.orb-wrap {
+    position: absolute;
+
+    right: 10%;
+    top: 24%;
+
+    width: 300px;
+    height: 300px;
+}
+
+.orb {
+    position: absolute;
+
+    inset: 75px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    font-size: 70px;
+
+    background:
+        radial-gradient(
+            circle,
+            #d9c5ff,
+            #7448d8 45%,
+            #28135d
+        );
+
+    box-shadow:
+        0 0 70px #9b6cffaa;
+
+    animation: pulse 2.8s infinite;
+}
+
+.orbit {
+    position: absolute;
+
+    inset: 30px;
+
+    border: 1px solid #8f7cff55;
+
+    border-radius: 50%;
+
+    animation: spin 10s linear infinite;
+}
+
+.o2 {
+    inset: 0;
+
+    transform: rotate(70deg);
+
+    animation-duration: 14s;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+.section {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 80px 7%;
+}
+
+.section h2 {
+    font-size: 42px;
+
+    margin: 10px 0 35px;
+}
+
+
+/* =========================================================
+   HOME CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.card {
+    min-height: 150px;
+
+    padding: 25px;
+
+    border: 1px solid #2a2d52;
+
+    border-radius: 20px;
+
+    background: #10122a;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+
+    border-color: #7358c9;
+}
+
+.card b {
+    font-size: 18px;
+}
+
+.card p {
+    color: #aaaec8;
+}
+
+.locked {
+    opacity: .65;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 40px 7%;
+
+    color: #777b9c;
+
+    border-top: 1px solid #20223e;
+}
+
+footer p {
+    margin: 6px 0;
+}
+
+footer a {
+    color: #a99aff;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ACTIVITY PAGES
+========================================================= */
+
+.page {
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 70px 5% 100px;
+}
+
+.experiment {
+    margin: 45px 0;
+
+    padding: 45px;
+
+    border: 1px solid #30335c;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #131632,
+            #0d0f25
+        );
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px #0004;
+}
+
+.bit-display,
+.big-q {
+    font-size: 100px;
+
+    font-weight: 900;
+
+    color: #c7b2ff;
+
+    text-shadow:
+        0 0 40px #9d7bff;
+}
+
+.coin {
+    font-size: 110px;
+
+    margin-bottom: 20px;
+}
+
+.spin {
+    animation: coinflip .8s ease;
+}
+
+.result {
+    margin: 25px 0;
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    color: #ded5ff;
+}
+
+
+/* =========================================================
+   LESSON BOX
+========================================================= */
+
+.lesson {
+    padding: 30px;
+
+    border-left: 3px solid #8b5cf6;
+
+    background: #11132b;
+
+    border-radius:
+        0 18px 18px 0;
+
+    margin: 25px 0;
+}
+
+.lesson h2 {
+    margin-top: 0;
+}
+
+.lesson p {
+    color: #b9bbd0;
+}
+
+
+/* =========================================================
+   CHOICES / CONTROLS
+========================================================= */
+
+.choice {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.choice button,
+.control {
+    padding: 13px 20px;
+
+    border-radius: 12px;
+
+    border: 1px solid #454873;
+
+    background: #1b1e3c;
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.choice button:hover,
+.control:hover {
+    border-color: #8c74dc;
+}
+
+.control.selected {
+    background: #754de0;
+
+    border-color: #a889ff;
+}
+
+.control:disabled {
+    opacity: .5;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   SEQUENCES / FEEDBACK
+========================================================= */
+
+.sequence {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    font-size: 36px;
+
+    margin: 20px;
+}
+
+.sequence span,
+.sequence strong {
+    padding: 15px 20px;
+
+    border-radius: 15px;
+
+    background: #1a1c39;
+}
+
+.feedback {
+    margin-top: 18px;
+
+    color: #d4c8ff;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats,
+.scoreboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin: 20px 0;
+}
+
+.stats > div,
+.scoreboard > div,
+.target {
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid #30335c;
+
+    border-radius: 16px;
+
+    background: #10122a;
+}
+
+.stats strong,
+.scoreboard strong {
+    display: block;
+
+    font-size: 32px;
+
+    color: #c9b6ff;
+}
+
+
+/* =========================================================
+   QUBIT
+========================================================= */
+
+.qubit-orb {
+    font-size: 100px;
+
+    margin-bottom: 25px;
+
+    filter:
+        drop-shadow(
+            0 0 25px #9e72ff
+        );
+}
+
+.slider-row {
+    display: grid;
+
+    grid-template-columns:
+        120px 1fr 120px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 30px 0;
+
+    color: #aaaec8;
+}
+
+.slider-row input {
+    accent-color: #a277ff;
+}
+
+.prob-bars {
+    display: grid;
+
+    gap: 12px;
+}
+
+.prob-bars > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.prob-bars span {
+    width: 20px;
+}
+
+.prob-bars i {
+    height: 18px;
+
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7047d7,
+            #c08cff
+        );
+
+    display: block;
+
+    transition: .3s;
+}
+
+
+/* =========================================================
+   QUANTUM CHALLENGE
+========================================================= */
+
+.challenge-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.robot-card {
+    padding: 35px;
+
+    border: 1px solid #30335c;
+
+    border-radius: 24px;
+
+    background: #10122a;
+
+    text-align: center;
+}
+
+.robot {
+    font-size: 90px;
+}
+
+.path {
+    font-size: 24px;
+
+    margin: 20px;
+}
+
+.controls {
+    display: flex;
+
+    gap: 8px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    margin: 20px;
+}
+
+.target {
+    margin-top: 20px;
+}
+
+.target strong {
+    display: block;
+
+    font-size: 35px;
+
+    color: #c9b6ff;
+}
+
+.next {
+    text-align: center;
+
+    margin-top: 40px;
+}
+
+
 /* =========================================================
    ADVERTISEMENT
 ========================================================= */
 
 .ad-container {
     width: 100%;
+
     max-width: 760px;
+
     margin: 45px auto 30px;
+
     padding: 0 20px;
+
     box-sizing: border-box;
 }
 
 .ad-label {
     text-align: center;
+
     color: #777b9c;
+
     font-size: 10px;
+
     font-weight: 700;
-    letter-spacing: 0.12em;
+
+    letter-spacing: .12em;
+
     margin-bottom: 8px;
 }
 
-.ad-box,
 .adsbygoogle {
-    width: 100%;
-    min-height: 90px;
-}
-
-.ad-box {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    padding: 20px 24px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #2c2f50;
-    border-radius: 18px;
-
-    background: #0e1025;
-}
-
-.ad-icon {
-    width: 50px;
-    height: 50px;
-
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
-
-    border-radius: 14px;
-
-    background: #211b43;
-
-    font-size: 24px;
-}
-
-.ad-content {
-    flex: 1;
-}
-
-.ad-content strong {
     display: block;
-    color: #f5f5ff;
-    font-size: 15px;
-}
 
-.ad-content p {
-    margin: 4px 0 0;
-    color: #999db8;
-    font-size: 13px;
-}
+    width: 100%;
 
-.ad-button {
-    border: 0;
-    border-radius: 10px;
-
-    padding: 10px 15px;
-
-    background: #24274a;
-    color: #ddd7ff;
-
-    font-size: 12px;
-    font-weight: 800;
-
-    cursor: pointer;
+    min-height: 90px;
 }
 
 
@@ -96,6 +767,7 @@
 
 .teacher-hero {
     padding: 100px 7%;
+
     text-align: center;
 
     background:
@@ -109,35 +781,35 @@
 
 .teacher-hero h1 {
     max-width: 900px;
+
     margin: 18px auto;
 
-    font-size: clamp(48px, 7vw, 82px);
+    font-size:
+        clamp(48px, 7vw, 82px);
+
     line-height: .98;
 }
 
 .teacher-hero .lead {
     max-width: 720px;
-    margin: 25px auto;
-}
 
-.hero-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    margin: 25px auto;
 }
 
 .teacher-section {
     max-width: 1150px;
+
     margin: auto;
+
     padding: 80px 6%;
 }
 
 .teacher-section h2 {
     margin: 10px 0 25px;
 
-    font-size: clamp(32px, 5vw, 48px);
+    font-size:
+        clamp(32px, 5vw, 48px);
+
     line-height: 1.05;
 }
 
@@ -147,6 +819,7 @@
     color: #b9bbd0;
 
     font-size: 18px;
+
     line-height: 1.7;
 }
 
@@ -157,7 +830,9 @@
 
 .teacher-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 15px;
 
@@ -172,6 +847,7 @@
     background: #10122a;
 
     border: 1px solid #2a2d52;
+
     border-radius: 20px;
 
     transition:
@@ -181,11 +857,13 @@
 
 .teacher-stat:hover {
     transform: translateY(-3px);
+
     border-color: #5d4c9c;
 }
 
 .teacher-stat-icon {
     margin-bottom: 12px;
+
     font-size: 32px;
 }
 
@@ -214,7 +892,9 @@
 
 .learning-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
 
     gap: 16px;
 
@@ -227,6 +907,7 @@
     background: #10122a;
 
     border: 1px solid #2a2d52;
+
     border-radius: 20px;
 
     transition:
@@ -236,6 +917,7 @@
 
 .learning-card:hover {
     transform: translateY(-3px);
+
     border-color: #5d4c9c;
 }
 
@@ -243,6 +925,7 @@
     color: #9e8cff;
 
     font-size: 13px;
+
     font-weight: 900;
 
     letter-spacing: .1em;
@@ -271,6 +954,7 @@
 
 .activity-list {
     display: grid;
+
     gap: 12px;
 
     margin-top: 30px;
@@ -278,7 +962,9 @@
 
 .teacher-activity {
     display: grid;
-    grid-template-columns: 65px 1fr 30px;
+
+    grid-template-columns:
+        65px 1fr 30px;
 
     align-items: center;
 
@@ -287,11 +973,13 @@
     padding: 22px;
 
     color: inherit;
+
     text-decoration: none;
 
     background: #10122a;
 
     border: 1px solid #2a2d52;
+
     border-radius: 18px;
 
     transition:
@@ -313,6 +1001,7 @@
     height: 58px;
 
     display: grid;
+
     place-items: center;
 
     border-radius: 16px;
@@ -326,6 +1015,7 @@
     color: #9e8cff;
 
     font-size: 11px;
+
     font-weight: 900;
 
     letter-spacing: .1em;
@@ -360,7 +1050,9 @@
 
 .question-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
 
     gap: 15px;
 
@@ -379,6 +1071,7 @@
     background: #11132b;
 
     border: 1px solid #2a2d52;
+
     border-radius: 18px;
 }
 
@@ -394,6 +1087,7 @@
     color: #c0c2d5;
 
     font-size: 16px;
+
     line-height: 1.6;
 }
 
@@ -404,7 +1098,9 @@
 
 .tips {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 15px;
 
@@ -417,6 +1113,7 @@
     background: #10122a;
 
     border: 1px solid #2a2d52;
+
     border-radius: 18px;
 }
 
@@ -443,11 +1140,13 @@
     max-width: 950px;
 
     margin: 30px auto 80px;
+
     padding: 70px 30px;
 
     text-align: center;
 
     border: 1px solid #45367a;
+
     border-radius: 28px;
 
     background:
@@ -461,7 +1160,8 @@
 .teacher-cta h2 {
     margin: 12px 0;
 
-    font-size: clamp(35px, 5vw, 55px);
+    font-size:
+        clamp(35px, 5vw, 55px);
 }
 
 .teacher-cta p {
@@ -472,64 +1172,185 @@
     color: #b5b7ca;
 
     font-size: 18px;
+
     line-height: 1.7;
 }
 
 
 /* =========================================================
-   TEACHER PAGE FOOTER
+   ANIMATIONS
 ========================================================= */
 
-footer {
-    padding: 35px 20px;
+@keyframes pulse {
 
-    text-align: center;
+    50% {
+        transform: scale(1.06);
+    }
 
-    color: #777b99;
-
-    border-top: 1px solid #202341;
 }
 
-footer p {
-    margin: 6px 0;
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
 }
 
-footer a {
-    color: #a99aff;
-    text-decoration: none;
-}
+@keyframes coinflip {
 
-footer a:hover {
-    text-decoration: underline;
+    50% {
+        transform:
+            rotateY(900deg)
+            scale(.7);
+    }
+
 }
 
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   TABLET
 ========================================================= */
 
 @media (max-width: 850px) {
 
+    header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    nav {
+        justify-content: flex-start;
+    }
+
+    .orb-wrap {
+        opacity: .35;
+
+        right: -70px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .challenge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 70px;
+    }
+
+    .slider-row {
+        grid-template-columns: 1fr;
+    }
+
+    .slider-row label {
+        text-align: center;
+    }
+
     .teacher-stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .learning-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .tips {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
 }
 
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 650px) {
+
+    header {
+        padding: 15px 4%;
+    }
+
+    nav {
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 7px 9px;
+
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 560px;
+
+        padding:
+            70px 5%;
+    }
+
+    .hero h1,
+    .page h1 {
+        font-size:
+            clamp(42px, 14vw, 68px);
+    }
+
+    .lead {
+        font-size: 17px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hero-actions .button {
+        width: 100%;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+
+    .experiment {
+        padding: 28px 18px;
+    }
+
+    .bit-display,
+    .big-q,
+    .qubit-orb {
+        font-size: 75px;
+    }
+
+    .coin {
+        font-size: 85px;
+    }
+
+    .stats,
+    .scoreboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sequence {
+        gap: 7px;
+
+        font-size: 25px;
+    }
+
+    .sequence span,
+    .sequence strong {
+        padding: 12px 14px;
+    }
+
+
+    /* Teacher */
 
     .teacher-hero {
         padding: 70px 5%;
@@ -547,7 +1368,8 @@ footer a:hover {
     }
 
     .teacher-activity {
-        grid-template-columns: 52px 1fr;
+        grid-template-columns:
+            52px 1fr;
     }
 
     .activity-icon {
@@ -561,21 +1383,17 @@ footer a:hover {
         display: none;
     }
 
+
+    /* Advertisement */
+
     .ad-container {
         padding: 0 10px;
+
+        margin-top: 35px;
     }
 
-    .ad-box {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .ad-content {
-        width: 100%;
-    }
-
-    .ad-button {
-        width: 100%;
+    .adsbygoogle {
+        min-height: 70px;
     }
 
 }
