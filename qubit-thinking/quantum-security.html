@@ -31,7 +31,7 @@
         class="brand"
         href="index.html"
     >
-        ⚛️ Qubit Thinking
+        🟣 Qubit Thinking
     </a>
 
     <nav>
@@ -40,8 +40,32 @@
             Home
         </a>
 
-        <a href="quantum.html">
-            Quantum
+        <a href="bits.html">
+            Bits
+        </a>
+
+        <a href="possibilities.html">
+            Possibilities
+        </a>
+
+        <a href="qubit.html">
+            Qubit
+        </a>
+
+        <a href="measurement.html">
+            Lab
+        </a>
+
+        <a href="challenge.html">
+            Challenge
+        </a>
+
+        <a href="index.html#applications">
+            Applications
+        </a>
+
+        <a href="teachers.html">
+            Teachers
         </a>
 
     </nav>
@@ -49,213 +73,575 @@
 </header>
 
 
-<main>
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<main class="page">
 
 
-    <!-- =====================================================
+    <!-- =================================================
          HERO
-    ====================================================== -->
+    ================================================== -->
 
-    <section class="quantum-hero">
+    <div class="eyebrow">
+        QUANTUM IN THE REAL WORLD
+    </div>
 
-        <div class="quantum-icon">
-            🔐
-        </div>
 
-        <div class="eyebrow">
-            QUANTUM SECURITY
-        </div>
+    <h1>
+        Quantum <span>Security</span>
+    </h1>
 
-        <h1>
-            Secret <span>Communication</span>
-        </h1>
+
+    <p class="lead">
+        Can you help Alice and Bob discover whether
+        their quantum message was disturbed?
+    </p>
+
+
+    <!-- =================================================
+         INTRODUCTION
+    ================================================== -->
+
+    <div class="lesson">
+
+        <h2>
+            🔐 Keeping messages secret
+        </h2>
 
         <p>
-            Can you help Alice and Bob discover whether
-            their quantum message was disturbed?
+            Imagine that Alice wants to send a secret
+            message to Bob.
         </p>
 
-    </section>
+        <p>
+            In ordinary communication, someone might try
+            to copy or inspect information while it is
+            being sent.
+        </p>
+
+        <p>
+            Quantum communication uses the unusual behavior
+            of quantum states to help detect when information
+            has been disturbed.
+        </p>
+
+    </div>
 
 
-    <!-- =====================================================
-         ACTIVITY
-    ====================================================== -->
+    <!-- =================================================
+         SECURITY GAME
+    ================================================== -->
 
-    <section class="quantum-activity">
+    <div class="experiment">
 
-        <div class="quantum-card">
+        <div class="eyebrow">
+            QUANTUM MESSAGE
+        </div>
 
-            <h2>
-                📡 The Secret Message
-            </h2>
+        <h2>
+            📡 The Secret Message
+        </h2>
 
-            <p>
-                Alice wants to send information to Bob.
-                They use quantum states to check whether
-                their communication has been disturbed.
-            </p>
+        <p>
+            Alice sends a quantum state to Bob.
+            Look at the message carefully.
+        </p>
 
 
-            <!-- Quantum Message -->
+        <!-- Quantum message -->
 
-            <div
-                id="messageBox"
-                class="quantum-message"
-                aria-label="Quantum message"
+        <div
+            id="messageBox"
+            class="big-q"
+            aria-label="Quantum message"
+        >
+            🔵
+        </div>
+
+
+        <div
+            id="stateLabel"
+            class="result"
+        >
+            🔵 Message received
+        </div>
+
+
+        <p>
+            What happened to the message?
+        </p>
+
+
+        <!-- Choices -->
+
+        <div class="choice">
+
+            <button
+                onclick="checkSecurity('safe')"
             >
-                🔵
-            </div>
+                🛡️ Stayed safe
+            </button>
 
 
-            <div
-                style="
-                    text-align:center;
-                "
+            <button
+                onclick="checkSecurity('peek')"
             >
+                👀 Someone peeked
+            </button>
 
-                <span
-                    id="stateLabel"
-                    class="security-state"
-                >
-                    🔵 Message received
+        </div>
+
+
+        <!-- Feedback -->
+
+        <div
+            id="result"
+            class="feedback"
+        >
+        </div>
+
+
+        <br>
+
+
+        <button
+            id="nextButton"
+            class="button"
+            style="display:none;"
+            onclick="nextRound()"
+        >
+            Try Another Message →
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         HOW IT WORKS
+    ================================================== -->
+
+    <div class="lesson">
+
+        <h2>
+            🔬 How can quantum security work?
+        </h2>
+
+        <p>
+            Quantum states can behave differently when
+            they are measured.
+        </p>
+
+        <p>
+            If someone tries to inspect certain quantum
+            information, the act of measuring it can
+            disturb the state.
+        </p>
+
+        <p>
+            Alice and Bob can compare selected information
+            to look for evidence that something changed
+            during transmission.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         SECURITY LAB
+    ================================================== -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            SECURITY DETECTOR
+        </div>
+
+        <h2>
+            🕵️ Detect the disturbance
+        </h2>
+
+        <p>
+            Imagine that you receive one of these quantum
+            messages. What clue would you look for?
+        </p>
+
+
+        <div class="stats">
+
+            <div>
+
+                <strong>
+                    🔵
+                </strong>
+
+                <span>
+                    Original state
                 </span>
 
             </div>
 
 
-            <p
-                style="
-                    text-align:center;
-                    margin-top:30px;
-                "
-            >
-                What happened to the message?
-            </p>
+            <div>
 
-
-            <!-- Choices -->
-
-            <div
-                class="quantum-choices"
-            >
-
-                <button
-                    class="quantum-choice"
-                    onclick="checkSecurity('safe')"
-                >
-                    🛡️
-                    <span
-                        style="
-                            font-size:16px;
-                            margin-left:5px;
-                        "
-                    >
-                        Stayed safe
-                    </span>
-                </button>
-
-
-                <button
-                    class="quantum-choice"
-                    onclick="checkSecurity('peek')"
-                >
+                <strong>
                     👀
-                    <span
-                        style="
-                            font-size:16px;
-                            margin-left:5px;
-                        "
-                    >
-                        Someone peeked
-                    </span>
-                </button>
+                </strong>
+
+                <span>
+                    Possible measurement
+                </span>
 
             </div>
 
 
-            <!-- Feedback -->
+            <div>
 
-            <div
-                id="result"
-                class="quantum-feedback"
+                <strong>
+                    🔄
+                </strong>
+
+                <span>
+                    Changed state
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="button"
+            onclick="simulateDetection()"
+        >
+            🔍 Check the Message
+        </button>
+
+
+        <div
+            id="detection-result"
+            class="feedback"
+        >
+            Check a message to begin.
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         WHY THIS IS INTERESTING
+    ================================================== -->
+
+    <div class="lesson">
+
+        <h2>
+            🤯 Why is this unusual?
+        </h2>
+
+        <p>
+            In everyday life, looking at a message usually
+            does not change the message itself.
+        </p>
+
+        <p>
+            Quantum systems are different. Measurements can
+            affect the quantum state being measured.
+        </p>
+
+        <p>
+            Scientists can use this unusual property when
+            designing protocols for secure quantum
+            communication.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         THINK LIKE A SCIENTIST
+    ================================================== -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            THINK LIKE A SCIENTIST
+        </div>
+
+        <h2>
+            🤔 What would you do?
+        </h2>
+
+        <p>
+            Alice and Bob suspect that someone may have
+            interfered with their communication.
+            What should they do?
+        </p>
+
+
+        <div class="choice">
+
+            <button
+                onclick="scientistChoice('ignore')"
             >
-            </div>
+                🙈 Ignore it
+            </button>
 
 
-            <div
-                style="
-                    text-align:center;
-                "
+            <button
+                onclick="scientistChoice('compare')"
             >
+                🔎 Compare states
+            </button>
 
-                <button
-                    id="nextButton"
-                    class="button"
-                    style="display:none;"
-                    onclick="nextRound()"
-                >
-                    Try Another Message →
-                </button>
+
+            <button
+                onclick="scientistChoice('resend')"
+            >
+                📡 Send new information
+            </button>
+
+        </div>
+
+
+        <div
+            id="scientist-result"
+            class="result"
+        >
+            Choose a strategy.
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         QUANTUM CONNECTION
+    ================================================== -->
+
+    <div class="lesson">
+
+        <h2>
+            ⚛️ Where does quantum computing fit?
+        </h2>
+
+        <p>
+            Quantum security and quantum computing are
+            related to the same underlying world of quantum
+            physics, but they are not the same thing.
+        </p>
+
+        <p>
+            Quantum communication focuses on transmitting
+            information using quantum states.
+        </p>
+
+        <p>
+            Quantum computing focuses on using quantum
+            systems to perform computations.
+        </p>
+
+        <p>
+            Both areas take advantage of properties that
+            do not behave like ordinary bits and everyday
+            objects.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         BIG IDEA
+    ================================================== -->
+
+    <section
+        class="section"
+        style="padding-left:0;padding-right:0;"
+    >
+
+        <div class="eyebrow">
+            THE BIG IDEA
+        </div>
+
+
+        <h2>
+            Quantum physics can provide unusual ways to protect information.
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    🔐
+                </div>
+
+                <b>
+                    Protect information
+                </b>
+
+                <p>
+                    Secure communication is about making
+                    it difficult for unwanted observers to
+                    learn secret information.
+                </p>
 
             </div>
 
 
-            <!-- Lesson -->
+            <div class="card">
 
-            <div class="quantum-lesson">
+                <div style="font-size:38px;">
+                    👀
+                </div>
 
-                <h3>
-                    🔬 The Big Idea
-                </h3>
-
-                <p>
-                    In quantum communication, measuring a
-                    quantum state can change it. This unusual
-                    property can help scientists detect whether
-                    information has been disturbed.
-                </p>
+                <b>
+                    Detect disturbances
+                </b>
 
                 <p>
-                    Scientists study these ideas as part of
-                    <strong>quantum cryptography</strong>.
+                    Certain quantum measurements can change
+                    a quantum state, providing a clue that
+                    information was disturbed.
                 </p>
 
             </div>
 
 
-            <!-- Think Like a Scientist -->
+            <div class="card">
 
-            <div class="quantum-lesson">
+                <div style="font-size:38px;">
+                    ⚛️
+                </div>
 
-                <h3>
-                    💡 Think Like a Scientist
-                </h3>
+                <b>
+                    Use quantum behavior
+                </b>
 
                 <p>
-                    If looking at something can change it,
-                    could that help us notice when somebody
-                    is trying to listen to a secret message?
+                    Quantum communication explores how
+                    quantum physics can be used to exchange
+                    information securely.
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
+    <!-- =================================================
+         TAKEAWAY
+    ================================================== -->
+
+    <div class="lesson">
+
+        <h2>
+            🌟 The takeaway
+        </h2>
+
+        <p>
+            Quantum communication takes advantage of the
+            fact that quantum measurements can affect
+            quantum states.
+        </p>
+
+        <p>
+            This can allow Alice and Bob to look for signs
+            that someone has interfered with their
+            communication.
+        </p>
+
+        <p>
+            Scientists study these ideas as part of
+            <strong>
+                quantum cryptography
+            </strong>
+            and quantum information science.
+        </p>
+
+        <p>
+            <strong>
+                The big idea is simple:
+                in the quantum world, trying to look at
+                certain information can leave a clue.
+            </strong>
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         NEXT
+    ================================================== -->
+
+    <div class="next">
+
+        <a
+            class="button"
+            href="quantum-ai.html"
+        >
+            🤖 Explore Quantum AI →
+        </a>
+
+        <br><br>
+
+        <a
+            class="button secondary"
+            href="index.html#applications"
+        >
+            ← Back to Applications
+        </a>
+
+    </div>
+
+
 </main>
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
     <p>
-        © Qubit Thinking — Learn. Explore. Imagine.
+        🟣 <strong>Qubit Thinking</strong>
+    </p>
+
+    <p>
+        A playful introduction to quantum ideas.
+    </p>
+
+    <p>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        ·
+
+        <a href="index.html#applications">
+            Applications
+        </a>
+
+        ·
+
+        <a href="teachers.html">
+            Teacher Resources
+        </a>
+
     </p>
 
 </footer>
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
 
@@ -323,7 +709,8 @@ function loadRound() {
 
     document.getElementById(
         "result"
-    ).textContent = "";
+    ).textContent =
+        "";
 
 
     document.getElementById(
@@ -333,7 +720,7 @@ function loadRound() {
 
 
     document
-        .querySelectorAll(".quantum-choice")
+        .querySelectorAll(".choice button")
         .forEach(button => {
 
             button.disabled = false;
@@ -344,7 +731,7 @@ function loadRound() {
 
 
 /* =========================================================
-   CHECK ANSWER
+   CHECK SECURITY
 ========================================================= */
 
 function checkSecurity(answer) {
@@ -364,15 +751,18 @@ function checkSecurity(answer) {
         current.answer
     ) {
 
-        if (answer === "peek") {
+        if (
+            answer ===
+            "peek"
+        ) {
 
             result.textContent =
-                "🎉 Correct! The changed state is a clue that the message was disturbed.";
+                "🎉 Correct! The changed state is a clue that the message may have been disturbed.";
 
         } else {
 
             result.textContent =
-                "🎉 Correct! The message was not disturbed.";
+                "🎉 Correct! This message was not disturbed.";
 
         }
 
@@ -384,7 +774,7 @@ function checkSecurity(answer) {
 
 
         document
-            .querySelectorAll(".quantum-choice")
+            .querySelectorAll(".choice button")
             .forEach(button => {
 
                 button.disabled = true;
@@ -394,7 +784,7 @@ function checkSecurity(answer) {
     } else {
 
         result.textContent =
-            "🔎 Not quite! Look at the message state carefully.";
+            "🔎 Not quite! Look carefully at the message state.";
 
     }
 
@@ -417,7 +807,7 @@ function nextRound() {
 
         document.getElementById(
             "messageBox"
-        ).innerHTML =
+        ).textContent =
             "🏆";
 
 
@@ -445,6 +835,85 @@ function nextRound() {
 
 
     loadRound();
+
+}
+
+
+/* =========================================================
+   MESSAGE DETECTION
+========================================================= */
+
+function simulateDetection() {
+
+    const messages = [
+
+        "🔵 No obvious change detected.",
+        "🟣 The state changed — this could be a clue.",
+        "🟢 The message looks consistent.",
+        "🟠 Something appears different from the original."
+    ];
+
+
+    const message =
+        messages[
+            Math.floor(
+                Math.random() *
+                messages.length
+            )
+        ];
+
+
+    document.getElementById(
+        "detection-result"
+    ).textContent =
+        "🔬 " + message;
+
+}
+
+
+/* =========================================================
+   SCIENTIST STRATEGY
+========================================================= */
+
+function scientistChoice(strategy) {
+
+    const result =
+        document.getElementById(
+            "scientist-result"
+        );
+
+
+    if (
+        strategy ===
+        "ignore"
+    ) {
+
+        result.textContent =
+            "🙈 Ignoring a possible disturbance could allow an important clue to be missed.";
+
+    }
+
+
+    if (
+        strategy ===
+        "compare"
+    ) {
+
+        result.textContent =
+            "🔎 Good idea! Comparing selected information can help Alice and Bob look for evidence of interference.";
+
+    }
+
+
+    if (
+        strategy ===
+        "resend"
+    ) {
+
+        result.textContent =
+            "📡 Sending new information could be useful, but first researchers would want to understand what happened.";
+
+    }
 
 }
 
