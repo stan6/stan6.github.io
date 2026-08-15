@@ -341,6 +341,161 @@ nav .active {
     opacity: .65;
 }
 
+/* =========================================================
+   QUANTUM APPLICATIONS
+========================================================= */
+
+.section-intro {
+    max-width: 720px;
+
+    margin:
+        -15px 0 35px;
+
+    color: #b9bbd0;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+.applications-section {
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 15% 30%,
+            #17143a 0,
+            transparent 35%
+        );
+}
+
+.application-cards {
+    grid-template-columns:
+        repeat(3, 1fr);
+}
+
+.application-card {
+    position: relative;
+
+    min-height: 270px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+.application-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -50px;
+    bottom: -50px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #8b5cf633,
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+.application-icon {
+    width: 58px;
+    height: 58px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #29204f,
+            #171832
+        );
+
+    border: 1px solid #40376d;
+
+    font-size: 29px;
+}
+
+.application-card b {
+    font-size: 20px;
+}
+
+.application-card p {
+    flex: 1;
+
+    margin:
+        10px 0 20px;
+
+    color: #aeb1c8;
+
+    line-height: 1.6;
+}
+
+.application-link {
+    color: #aa94ff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: .02em;
+
+    transition:
+        color .2s ease;
+}
+
+.application-card:hover .application-link {
+    color: #d0c2ff;
+}
+
+
+/* =========================================================
+   APPLICATION RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .application-cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .application-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .application-card {
+        min-height: 230px;
+    }
+
+    .section-intro {
+        font-size: 16px;
+    }
+
+}
 
 /* =========================================================
    FOOTER
@@ -1395,5 +1550,345 @@ footer a:hover {
     .adsbygoogle {
         min-height: 70px;
     }
+}
+
+/* =========================================================
+   QUANTUM DELIVERY
+========================================================= */
+
+.delivery-map {
+    position: relative;
+
+    width: 100%;
+    max-width: 650px;
+
+    height: 360px;
+
+    margin: 35px auto;
+
+    overflow: hidden;
+
+    border: 1px solid #30335c;
+
+    border-radius: 25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #191c3e 0,
+            #10122b 55%,
+            #0b0d20 100%
+        );
+}
+
+
+/* ---------------------------------------------------------
+   MAP GRID
+--------------------------------------------------------- */
+
+.delivery-map::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .18;
+
+    background-image:
+        linear-gradient(
+            #777cff 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            #777cff 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+}
+
+
+/* ---------------------------------------------------------
+   HOUSES
+--------------------------------------------------------- */
+
+.house {
+    position: absolute;
+
+    z-index: 2;
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #454873;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #202448,
+            #151832
+        );
+
+    color: white;
+
+    font-size: 34px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px #0005;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.house:hover {
+    transform: scale(1.08);
+
+    background: #292650;
+
+    border-color: #9b7cff;
+
+    box-shadow:
+        0 0 25px #8b6bea55;
+}
+
+.house small {
+    margin-top: 4px;
+
+    color: #aaaec8;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
+
+.house.start {
+    left: 40px;
+    top: 135px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #38256d,
+            #211844
+        );
+
+    border-color: #9a7cff;
+
+    box-shadow:
+        0 0 30px #8b5cf655;
+}
+
+
+/* ---------------------------------------------------------
+   HOUSE B
+--------------------------------------------------------- */
+
+.house[data-place="B"] {
+    right: 45px;
+    top: 35px;
+}
+
+
+/* ---------------------------------------------------------
+   HOUSE C
+--------------------------------------------------------- */
+
+.house[data-place="C"] {
+    right: 45px;
+    bottom: 35px;
+}
+
+
+/* ---------------------------------------------------------
+   HOUSE D
+--------------------------------------------------------- */
+
+.house[data-place="D"] {
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+.house[data-place="D"]:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+}
+
+
+/* ---------------------------------------------------------
+   ROUTE DISPLAY
+--------------------------------------------------------- */
+
+.route-display {
+    margin-top: 25px;
+}
+
+.route-display .eyebrow {
+    margin-bottom: 8px;
+}
+
+.route-display #route {
+    margin-top: 10px;
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 16px;
+
+    border: 1px solid #30335c;
+
+    border-radius: 14px;
+
+    background: #1a1c39;
+
+    color: #d7caff;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    word-break: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   DISTANCE
+--------------------------------------------------------- */
+
+.distance-display {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 20px 0;
+}
+
+.distance-display span {
+    color: #9fa3bd;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.distance-display strong {
+    min-width: 70px;
+
+    font-size: 32px;
+
+    color: #c9b6ff;
+}
+
+
+/* ---------------------------------------------------------
+   DELIVERY FEEDBACK
+--------------------------------------------------------- */
+
+.delivery-map + .route-display {
+    position: relative;
+}
+
+.delivery-map .house.selected {
+    background: #754de0;
+
+    border-color: #b59cff;
+
+    box-shadow:
+        0 0 30px #8b5cf688;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 650px) {
+
+    .delivery-map {
+        height: 300px;
+
+        margin-top: 25px;
+    }
+
+    .house {
+        width: 70px;
+        height: 70px;
+
+        font-size: 26px;
+
+        border-radius: 16px;
+    }
+
+    .house small {
+        font-size: 9px;
+    }
+
+    .house.start {
+        left: 20px;
+
+        top: 115px;
+    }
+
+    .house[data-place="B"] {
+        right: 20px;
+
+        top: 25px;
+    }
+
+    .house[data-place="C"] {
+        right: 20px;
+
+        bottom: 25px;
+    }
+
+    .house[data-place="D"] {
+        left: 50%;
+        top: 50%;
+    }
+
+    .route-display #route {
+        font-size: 17px;
+
+        padding: 13px;
+    }
+
+    .distance-display strong {
+        font-size: 28px;
+    }
+
+}
 
 }
