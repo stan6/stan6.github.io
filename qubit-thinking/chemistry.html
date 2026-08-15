@@ -25,7 +25,7 @@
         <a href="qubit.html">Qubit</a>
         <a href="measurement.html">Lab</a>
         <a href="challenge.html">Challenge</a>
-        <a href="#applications">Applications</a>
+        <a class="active" href="index.html#applications">Applications</a>
         <a href="teachers.html">Teachers</a>
     </nav>
 
@@ -33,13 +33,13 @@
 
 
 <!-- =====================================================
-     PAGE
+     HERO
 ===================================================== -->
 
-<main class="page">
+<main class="hero">
 
     <div class="eyebrow">
-        QUANTUM IN THE REAL WORLD · 02
+        QUANTUM IN THE REAL WORLD
     </div>
 
     <h1>
@@ -47,346 +47,487 @@
     </h1>
 
     <p class="lead">
-        Molecules are tiny, but they can be surprisingly
-        complicated. Explore how scientists think about
-        molecules and why quantum computers are interesting
-        for chemistry.
+        How could quantum computers help us understand molecules?
     </p>
 
-
-    <!-- =================================================
-         INTRODUCTION
-    ================================================= -->
-
-    <div class="lesson">
-
-        <h2>
-            🧪 Why molecules matter
-        </h2>
-
-        <p>
-            Everything around us is made from atoms and
-            molecules. Water, medicines, batteries, food,
-            plastics, and many other materials all depend
-            on how atoms interact.
-        </p>
-
-        <p>
-            But molecules follow the rules of quantum physics.
-            Understanding those rules can become difficult as
-            molecules get more complicated.
-        </p>
-
-        <p>
-            That's one reason researchers are exploring whether
-            quantum computers could eventually help model
-            molecules and chemical systems.
-        </p>
-
-    </div>
-
-
-    <!-- =================================================
-         ACTIVITY
-    ================================================= -->
-
-    <section class="experiment">
-
-        <div class="eyebrow">
-            MOLECULE EXPLORER
-        </div>
-
-        <h2>
-            Build a molecule
-        </h2>
-
-        <p>
-            Choose atoms and see how your molecule changes.
-        </p>
-
-
-        <!-- Molecule Display -->
-
-        <div id="moleculeDisplay"
-             class="molecule-display">
-
-            <div class="atom atom-h">
-                H
-            </div>
-
-            <div class="bond"></div>
-
-            <div class="atom atom-o">
-                O
-            </div>
-
-            <div class="bond"></div>
-
-            <div class="atom atom-h">
-                H
-            </div>
-
-        </div>
-
-
-        <div id="moleculeName"
-             class="result">
-            Water · H₂O
-        </div>
-
-
-        <!-- Controls -->
-
-        <div class="choice">
-
-            <button onclick="selectMolecule('water')">
-                💧 Water
-            </button>
-
-            <button onclick="selectMolecule('carbon')">
-                🌫️ Carbon Dioxide
-            </button>
-
-            <button onclick="selectMolecule('methane')">
-                🔥 Methane
-            </button>
-
-            <button onclick="selectMolecule('ammonia')">
-                ☁️ Ammonia
-            </button>
-
-        </div>
-
-
-        <div id="moleculeFact"
-             class="feedback">
-
-            Water contains two hydrogen atoms
-            and one oxygen atom.
-            
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         QUANTUM CONNECTION
-    ================================================= -->
-
-    <div class="lesson">
-
-        <h2>
-            🟣 Where does quantum computing come in?
-        </h2>
-
-        <p>
-            The electrons in atoms and molecules behave
-            according to quantum physics. Their possible
-            arrangements can be difficult to calculate.
-        </p>
-
-        <p>
-            A quantum computer can represent information
-            using qubits. Researchers are investigating
-            whether quantum computers could eventually
-            represent and simulate some quantum systems
-            more naturally.
-        </p>
-
-        <p>
-            This doesn't mean quantum computers can already
-            solve every chemistry problem. They are still
-            an active area of research.
-        </p>
-
-    </div>
-
-
-    <!-- =================================================
-         QUANTUM THINKING ACTIVITY
-    ================================================= -->
-
-    <section class="experiment">
-
-        <div class="eyebrow">
-            THINK LIKE A QUANTUM SCIENTIST
-        </div>
-
-        <h2>
-            Which molecule is more complicated?
-        </h2>
-
-        <p>
-            Scientists often need to reason about many
-            possible arrangements of electrons and atoms.
-        </p>
-
-        <p>
-            Which molecule do you think would require
-            more information to describe?
-        </p>
-
-
-        <div class="choice">
-
-            <button onclick="chooseComplexity('water')">
-                💧 Water
-            </button>
-
-            <button onclick="chooseComplexity('methane')">
-                🔥 Methane
-            </button>
-
-        </div>
-
-
-        <div id="complexityFeedback"
-             class="feedback">
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         MOLECULE SEARCH
-    ================================================= -->
-
-    <section class="experiment">
-
-        <div class="eyebrow">
-            THE BIG SEARCH
-        </div>
-
-        <h2>
-            Imagine searching for a useful molecule
-        </h2>
-
-        <p>
-            Imagine that scientists want to find a molecule
-            with exactly the right properties.
-        </p>
-
-        <p>
-            There could be many possible candidates.
-            Let's see how quickly the possibilities grow.
-        </p>
-
-
-        <div class="stats">
-
-            <div>
-                <strong id="candidateCount">
-                    4
-                </strong>
-
-                <span>
-                    candidate molecules
-                </span>
-            </div>
-
-            <div>
-                <strong id="atomCount">
-                    2
-                </strong>
-
-                <span>
-                    atom types
-                </span>
-            </div>
-
-            <div>
-                <strong id="possibilityCount">
-                    8
-                </strong>
-
-                <span>
-                    possible combinations
-                </span>
-            </div>
-
-        </div>
-
-
-        <button class="button"
-                onclick="growSearch()">
-
-            🔬 Add another possibility
-
-        </button>
-
-
-        <div id="searchFeedback"
-             class="feedback">
-
-            Start with a small search.
-            
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         KEY IDEA
-    ================================================= -->
-
-    <div class="lesson">
-
-        <h2>
-            💡 The big idea
-        </h2>
-
-        <p>
-            Chemistry involves enormous numbers of possible
-            states and interactions. Scientists use computers
-            to help explore them.
-        </p>
-
-        <p>
-            Quantum computing is interesting because quantum
-            systems themselves follow the rules of quantum
-            physics.
-        </p>
-
-        <p>
-            <strong>
-                Quantum chemistry is one example of a problem
-                where quantum computing may eventually become
-                useful.
-            </strong>
-        </p>
-
-    </div>
-
-
-    <!-- =================================================
-         NEXT ACTIVITY
-    ================================================= -->
-
-    <div class="next">
-
-        <div class="eyebrow">
-            NEXT APPLICATION
-        </div>
-
-        <h2>
-            Ready to explore materials?
-        </h2>
-
-        <p class="lead">
-            What if we could search for materials with
-            interesting properties?
-        </p>
-
-        <a class="button"
-           href="materials.html">
-
-            🔋 Explore Better Materials →
-
+    <p class="lead"
+       style="font-size:17px;max-width:650px;">
+
+        Molecules follow the rules of quantum physics.
+        That makes them fascinating — and sometimes very
+        difficult for ordinary computers to model.
+    </p>
+
+    <div class="hero-actions">
+
+        <a class="button" href="#experiment">
+            🧪 Start the experiment
+        </a>
+
+        <a class="button secondary"
+           href="index.html#applications">
+            ← Applications
         </a>
 
     </div>
 
+    <div class="orb-wrap">
+
+        <div class="orbit o1"></div>
+
+        <div class="orbit o2"></div>
+
+        <div class="orb">
+            🧪
+        </div>
+
+    </div>
+
 </main>
+
+
+<!-- =====================================================
+     INTRODUCTION
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        FIRST QUESTION
+    </div>
+
+    <h2>
+        Why are molecules interesting?
+    </h2>
+
+    <p class="lead">
+
+        Everything around us is made from atoms and molecules.
+        Water, oxygen, medicines, food, and even the materials
+        in your phone all involve molecules.
+
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                ⚛️
+            </div>
+
+            <b>
+                Atoms
+            </b>
+
+            <p>
+                Atoms are tiny building blocks that can
+                join together to form molecules.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🧬
+            </div>
+
+            <b>
+                Molecules
+            </b>
+
+            <p>
+                Molecules are groups of atoms connected
+                in particular arrangements.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                ⚡
+            </div>
+
+            <b>
+                Energy
+            </b>
+
+            <p>
+                Molecules can exist in different energy
+                states. Understanding these states is important
+                in chemistry.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LESSON
+===================================================== -->
+
+<section class="section">
+
+    <div class="lesson">
+
+        <h2>
+            🧠 The big idea
+        </h2>
+
+        <p>
+
+            Electrons in molecules behave according to
+            quantum mechanics. Predicting exactly how all
+            those electrons behave can become very difficult
+            as molecules get larger.
+
+        </p>
+
+        <p>
+
+            Researchers are investigating whether quantum
+            computers could eventually help simulate some
+            of these quantum systems.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MOLECULE EXPERIMENT
+===================================================== -->
+
+<section id="experiment" class="section">
+
+    <div class="eyebrow">
+        MOLECULE LAB
+    </div>
+
+    <h2>
+        Build a simple molecule
+    </h2>
+
+    <p class="lead">
+
+        Molecules can be arranged in different ways.
+        Try changing the distance between the atoms and
+        watch how our simple model changes.
+
+    </p>
+
+
+    <div class="experiment">
+
+        <div class="molecule">
+
+            <div class="atom atom-a">
+                H
+            </div>
+
+            <div id="bond"
+                 class="bond">
+            </div>
+
+            <div class="atom atom-b">
+                H
+            </div>
+
+        </div>
+
+
+        <div class="slider-row">
+
+            <label for="distance">
+                Atom distance
+            </label>
+
+            <input
+                id="distance"
+                type="range"
+                min="20"
+                max="180"
+                value="80"
+            >
+
+            <strong id="distanceValue">
+                80
+            </strong>
+
+        </div>
+
+
+        <div class="result"
+             id="moleculeResult">
+
+            Balanced molecule
+
+        </div>
+
+
+        <p class="feedback"
+           id="moleculeFeedback">
+
+            The atoms are at a comfortable distance
+            in this simple model.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUANTUM CONNECTION
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        WHERE QUANTUM COMPUTING ENTERS
+    </div>
+
+    <h2>
+        From molecules to qubits
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                ⚛️
+            </div>
+
+            <b>
+                Step 1 — Molecule
+            </b>
+
+            <p>
+                A molecule contains atoms and electrons
+                interacting with one another.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🔢
+            </div>
+
+            <b>
+                Step 2 — Model
+            </b>
+
+            <p>
+                Scientists create mathematical models
+                describing the molecule.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🟣
+            </div>
+
+            <b>
+                Step 3 — Qubits
+            </b>
+
+            <p>
+                Some quantum algorithms use qubits to
+                represent and explore quantum systems.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CHALLENGE
+===================================================== -->
+
+<section class="section">
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            THINK LIKE A SCIENTIST
+        </div>
+
+        <h2>
+            Which molecule should we study?
+        </h2>
+
+        <p class="lead"
+           style="margin:20px auto;max-width:650px;">
+
+            Scientists often have to decide which problems
+            are worth investigating. Start simple before
+            moving to more complicated systems.
+
+        </p>
+
+        <div class="choice">
+
+            <button
+                class="control"
+                onclick="chooseMolecule('water')">
+
+                💧 Water
+
+            </button>
+
+            <button
+                class="control"
+                onclick="chooseMolecule('oxygen')">
+
+                🫧 Oxygen
+
+            </button>
+
+            <button
+                class="control"
+                onclick="chooseMolecule('complex')">
+
+                🧬 Larger molecule
+
+            </button>
+
+        </div>
+
+
+        <div class="result"
+             id="moleculeChoice">
+
+            Choose a molecule.
+
+        </div>
+
+        <p class="feedback"
+           id="choiceFeedback">
+
+            Think about how the number of atoms
+            and electrons might affect the problem.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHAT DID YOU DISCOVER?
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        WHAT DID YOU DISCOVER?
+    </div>
+
+    <h2>
+        Quantum chemistry is a giant puzzle.
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <b>
+                🔍 Many possibilities
+            </b>
+
+            <p>
+                A molecule can have many possible
+                configurations and quantum states.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                ⚡ Quantum behaviour
+            </b>
+
+            <p>
+                Electrons behave according to quantum
+                rules that are different from everyday objects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                🖥️ Computing
+            </b>
+
+            <p>
+                Researchers are exploring quantum computers
+                as tools for studying some difficult molecular
+                problems.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TEACHER CTA
+===================================================== -->
+
+<section class="teacher-cta">
+
+    <div class="eyebrow">
+        KEEP EXPLORING
+    </div>
+
+    <h2>
+        What else could quantum computers help explore?
+    </h2>
+
+    <p>
+
+        Molecules are only one possibility.
+        Explore materials, optimization, medicine,
+        artificial intelligence, and quantum security.
+
+    </p>
+
+    <a class="button"
+       href="index.html#applications">
+
+        EXPLORE APPLICATIONS →
+
+    </a>
+
+</section>
 
 
 <!-- =====================================================
@@ -404,231 +545,160 @@
     </p>
 
     <p>
+
         <a href="index.html">
             Home
         </a>
+
         ·
+
         <a href="index.html#applications">
             Quantum Applications
         </a>
+
         ·
+
         <a href="teachers.html">
             Teacher Resources
         </a>
+
     </p>
 
 </footer>
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     PAGE JAVASCRIPT
 ===================================================== -->
 
 <script>
 
-    /* =====================================================
-       MOLECULE EXPLORER
-    ===================================================== */
+    /* -----------------------------------------------------
+       MOLECULE DISTANCE EXPERIMENT
+    ----------------------------------------------------- */
 
-    const molecules = {
+    const distanceSlider =
+        document.getElementById("distance");
 
-        water: {
-            name: "Water · H₂O",
+    const distanceValue =
+        document.getElementById("distanceValue");
 
-            atoms: [
-                ["H", "atom-h"],
-                ["O", "atom-o"],
-                ["H", "atom-h"]
-            ],
+    const moleculeResult =
+        document.getElementById("moleculeResult");
 
-            fact:
-                "Water contains two hydrogen atoms and one oxygen atom."
-        },
-
-        carbon: {
-            name: "Carbon Dioxide · CO₂",
-
-            atoms: [
-                ["O", "atom-o"],
-                ["C", "atom-c"],
-                ["O", "atom-o"]
-            ],
-
-            fact:
-                "Carbon dioxide contains one carbon atom and two oxygen atoms."
-        },
-
-        methane: {
-            name: "Methane · CH₄",
-
-            atoms: [
-                ["H", "atom-h"],
-                ["C", "atom-c"],
-                ["H", "atom-h"],
-                ["H", "atom-h"],
-                ["H", "atom-h"]
-            ],
-
-            fact:
-                "Methane contains one carbon atom surrounded by four hydrogen atoms."
-        },
-
-        ammonia: {
-            name: "Ammonia · NH₃",
-
-            atoms: [
-                ["H", "atom-h"],
-                ["N", "atom-n"],
-                ["H", "atom-h"],
-                ["H", "atom-h"]
-            ],
-
-            fact:
-                "Ammonia contains one nitrogen atom and three hydrogen atoms."
-        }
-
-    };
+    const moleculeFeedback =
+        document.getElementById("moleculeFeedback");
 
 
-    function selectMolecule(type) {
+    function updateMolecule() {
 
-        const molecule =
-            molecules[type];
+        const distance =
+            Number(distanceSlider.value);
 
-        const display =
-            document.getElementById(
-                "moleculeDisplay"
-            );
-
-        display.innerHTML = "";
-
-        molecule.atoms.forEach(
-            (atom, index) => {
-
-                const element =
-                    document.createElement("div");
-
-                element.className =
-                    "atom " + atom[1];
-
-                element.textContent =
-                    atom[0];
-
-                display.appendChild(element);
-
-                if (
-                    index <
-                    molecule.atoms.length - 1
-                ) {
-
-                    const bond =
-                        document.createElement("div");
-
-                    bond.className =
-                        "bond";
-
-                    display.appendChild(
-                        bond
-                    );
-                }
-
-            }
-        );
+        distanceValue.textContent =
+            distance;
 
 
-        document.getElementById(
-            "moleculeName"
-        ).textContent =
-            molecule.name;
+        /*
+         * Move the second atom.
+         */
+
+        const atomB =
+            document.querySelector(".atom-b");
+
+        atomB.style.transform =
+            `translateX(${distance - 80}px)`;
 
 
-        document.getElementById(
-            "moleculeFact"
-        ).textContent =
-            molecule.fact;
+        /*
+         * Change the simple educational
+         * description based on distance.
+         */
 
-    }
+        if (distance < 55) {
 
+            moleculeResult.textContent =
+                "Too close!";
 
-    /* =====================================================
-       COMPLEXITY ACTIVITY
-    ===================================================== */
-
-    function chooseComplexity(choice) {
-
-        const feedback =
-            document.getElementById(
-                "complexityFeedback"
-            );
-
-        if (choice === "water") {
-
-            feedback.textContent =
-                "Good choice to think about! Water is a small molecule, but even small molecules have quantum behavior.";
+            moleculeFeedback.textContent =
+                "The atoms are very close together in this model. Try increasing the distance.";
 
         }
 
-        if (choice === "methane") {
+        else if (distance <= 115) {
 
-            feedback.textContent =
-                "Nice thinking! Methane has more atoms than water, so describing its possible configurations can involve more information.";
+            moleculeResult.textContent =
+                "Balanced molecule";
+
+            moleculeFeedback.textContent =
+                "Nice! The atoms are at a comfortable distance in our simple model.";
+
+        }
+
+        else {
+
+            moleculeResult.textContent =
+                "Very far apart";
+
+            moleculeFeedback.textContent =
+                "The atoms are becoming separated. At very large distances, their interaction becomes weaker.";
 
         }
 
     }
 
 
-    /* =====================================================
-       SEARCH ACTIVITY
-    ===================================================== */
-
-    let searchLevel = 1;
-
-
-    function growSearch() {
-
-        searchLevel++;
-
-        const candidates =
-            Math.pow(2, searchLevel + 1);
-
-        const possibilities =
-            Math.pow(2, searchLevel + 2);
+    distanceSlider.addEventListener(
+        "input",
+        updateMolecule
+    );
 
 
-        document.getElementById(
-            "candidateCount"
-        ).textContent =
-            candidates;
+    updateMolecule();
 
 
-        document.getElementById(
-            "atomCount"
-        ).textContent =
-            searchLevel + 1;
+    /* -----------------------------------------------------
+       MOLECULE CHALLENGE
+    ----------------------------------------------------- */
 
+    function chooseMolecule(type) {
 
-        document.getElementById(
-            "possibilityCount"
-        ).textContent =
-            possibilities;
-
+        const result =
+            document.getElementById("moleculeChoice");
 
         const feedback =
-            document.getElementById(
-                "searchFeedback"
-            );
+            document.getElementById("choiceFeedback");
 
 
-        if (searchLevel < 5) {
+        if (type === "water") {
 
-            feedback.textContent =
-                "The search is getting bigger! More possibilities mean more states to explore.";
-
-        } else {
+            result.textContent =
+                "💧 Water — a great place to start!";
 
             feedback.textContent =
-                "That's a lot of possibilities already. Real molecular systems can involve vastly more complex quantum states.";
+                "Water is a relatively small molecule, making it a useful example when learning about molecular simulation.";
+
+        }
+
+
+        else if (type === "oxygen") {
+
+            result.textContent =
+                "🫧 Oxygen — another simple example!";
+
+            feedback.textContent =
+                "Oxygen molecules contain two oxygen atoms. Simple systems can help scientists test ideas before studying larger ones.";
+
+        }
+
+
+        else {
+
+            result.textContent =
+                "🧬 Larger molecule — much more complicated!";
+
+            feedback.textContent =
+                "As molecules become larger, the number of possible quantum states can grow dramatically.";
 
         }
 
@@ -638,14 +708,14 @@
 
 
 <!-- =====================================================
-     MOLECULE STYLES
+     PAGE-SPECIFIC CSS
 ===================================================== -->
 
 <style>
 
-    .molecule-display {
+    .molecule {
 
-        min-height: 190px;
+        min-height: 170px;
 
         display: flex;
 
@@ -653,201 +723,116 @@
 
         justify-content: center;
 
-        gap: 8px;
+        gap: 0;
 
-        flex-wrap: wrap;
+        overflow: hidden;
 
-        margin: 35px 0;
-
-        padding: 30px;
-
-        border-radius: 24px;
-
-        background:
-            radial-gradient(
-                circle at center,
-                #211b43,
-                #10122a
-            );
-
-        border: 1px solid #30335c;
+        margin-bottom: 20px;
 
     }
 
 
     .atom {
 
-        width: 72px;
-        height: 72px;
+        width: 90px;
+        height: 90px;
 
         display: grid;
 
         place-items: center;
 
+        flex-shrink: 0;
+
         border-radius: 50%;
 
-        font-size: 25px;
+        font-size: 30px;
 
         font-weight: 900;
 
         color: white;
 
-        box-shadow:
-            0 0 25px #0007;
-
-        animation:
-            atomAppear .35s ease;
-
-    }
-
-
-    .atom-h {
-
         background:
             radial-gradient(
                 circle at 35% 30%,
                 #ffffff,
-                #9ba7c9
+                #9f7aea 20%,
+                #6335bd 60%,
+                #25104e
             );
 
-        color: #16182c;
-
-    }
-
-
-    .atom-o {
-
-        background:
-            radial-gradient(
-                circle at 35% 30%,
-                #ffb3b3,
-                #d9485f
-            );
+        border: 2px solid #bda9ff;
 
         box-shadow:
-            0 0 25px #d9485f66;
+            0 0 30px #8b5cf655;
 
-    }
+        z-index: 2;
 
-
-    .atom-c {
-
-        background:
-            radial-gradient(
-                circle at 35% 30%,
-                #777,
-                #222
-            );
-
-        box-shadow:
-            0 0 25px #77777766;
-
-    }
-
-
-    .atom-n {
-
-        background:
-            radial-gradient(
-                circle at 35% 30%,
-                #a9c8ff,
-                #4267b2
-            );
-
-        box-shadow:
-            0 0 25px #4267b266;
+        transition:
+            transform .25s ease;
 
     }
 
 
     .bond {
 
-        width: 45px;
+        width: 100px;
+        height: 12px;
 
-        height: 8px;
+        margin: 0 -5px;
 
         border-radius: 99px;
 
         background:
             linear-gradient(
                 90deg,
-                #7d68c9,
-                #c8b7ff,
-                #7d68c9
+                #8b5cf6,
+                #c084fc,
+                #8b5cf6
             );
 
         box-shadow:
-            0 0 15px #8b6bea55;
+            0 0 20px #9b6cff88;
+
+        transition:
+            width .25s ease;
 
     }
 
 
-    .stats span {
+    .atom-b {
 
-        display: block;
-
-        margin-top: 5px;
-
-        color: #9296b2;
-
-        font-size: 13px;
-
-    }
-
-
-    @keyframes atomAppear {
-
-        from {
-
-            opacity: 0;
-
-            transform:
-                scale(.6);
-
-        }
-
-        to {
-
-            opacity: 1;
-
-            transform:
-                scale(1);
-
-        }
+        margin-left: 0;
 
     }
 
 
     @media (max-width: 650px) {
 
-        .molecule-display {
+        .molecule {
 
-            min-height: 220px;
-
-            padding: 20px;
+            min-height: 150px;
 
         }
 
         .atom {
 
-            width: 58px;
-            height: 58px;
+            width: 70px;
+            height: 70px;
 
-            font-size: 21px;
+            font-size: 24px;
 
         }
 
         .bond {
 
-            width: 25px;
-
-            height: 6px;
+            width: 70px;
 
         }
 
     }
 
 </style>
+
 
 </body>
 </html>
