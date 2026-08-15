@@ -1,16 +1,31 @@
+```html
 <!doctype html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quantum Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quantum Challenge — Qubit Thinking</title>
+
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4495303340414306"
+        crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body>
 
 <header>
-    <a class="brand" href="index.html">🟣 Qubit Thinking</a>
+
+    <a class="brand" href="index.html">
+        🟣 Qubit Thinking
+    </a>
 
     <nav>
         <a href="index.html">Home</a>
@@ -19,81 +34,128 @@
         <a href="qubit.html">Qubit</a>
         <a href="measurement.html">Lab</a>
         <a class="active" href="challenge.html">Challenge</a>
-         <a href="#applications">Applications</a>
+        <a href="#applications">Applications</a>
         <a href="teachers.html">Teachers</a>
     </nav>
+
 </header>
+
 
 <main class="page">
 
-    <div class="progress">FINAL CHALLENGE</div>
+    <div class="progress">
+        FINAL CHALLENGE
+    </div>
 
-    <h1>Help the <span>qubit robot.</span></h1>
+
+    <h1>
+        Help the <span>qubit robot.</span>
+    </h1>
+
 
     <p class="lead">
         The robot needs to reach the treasure.
         Choose a setup, run it, and see what happens.
     </p>
 
+
+    <!-- =====================================================
+         CHALLENGE
+         ===================================================== -->
+
     <div class="challenge-grid">
+
+
+        <!-- Robot -->
 
         <div class="robot-card">
 
-            <div class="robot">🤖</div>
+            <div class="robot">
+                🤖
+            </div>
+
 
             <div class="path">
                 START → 🟣 → 🎯
             </div>
 
+
             <div class="controls">
 
                 <button
+                    type="button"
                     class="control selected"
                     data-v="50">
+
                     Balanced
+
                 </button>
 
+
                 <button
+                    type="button"
                     class="control"
                     data-v="80">
+
                     Favor 1
+
                 </button>
 
+
                 <button
+                    type="button"
                     class="control"
                     data-v="20">
+
                     Favor 0
+
                 </button>
 
             </div>
 
+
             <button
+                type="button"
                 class="button"
                 id="run">
+
                 RUN THE EXPERIMENT
+
             </button>
 
         </div>
 
 
+
+        <!-- Lesson -->
+
         <div class="lesson">
 
-            <h2>Can you get the result?</h2>
+            <h2>
+                Can you get the result?
+            </h2>
+
 
             <p id="challengeText">
+
                 Pick a setup, then run it.
                 Your goal is to reach the target 3 times.
+
             </p>
+
 
             <div class="target">
 
-                <span>Treasure runs</span>
+                <span>
+                    Treasure runs
+                </span>
 
                 <strong id="wins">
                     0 / 3
                 </strong>
 
             </div>
+
 
             <div
                 id="final"
@@ -103,147 +165,236 @@
         </div>
 
     </div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4495303340414306"
-     crossorigin="anonymous"></script>
-<!-- Qubit Challenge -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4495303340414306"
-     data-ad-slot="6014491962"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     <div class="next">
+
+
+
+    <!-- =====================================================
+         ADVERTISEMENT
+         ===================================================== -->
+
+    <div class="ad-container">
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4495303340414306"
+             data-ad-slot="6014491962"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NEXT
+         ===================================================== -->
+
+    <div class="next">
+
         <a
             class="button secondary"
             href="index.html">
+
             ← Back to the journey
+
         </a>
+
     </div>
+
 </main>
 
 
+
+<!-- =========================================================
+     GOOGLE ADSENSE INITIALIZATION
+     ========================================================= -->
+
 <script>
 
-let prob = 50;
-let w = 0;
+    window.adsbygoogle = window.adsbygoogle || [];
 
-
-// ---------------------------------------------------------
-// Setup buttons
-// ---------------------------------------------------------
-
-document.querySelectorAll('.control').forEach(btn => {
-
-    btn.onclick = () => {
-
-        // Don't allow setup changes after completion
-        if (w >= 3) {
-            return;
-        }
-
-        document
-            .querySelectorAll('.control')
-            .forEach(x => x.classList.remove('selected'));
-
-        btn.classList.add('selected');
-
-        prob = Number(btn.dataset.v);
-    };
-
-});
-
-
-// ---------------------------------------------------------
-// Run experiment
-// ---------------------------------------------------------
-
-document.getElementById('run').onclick = () => {
-
-    // Challenge already completed
-    if (w >= 3) {
-        return;
-    }
-
-
-    const success =
-        (Math.random() * 100) < prob;
-
-
-    // -----------------------------------------------------
-    // Successful run
-    // -----------------------------------------------------
-
-    if (success) {
-
-        w++;
-
-        document.getElementById('wins').textContent =
-            w + ' / 3';
-
-
-        // ---------------------------------------------
-        // Challenge completed
-        // ---------------------------------------------
-
-        if (w >= 3) {
-
-            document.getElementById('challengeText').textContent =
-                '🎉 Amazing! You reached the treasure 3 times.';
-
-
-            document.getElementById('final').textContent =
-                '🟣 You are a Qubit Thinker! You learned to reason with possibilities, probability and measurement.';
-
-
-            const runButton =
-                document.getElementById('run');
-
-            runButton.textContent =
-                'CHALLENGE COMPLETE';
-
-            runButton.disabled = true;
-
-
-            // Disable setup buttons
-            document
-                .querySelectorAll('.control')
-                .forEach(btn => {
-                    btn.disabled = true;
-                });
-
-        }
-
-        // ---------------------------------------------
-        // Successful but not finished
-        // ---------------------------------------------
-
-        else {
-
-            document.getElementById('challengeText').textContent =
-                '🏆 The robot reached the treasure! Try again to build your score.';
-
-        }
-
-    }
-
-
-    // -----------------------------------------------------
-    // Unsuccessful run
-    // -----------------------------------------------------
-
-    else {
-
-        document.getElementById('challengeText').textContent =
-            '🤔 Not this time. Try a different setup or run the experiment again.';
-
-    }
-
-};
+    window.adsbygoogle.push({});
 
 </script>
 
+
+
+<!-- =========================================================
+     QUANTUM CHALLENGE
+     ========================================================= -->
+
+<script>
+
+    let prob = 50;
+    let w = 0;
+
+
+    // ---------------------------------------------------------
+    // Setup buttons
+    // ---------------------------------------------------------
+
+    document
+        .querySelectorAll('.control')
+        .forEach(btn => {
+
+            btn.addEventListener('click', () => {
+
+                // Don't allow setup changes after completion
+                if (w >= 3) {
+                    return;
+                }
+
+
+                document
+                    .querySelectorAll('.control')
+                    .forEach(x => {
+
+                        x.classList.remove('selected');
+
+                    });
+
+
+                btn.classList.add('selected');
+
+
+                prob = Number(btn.dataset.v);
+
+            });
+
+        });
+
+
+
+    // ---------------------------------------------------------
+    // Run experiment
+    // ---------------------------------------------------------
+
+    document
+        .getElementById('run')
+        .addEventListener('click', () => {
+
+            // Challenge already completed
+            if (w >= 3) {
+                return;
+            }
+
+
+            const success =
+                (Math.random() * 100) < prob;
+
+
+
+            // -------------------------------------------------
+            // Successful run
+            // -------------------------------------------------
+
+            if (success) {
+
+                w++;
+
+
+                document
+                    .getElementById('wins')
+                    .textContent = w + ' / 3';
+
+
+
+                // ---------------------------------------------
+                // Challenge completed
+                // ---------------------------------------------
+
+                if (w >= 3) {
+
+                    document
+                        .getElementById('challengeText')
+                        .textContent =
+                        '🎉 Amazing! You reached the treasure 3 times.';
+
+
+                    document
+                        .getElementById('final')
+                        .textContent =
+                        '🟣 You are a Qubit Thinker! You learned to reason with possibilities, probability and measurement.';
+
+
+
+                    const runButton =
+                        document.getElementById('run');
+
+
+                    runButton.textContent =
+                        'CHALLENGE COMPLETE';
+
+
+                    runButton.disabled = true;
+
+
+
+                    // Disable setup buttons
+
+                    document
+                        .querySelectorAll('.control')
+                        .forEach(btn => {
+
+                            btn.disabled = true;
+
+                        });
+
+                }
+
+
+                // ---------------------------------------------
+                // Successful but not finished
+                // ---------------------------------------------
+
+                else {
+
+                    document
+                        .getElementById('challengeText')
+                        .textContent =
+                        '🏆 The robot reached the treasure! Try again to build your score.';
+
+                }
+
+            }
+
+
+
+            // -------------------------------------------------
+            // Unsuccessful run
+            // -------------------------------------------------
+
+            else {
+
+                document
+                    .getElementById('challengeText')
+                    .textContent =
+                    '🤔 Not this time. Try a different setup or run the experiment again.';
+
+            }
+
+        });
+
+</script>
+
+
 </body>
 </html>
+```
+
+Add this to `styles.css` so the ad has a visible area even when Google doesn't immediately fill it:
+
+```css
+.ad-container {
+    width: 100%;
+    min-height: 100px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+```
+
+**Important:** if this still shows a blank area on your live website, the HTML is probably not the problem. The next things to check are **AdSense site approval, the `6014491962` ad-unit ID, your domain, and the browser console**.
