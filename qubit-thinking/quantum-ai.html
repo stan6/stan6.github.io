@@ -7,7 +7,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1"
+        content="width=device-width,initial-scale=1"
     >
 
     <title>
@@ -49,137 +49,560 @@
 </header>
 
 
-<main>
+<!-- =====================================================
+     PAGE
+===================================================== -->
+
+<main class="page">
 
 
-    <!-- =====================================================
+    <!-- =================================================
          HERO
-    ====================================================== -->
+    ================================================= -->
 
-    <section class="quantum-hero">
+    <div class="eyebrow">
+        QUANTUM IN THE REAL WORLD
+    </div>
 
-        <div class="quantum-icon">
-            🤖
-        </div>
 
-        <div class="eyebrow">
-            QUANTUM AI
-        </div>
+    <h1>
+        Quantum AI <span>Patterns</span>
+    </h1>
 
-        <h1>
-            Find the <span>Pattern</span>
-        </h1>
+
+    <p class="lead">
+        Can you spot a pattern?
+        Explore how computers can learn from examples
+        and make predictions.
+    </p>
+
+
+    <!-- =================================================
+         INTRODUCTION
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            🤖 How does AI find patterns?
+        </h2>
+
 
         <p>
-            Train your brain to spot patterns and discover
-            how computers can learn from examples.
+            Artificial intelligence can learn by looking
+            for patterns in examples.
         </p>
 
-    </section>
+
+        <p>
+            For example, a computer might examine many
+            pictures and discover that certain shapes,
+            colors, or features often appear together.
+        </p>
 
 
-    <!-- =====================================================
-         ACTIVITY
-    ====================================================== -->
+        <p>
+            Once a useful pattern has been discovered,
+            the computer can use it to make predictions
+            about new information.
+        </p>
 
-    <section class="quantum-activity">
-
-        <div class="quantum-card">
-
-            <h2>
-                🧠 Pattern Detective
-            </h2>
-
-            <p>
-                Look carefully at the sequence.
-                Can you figure out which symbol comes next?
-            </p>
+    </div>
 
 
-            <!-- Pattern -->
+    <!-- =================================================
+         PATTERN DETECTIVE
+    ================================================= -->
 
-            <div
-                id="pattern"
-                class="pattern-display"
+    <div class="experiment">
+
+        <div class="eyebrow">
+            PATTERN DETECTIVE
+        </div>
+
+
+        <h2>
+            🧠 What comes next?
+        </h2>
+
+
+        <p>
+            Look carefully at the sequence.
+            Can you figure out which symbol comes next?
+        </p>
+
+
+        <div
+            id="pattern"
+            class="sequence"
+        >
+        </div>
+
+
+        <div
+            id="choices"
+            class="choice"
+        >
+        </div>
+
+
+        <div
+            id="message"
+            class="result"
+        >
+            Choose an answer to begin.
+        </div>
+
+
+        <button
+            id="nextButton"
+            class="button"
+            style="display:none;"
+            onclick="nextPuzzle()"
+        >
+            Next Pattern →
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         THINK LIKE AI
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            💡 Think Like AI
+        </h2>
+
+
+        <p>
+            Computers can look at many examples and search
+            for relationships between them.
+        </p>
+
+
+        <p>
+            When a computer discovers a useful pattern,
+            it can use that pattern to make a prediction.
+        </p>
+
+
+        <p>
+            But finding a pattern is not enough.
+            The computer also needs to determine whether
+            the pattern is actually useful.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         SECOND PATTERN CHALLENGE
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            CHALLENGE
+        </div>
+
+
+        <h2>
+            🔎 Find the hidden rule
+        </h2>
+
+
+        <p>
+            This pattern contains a repeating group.
+            Can you identify what comes next?
+        </p>
+
+
+        <div
+            class="sequence"
+            id="advanced-pattern"
+        >
+        </div>
+
+
+        <div
+            class="choice"
+            id="advanced-choices"
+        >
+        </div>
+
+
+        <div
+            class="feedback"
+            id="advanced-feedback"
+        >
+            Choose an answer.
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SEARCH SPACE
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            THE SEARCH SPACE
+        </div>
+
+
+        <h2>
+            🔢 How many possibilities?
+        </h2>
+
+
+        <p>
+            Imagine that a computer needs to choose from
+            many possible patterns.
+        </p>
+
+
+        <div class="target">
+
+            <strong id="possibility-number">
+                4
+            </strong>
+
+            <span>
+                possible patterns
+            </span>
+
+        </div>
+
+
+        <button
+            class="button"
+            onclick="addPossibilities()"
+        >
+            ➕ Add More Possibilities
+        </button>
+
+
+        <div
+            class="feedback"
+            id="possibility-feedback"
+        >
+            Start with a small number of possibilities.
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         QUANTUM CONNECTION
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            ⚛️ Where does quantum computing fit in?
+        </h2>
+
+
+        <p>
+            Quantum computers process information using
+            quantum states rather than ordinary bits alone.
+        </p>
+
+
+        <p>
+            Researchers are investigating whether quantum
+            computers could eventually help with certain
+            machine-learning and pattern-recognition
+            problems.
+        </p>
+
+
+        <p>
+            This does not mean that quantum computers are
+            automatically better at every AI problem.
+        </p>
+
+
+        <p>
+            Instead, scientists are asking which particular
+            problems might benefit from quantum computing.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         PATTERN TYPES
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            PATTERN TYPES
+        </div>
+
+
+        <h2>
+            🧩 Different kinds of patterns
+        </h2>
+
+
+        <p>
+            Choose a type of pattern and think about
+            the rule behind it.
+        </p>
+
+
+        <div class="choice">
+
+            <button
+                onclick="showPatternType('repeat')"
             >
-            </div>
+                🔁 Repetition
+            </button>
 
 
-            <!-- Choices -->
-
-            <div
-                id="choices"
-                class="quantum-choices"
+            <button
+                onclick="showPatternType('change')"
             >
-            </div>
+                📈 Changing Numbers
+            </button>
 
 
-            <!-- Feedback -->
-
-            <div
-                id="message"
-                class="quantum-feedback"
+            <button
+                onclick="showPatternType('sequence')"
             >
-            </div>
+                🧩 Sequence
+            </button>
+
+        </div>
 
 
-            <div
-                style="
-                    text-align:center;
-                "
-            >
+        <div
+            class="result"
+            id="pattern-type-result"
+        >
+            Choose a pattern type.
+        </div>
 
-                <button
-                    id="nextButton"
-                    class="button"
-                    style="display:none;"
-                    onclick="nextPuzzle()"
-                >
-                    Next Pattern →
-                </button>
-
-            </div>
+    </div>
 
 
-            <!-- Lesson -->
+    <!-- =================================================
+         BIG IDEA
+    ================================================= -->
 
-            <div class="quantum-lesson">
+    <section
+        class="section"
+        style="padding-left:0;padding-right:0;"
+    >
 
-                <h3>
-                    💡 Think Like AI
-                </h3>
+        <div class="eyebrow">
+            THE BIG IDEA
+        </div>
+
+
+        <h2>
+            AI can learn by finding useful patterns.
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    🔎
+                </div>
+
+
+                <b>
+                    Find patterns
+                </b>
+
 
                 <p>
-                    Computers can look at examples and search
-                    for patterns. Once they discover a pattern,
-                    they can use it to make predictions about
-                    what might happen next.
+                    Computers can examine examples and
+                    search for relationships in data.
                 </p>
 
             </div>
 
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    🧠
+                </div>
+
+
+                <b>
+                    Learn from examples
+                </b>
+
+
+                <p>
+                    Patterns discovered from examples can
+                    help a system make predictions.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    ⚛️
+                </div>
+
+
+                <b>
+                    Explore quantum computing
+                </b>
+
+
+                <p>
+                    Researchers are studying whether
+                    quantum computers could help with
+                    particular computational problems.
+                </p>
+
+            </div>
+
+
         </div>
 
     </section>
+
+
+    <!-- =================================================
+         TAKEAWAY
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            🌟 The takeaway
+        </h2>
+
+
+        <p>
+            Pattern recognition is an important idea in
+            computer science and artificial intelligence.
+        </p>
+
+
+        <p>
+            Computers can process many examples and search
+            for patterns that help them make predictions.
+        </p>
+
+
+        <p>
+            Quantum computing introduces a different way
+            of processing information, and researchers are
+            exploring whether it could be useful for some
+            AI problems.
+        </p>
+
+
+        <p>
+            <strong>
+                The big question is not "Is quantum AI
+                better at everything?"
+                It is "Which problems could quantum
+                computers help us explore?"
+            </strong>
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         NEXT
+    ================================================= -->
+
+    <div class="next">
+
+        <a
+            class="button"
+            href="quantum-security.html"
+        >
+            🔐 Explore Quantum Security →
+        </a>
+
+
+        <br>
+        <br>
+
+
+        <a
+            class="button secondary"
+            href="index.html#applications"
+        >
+            ← Back to Applications
+        </a>
+
+    </div>
 
 
 </main>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
     <p>
-        © Qubit Thinking — Learn. Explore. Imagine.
+        🟣 <strong>Qubit Thinking</strong>
+    </p>
+
+
+    <p>
+        A playful introduction to quantum ideas.
+    </p>
+
+
+    <p>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        ·
+
+        <a href="index.html#applications">
+            Applications
+        </a>
+
+        ·
+
+        <a href="teachers.html">
+            Teacher Resources
+        </a>
+
     </p>
 
 </footer>
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
 
 
 /* =========================================================
-   PUZZLES
+   BASIC PATTERN PUZZLES
 ========================================================= */
 
 const puzzles = [
@@ -275,47 +698,45 @@ function loadPuzzle() {
         puzzles[currentPuzzle];
 
 
-    const patternElement =
-        document.getElementById("pattern");
+    const pattern =
+        document.getElementById(
+            "pattern"
+        );
 
 
-    patternElement.innerHTML = "";
+    pattern.innerHTML = "";
 
 
     puzzle.pattern.forEach(symbol => {
 
         const item =
-            document.createElement("span");
-
-        item.className =
-            "pattern-item";
+            document.createElement(
+                "span"
+            );
 
         item.textContent =
             symbol;
 
-        patternElement.appendChild(item);
+        pattern.appendChild(item);
 
     });
 
 
-    // Question mark
-
     const question =
-        document.createElement("span");
+        document.createElement(
+            "strong"
+        );
 
-    question.className =
-        "pattern-item";
+    question.textContent = "?";
 
-    question.textContent =
-        "?";
+    pattern.appendChild(question);
 
-    patternElement.appendChild(question);
-
-
-    // Choices
 
     const choices =
-        document.getElementById("choices");
+        document.getElementById(
+            "choices"
+        );
+
 
     choices.innerHTML = "";
 
@@ -323,37 +744,35 @@ function loadPuzzle() {
     puzzle.choices.forEach(choice => {
 
         const button =
-            document.createElement("button");
-
-        button.className =
-            "quantum-choice";
+            document.createElement(
+                "button"
+            );
 
         button.textContent =
             choice;
 
-        button.setAttribute(
-            "aria-label",
-            "Choose " + choice
-        );
+        button.onclick =
+            function () {
 
-        button.onclick = () =>
-            checkAnswer(choice);
+                checkAnswer(choice);
+
+            };
 
         choices.appendChild(button);
 
     });
 
 
-    // Reset feedback
-
     document.getElementById(
         "message"
-    ).textContent = "";
+    ).textContent =
+        "Choose an answer to begin.";
 
 
     document.getElementById(
         "nextButton"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 }
 
@@ -367,11 +786,17 @@ function checkAnswer(answer) {
     const puzzle =
         puzzles[currentPuzzle];
 
+
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
 
 
-    if (answer === puzzle.answer) {
+    if (
+        answer ===
+        puzzle.answer
+    ) {
 
         message.textContent =
             "🎉 Great job! You found the pattern!";
@@ -383,10 +808,10 @@ function checkAnswer(answer) {
             "inline-flex";
 
 
-        // Disable choices after correct answer
-
         document
-            .querySelectorAll(".quantum-choice")
+            .querySelectorAll(
+                "#choices button"
+            )
             .forEach(button => {
 
                 button.disabled = true;
@@ -420,7 +845,7 @@ function nextPuzzle() {
         document.getElementById(
             "pattern"
         ).innerHTML =
-            '<span class="pattern-item">🏆</span>';
+            "<strong>🏆</strong>";
 
 
         document.getElementById(
@@ -451,11 +876,198 @@ function nextPuzzle() {
 
 
 /* =========================================================
+   ADVANCED PATTERN
+========================================================= */
+
+const advancedPattern = [
+    "1",
+    "2",
+    "4",
+    "1",
+    "2",
+    "4"
+];
+
+
+const advancedChoices = [
+    "1",
+    "3",
+    "6"
+];
+
+
+function loadAdvancedPattern() {
+
+    const display =
+        document.getElementById(
+            "advanced-pattern"
+        );
+
+
+    advancedPattern.forEach(value => {
+
+        const item =
+            document.createElement(
+                "span"
+            );
+
+        item.textContent =
+            value;
+
+        display.appendChild(item);
+
+    });
+
+
+    const question =
+        document.createElement(
+            "strong"
+        );
+
+    question.textContent =
+        "?";
+
+
+    display.appendChild(question);
+
+
+    const choices =
+        document.getElementById(
+            "advanced-choices"
+        );
+
+
+    advancedChoices.forEach(value => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.textContent =
+            value;
+
+
+        button.onclick =
+            function () {
+
+                const feedback =
+                    document.getElementById(
+                        "advanced-feedback"
+                    );
+
+
+                if (value === "1") {
+
+                    feedback.textContent =
+                        "🎉 Correct! The sequence repeats 1, 2, 4.";
+
+                } else {
+
+                    feedback.textContent =
+                        "🔎 Look at the repeating group: 1, 2, 4.";
+
+                }
+
+            };
+
+
+        choices.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================================================
+   SEARCH SPACE
+========================================================= */
+
+let possibilities = 4;
+
+
+function addPossibilities() {
+
+    possibilities *= 2;
+
+
+    document.getElementById(
+        "possibility-number"
+    ).textContent =
+        possibilities;
+
+
+    const feedback =
+        document.getElementById(
+            "possibility-feedback"
+        );
+
+
+    if (possibilities < 32) {
+
+        feedback.textContent =
+            "The number of possible patterns is growing.";
+
+    } else if (possibilities < 128) {
+
+        feedback.textContent =
+            "Now the computer has many more possibilities to consider.";
+
+    } else {
+
+        feedback.textContent =
+            "Large search spaces are one reason efficient algorithms matter.";
+
+    }
+
+}
+
+
+/* =========================================================
+   PATTERN TYPES
+========================================================= */
+
+function showPatternType(type) {
+
+    const result =
+        document.getElementById(
+            "pattern-type-result"
+        );
+
+
+    if (type === "repeat") {
+
+        result.textContent =
+            "🔁 Repetition means the same group appears again and again.";
+
+    }
+
+
+    if (type === "change") {
+
+        result.textContent =
+            "📈 Changing patterns follow a rule, such as numbers increasing by 2.";
+
+    }
+
+
+    if (type === "sequence") {
+
+        result.textContent =
+            "🧩 A sequence is an ordered collection where each item follows a rule.";
+
+    }
+
+}
+
+
+/* =========================================================
    START
 ========================================================= */
 
 loadPuzzle();
 
+loadAdvancedPattern();
 
 </script>
 
