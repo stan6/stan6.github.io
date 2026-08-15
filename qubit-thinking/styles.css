@@ -883,14 +883,12 @@ footer a:hover {
 
 .ad-container {
     width: 100%;
-
-    max-width: 760px;
-
-    margin: 45px auto 30px;
-
-    padding: 0 20px;
-
-    box-sizing: border-box;
+    min-height: 100px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .ad-label {
