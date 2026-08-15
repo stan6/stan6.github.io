@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Better Materials — Qubit Thinking</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+    <a class="brand" href="index.html">
+        🟣 Qubit Thinking
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="bits.html">Bits</a>
+        <a href="possibilities.html">Possibilities</a>
+        <a href="qubit.html">Qubit</a>
+        <a href="measurement.html">Lab</a>
+        <a href="challenge.html">Challenge</a>
+        <a class="active" href="index.html#applications">Applications</a>
+        <a href="teachers.html">Teachers</a>
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main class="hero">
+
+    <div class="eyebrow">
+        QUANTUM IN THE REAL WORLD
+    </div>
+
+    <h1>
+        Better <span>Materials</span>
+    </h1>
+
+    <p class="lead">
+        Could computers help us discover materials with useful properties?
+    </p>
+
+    <p class="lead"
+       style="font-size:17px;max-width:650px;">
+
+        Scientists search through many possible materials
+        when looking for useful properties such as strength,
+        conductivity, light absorption, or energy storage.
+
+    </p>
+
+    <div class="hero-actions">
+
+        <a class="button" href="#experiment">
+            🔋 Start searching
+        </a>
+
+        <a class="button secondary"
+           href="index.html#applications">
+            ← Applications
+        </a>
+
+    </div>
+
+
+    <div class="orb-wrap">
+
+        <div class="orbit o1"></div>
+
+        <div class="orbit o2"></div>
+
+        <div class="orb">
+            🔋
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     INTRODUCTION
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        THE BIG QUESTION
+    </div>
+
+    <h2>
+        What makes a material useful?
+    </h2>
+
+    <p class="lead">
+
+        Different materials have different properties.
+        A scientist might want something strong, light,
+        conductive, heat-resistant, or able to store energy.
+
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                💪
+            </div>
+
+            <b>
+                Strength
+            </b>
+
+            <p>
+                Some materials can withstand large forces
+                without breaking.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                ⚡
+            </div>
+
+            <b>
+                Conductivity
+            </b>
+
+            <p>
+                Some materials allow electricity to move
+                through them easily.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🔋
+            </div>
+
+            <b>
+                Energy storage
+            </b>
+
+            <p>
+                Some materials can help store and release
+                energy in batteries.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LESSON
+===================================================== -->
+
+<section class="section">
+
+    <div class="lesson">
+
+        <h2>
+            🧠 The search can become enormous
+        </h2>
+
+        <p>
+
+            Imagine having thousands or millions of possible
+            combinations of atoms. Which one might have the
+            property we want?
+
+        </p>
+
+        <p>
+
+            Scientists use computers, simulations, experiments,
+            and mathematical models to search through these
+            possibilities.
+
+        </p>
+
+        <p>
+
+            Quantum computers are being researched as possible
+            tools for some types of difficult material and
+            molecular problems.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MATERIAL SEARCH
+===================================================== -->
+
+<section id="experiment" class="section">
+
+    <div class="eyebrow">
+        MATERIAL DISCOVERY LAB
+    </div>
+
+    <h2>
+        Search for a useful material
+    </h2>
+
+    <p class="lead">
+
+        Choose the properties you want.
+        Our little laboratory will search through
+        a collection of imaginary materials.
+
+    </p>
+
+
+    <div class="experiment">
+
+
+        <div class="material-controls">
+
+            <h3>
+                What are you looking for?
+            </h3>
+
+
+            <div class="choice">
+
+                <button
+                    class="control property-button selected"
+                    data-property="strength"
+                    onclick="selectProperty('strength')">
+
+                    💪 Strong
+
+                </button>
+
+
+                <button
+                    class="control property-button"
+                    data-property="conductivity"
+                    onclick="selectProperty('conductivity')">
+
+                    ⚡ Conductive
+
+                </button>
+
+
+                <button
+                    class="control property-button"
+                    data-property="energy"
+                    onclick="selectProperty('energy')">
+
+                    🔋 Energy
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="material-display">
+
+            <div class="material-atom">
+                ⚛️
+            </div>
+
+            <div>
+
+                <div class="eyebrow">
+                    CURRENT CANDIDATE
+                </div>
+
+                <div class="material-name"
+                     id="materialName">
+
+                    Titanium-X
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats material-stats">
+
+            <div>
+
+                <span>
+                    Strength
+                </span>
+
+                <strong id="strengthValue">
+                    94
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Conductivity
+                </span>
+
+                <strong id="conductivityValue">
+                    42
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Energy
+                </span>
+
+                <strong id="energyValue">
+                    61
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="button"
+            onclick="searchMaterial()">
+
+            🔎 Search next material
+
+        </button>
+
+
+        <div class="result"
+             id="searchResult">
+
+            Looking for a strong material...
+
+        </div>
+
+
+        <p class="feedback"
+           id="searchFeedback">
+
+            Try searching for a material with a high
+            strength score.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SEARCH SPACE
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        THINK ABOUT THE SEARCH
+    </div>
+
+    <h2>
+        How many possibilities are there?
+    </h2>
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <b>
+                🧱 3 materials
+            </b>
+
+            <p>
+                Easy to compare. You could probably
+                test every possibility yourself.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                🔬 1,000 materials
+            </b>
+
+            <p>
+                A computer could help organize and
+                compare the candidates.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                🌌 Huge search space
+            </b>
+
+            <p>
+                When the number of possibilities becomes
+                enormous, finding clever ways to search
+                becomes increasingly important.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUANTUM CONNECTION
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        WHERE QUANTUM COMPUTING ENTERS
+    </div>
+
+    <h2>
+        Why are quantum computers interesting?
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🔢
+            </div>
+
+            <b>
+                Many possibilities
+            </b>
+
+            <p>
+                Material properties can depend on complicated
+                interactions between atoms and electrons.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🟣
+            </div>
+
+            <b>
+                Quantum systems
+            </b>
+
+            <p>
+                The electrons inside materials follow
+                quantum-mechanical rules.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div style="font-size:38px;margin-bottom:12px;">
+                🖥️
+            </div>
+
+            <b>
+                Better simulations
+            </b>
+
+            <p>
+                Researchers are investigating whether
+                quantum computers could eventually help
+                simulate certain quantum systems.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     THINK LIKE A SCIENTIST
+===================================================== -->
+
+<section class="section">
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            SCIENTIST CHALLENGE
+        </div>
+
+        <h2>
+            Which property would you choose?
+        </h2>
+
+        <p class="lead"
+           style="margin:20px auto;max-width:650px;">
+
+            There isn't always one perfect material.
+            Scientists often have to balance several
+            properties at once.
+
+        </p>
+
+
+        <div class="choice">
+
+            <button
+                class="control"
+                onclick="chooseGoal('battery')">
+
+                🔋 Better battery
+
+            </button>
+
+
+            <button
+                class="control"
+                onclick="chooseGoal('building')">
+
+                🏗️ Strong building
+
+            </button>
+
+
+            <button
+                class="control"
+                onclick="chooseGoal('electronics')">
+
+                💻 Electronics
+
+            </button>
+
+        </div>
+
+
+        <div class="result"
+             id="goalResult">
+
+            Choose a goal.
+
+        </div>
+
+
+        <p class="feedback"
+           id="goalFeedback">
+
+            Think about which properties might matter
+            for your chosen application.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHAT DID YOU DISCOVER?
+===================================================== -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        WHAT DID YOU DISCOVER?
+    </div>
+
+    <h2>
+        Finding a new material is a search problem.
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <b>
+                🔎 Search
+            </b>
+
+            <p>
+                Scientists may need to explore many
+                possible candidates.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                ⚖️ Compare
+            </b>
+
+            <p>
+                A useful material may need several
+                properties at the same time.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <b>
+                🧪 Test
+            </b>
+
+            <p>
+                Computer predictions can help guide
+                experiments, but real materials still
+                need to be tested.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TEACHER CTA
+===================================================== -->
+
+<section class="teacher-cta">
+
+    <div class="eyebrow">
+        KEEP EXPLORING
+    </div>
+
+    <h2>
+        What other problems could quantum computers explore?
+    </h2>
+
+    <p>
+
+        Explore molecules, optimization, medicine,
+        artificial intelligence, and quantum security.
+
+    </p>
+
+    <a class="button"
+       href="index.html#applications">
+
+        EXPLORE APPLICATIONS →
+
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        🟣 <strong>Qubit Thinking</strong>
+    </p>
+
+    <p>
+        A playful introduction to quantum ideas.
+    </p>
+
+    <p>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        ·
+
+        <a href="index.html#applications">
+            Quantum Applications
+        </a>
+
+        ·
+
+        <a href="teachers.html">
+            Teacher Resources
+        </a>
+
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     PAGE JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    /* =====================================================
+       MATERIAL DATA
+    ===================================================== */
+
+    const materials = [
+
+        {
+            name: "Titanium-X",
+            strength: 94,
+            conductivity: 42,
+            energy: 61
+        },
+
+        {
+            name: "Copper-Z",
+            strength: 58,
+            conductivity: 97,
+            energy: 43
+        },
+
+        {
+            name: "Graphene-Q",
+            strength: 91,
+            conductivity: 95,
+            energy: 72
+        },
+
+        {
+            name: "Battery-M",
+            strength: 52,
+            conductivity: 68,
+            energy: 96
+        },
+
+        {
+            name: "Carbonium",
+            strength: 88,
+            conductivity: 82,
+            energy: 84
+        },
+
+        {
+            name: "Silicon-X",
+            strength: 63,
+            conductivity: 76,
+            energy: 70
+        },
+
+        {
+            name: "Crystal-N",
+            strength: 97,
+            conductivity: 64,
+            energy: 79
+        }
+
+    ];
+
+
+    let currentMaterial = 0;
+
+    let selectedProperty = "strength";
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const materialName =
+        document.getElementById("materialName");
+
+    const strengthValue =
+        document.getElementById("strengthValue");
+
+    const conductivityValue =
+        document.getElementById("conductivityValue");
+
+    const energyValue =
+        document.getElementById("energyValue");
+
+    const searchResult =
+        document.getElementById("searchResult");
+
+    const searchFeedback =
+        document.getElementById("searchFeedback");
+
+
+    /* =====================================================
+       SELECT PROPERTY
+    ===================================================== */
+
+    function selectProperty(property) {
+
+        selectedProperty = property;
+
+
+        document
+            .querySelectorAll(".property-button")
+            .forEach(button => {
+
+                button.classList.remove("selected");
+
+            });
+
+
+        const selectedButton =
+            document.querySelector(
+                `[data-property="${property}"]`
+            );
+
+
+        if (selectedButton) {
+
+            selectedButton.classList.add("selected");
+
+        }
+
+
+        updateMaterial();
+
+    }
+
+
+    /* =====================================================
+       UPDATE MATERIAL
+    ===================================================== */
+
+    function updateMaterial() {
+
+        const material =
+            materials[currentMaterial];
+
+
+        materialName.textContent =
+            material.name;
+
+
+        strengthValue.textContent =
+            material.strength;
+
+
+        conductivityValue.textContent =
+            material.conductivity;
+
+
+        energyValue.textContent =
+            material.energy;
+
+
+        const score =
+            material[selectedProperty];
+
+
+        if (score >= 90) {
+
+            searchResult.textContent =
+                "⭐ Excellent candidate!";
+
+            searchFeedback.textContent =
+                "This material has a very high score for the property you selected.";
+
+        }
+
+        else if (score >= 75) {
+
+            searchResult.textContent =
+                "👍 Interesting candidate!";
+
+            searchFeedback.textContent =
+                "This material has a strong score, but there may be even better candidates.";
+
+        }
+
+        else {
+
+            searchResult.textContent =
+                "🔎 Keep searching!";
+
+            searchFeedback.textContent =
+                "Try another candidate. Scientists often have to search through many possibilities.";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    function searchMaterial() {
+
+        currentMaterial++;
+
+        if (currentMaterial >= materials.length) {
+
+            currentMaterial = 0;
+
+        }
+
+        updateMaterial();
+
+    }
+
+
+    /* =====================================================
+       GOAL CHALLENGE
+    ===================================================== */
+
+    function chooseGoal(goal) {
+
+        const result =
+            document.getElementById("goalResult");
+
+        const feedback =
+            document.getElementById("goalFeedback");
+
+
+        if (goal === "battery") {
+
+            result.textContent =
+                "🔋 Energy storage";
+
+            feedback.textContent =
+                "For a battery, scientists might care about properties such as energy storage, conductivity, stability, and cost.";
+
+        }
+
+
+        else if (goal === "building") {
+
+            result.textContent =
+                "🏗️ Strength matters";
+
+            feedback.textContent =
+                "For a building material, strength, weight, durability, and resistance to heat or weather could all matter.";
+
+        }
+
+
+        else {
+
+            result.textContent =
+                "💻 Electronics";
+
+            feedback.textContent =
+                "Electronics may require carefully controlled electrical properties, stability, and other material characteristics.";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       INITIAL STATE
+    ===================================================== */
+
+    updateMaterial();
+
+</script>
+
+
+<!-- =====================================================
+     PAGE-SPECIFIC CSS
+===================================================== -->
+
+<style>
+
+    .material-controls h3 {
+
+        margin-top: 0;
+
+        margin-bottom: 20px;
+
+        font-size: 22px;
+
+    }
+
+
+    .material-display {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 25px;
+
+        margin: 35px 0;
+
+    }
+
+
+    .material-atom {
+
+        width: 110px;
+        height: 110px;
+
+        display: grid;
+
+        place-items: center;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        font-size: 48px;
+
+        background:
+            radial-gradient(
+                circle at 35% 30%,
+                #ffffff,
+                #9f7aea 20%,
+                #6335bd 60%,
+                #25104e
+            );
+
+        border: 2px solid #bda9ff;
+
+        box-shadow:
+            0 0 40px #8b5cf666;
+
+        animation:
+            pulse 2.8s infinite;
+
+    }
+
+
+    .material-name {
+
+        margin-top: 5px;
+
+        color: #ded5ff;
+
+        font-size: 32px;
+
+        font-weight: 900;
+
+    }
+
+
+    .material-stats {
+
+        width: 100%;
+
+        max-width: 700px;
+
+        margin: 25px auto;
+
+    }
+
+
+    .material-stats span {
+
+        display: block;
+
+        margin-bottom: 5px;
+
+        color: #9296b2;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+    }
+
+
+    @media (max-width: 650px) {
+
+        .material-display {
+
+            flex-direction: column;
+
+        }
+
+        .material-name {
+
+            font-size: 26px;
+
+        }
+
+        .material-atom {
+
+            width: 90px;
+            height: 90px;
+
+            font-size: 38px;
+
+        }
+
+    }
+
+</style>
+
+
+</body>
+</html>
