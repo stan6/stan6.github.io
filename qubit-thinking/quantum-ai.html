@@ -1,0 +1,231 @@
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quantum AI — Patterns | Qubit Thinking</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+    <a class="brand" href="index.html">
+        ⚛️ Qubit Thinking
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="quantum.html">Quantum</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-icon">🤖</div>
+
+        <h1>Quantum AI — Patterns</h1>
+
+        <p>
+            Train your brain to spot patterns and discover
+            how computers can learn from them.
+        </p>
+
+    </section>
+
+
+    <section class="activity">
+
+        <div class="card">
+
+            <h2>🧠 Pattern Detective</h2>
+
+            <p>
+                Look carefully at the sequence below.
+                Can you figure out what comes next?
+            </p>
+
+            <div id="pattern"
+                 style="
+                    font-size: 2.5rem;
+                    text-align: center;
+                    margin: 30px 0;
+                 ">
+            </div>
+
+            <div id="choices"
+                 style="
+                    display: flex;
+                    gap: 12px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                 ">
+            </div>
+
+            <p id="message"
+               style="
+                    text-align: center;
+                    font-weight: bold;
+                    margin-top: 20px;
+               ">
+            </p>
+
+            <button
+                id="nextButton"
+                style="display:none;"
+                onclick="nextPuzzle()">
+                Next Pattern →
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © Qubit Thinking — Learn. Explore. Imagine.
+    </p>
+
+</footer>
+
+
+<script>
+
+const puzzles = [
+
+    {
+        pattern: ["🔵", "🔴", "🔵", "🔴", "🔵"],
+        choices: ["🔵", "🔴", "🟢"],
+        answer: "🔴"
+    },
+
+    {
+        pattern: ["⭐", "⭐", "🌙", "⭐", "⭐"],
+        choices: ["🌙", "⭐", "☀️"],
+        answer: "🌙"
+    },
+
+    {
+        pattern: ["🟦", "🟩", "🟨", "🟦", "🟩"],
+        choices: ["🟦", "🟩", "🟨"],
+        answer: "🟨"
+    },
+
+    {
+        pattern: ["🐱", "🐶", "🐰", "🐱", "🐶"],
+        choices: ["🐱", "🐰", "🐶"],
+        answer: "🐰"
+    }
+
+];
+
+let currentPuzzle = 0;
+
+
+function loadPuzzle() {
+
+    const puzzle = puzzles[currentPuzzle];
+
+    document.getElementById("pattern").textContent =
+        puzzle.pattern.join("  ") + "  ?";
+
+    const choices =
+        document.getElementById("choices");
+
+    choices.innerHTML = "";
+
+    puzzle.choices.forEach(choice => {
+
+        const button = document.createElement("button");
+
+        button.textContent = choice;
+
+        button.style.fontSize = "2rem";
+        button.style.padding = "12px 20px";
+        button.style.cursor = "pointer";
+
+        button.onclick = () =>
+            checkAnswer(choice);
+
+        choices.appendChild(button);
+
+    });
+
+    document.getElementById("message").textContent = "";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+}
+
+
+function checkAnswer(answer) {
+
+    const puzzle = puzzles[currentPuzzle];
+
+    const message =
+        document.getElementById("message");
+
+    if (answer === puzzle.answer) {
+
+        message.textContent =
+            "🎉 Great job! You found the pattern!";
+
+        document.getElementById("nextButton")
+            .style.display = "inline-block";
+
+    } else {
+
+        message.textContent =
+            "🔎 Not quite! Look carefully at the pattern.";
+
+    }
+
+}
+
+
+function nextPuzzle() {
+
+    currentPuzzle++;
+
+    if (currentPuzzle >= puzzles.length) {
+
+        document.getElementById("pattern").textContent =
+            "🏆";
+
+        document.getElementById("choices").innerHTML = "";
+
+        document.getElementById("message").textContent =
+            "Amazing! You solved all the patterns!";
+
+        document.getElementById("nextButton")
+            .style.display = "none";
+
+        return;
+    }
+
+    loadPuzzle();
+
+}
+
+
+loadPuzzle();
+
+</script>
+
+</body>
+
+</html>
+```
