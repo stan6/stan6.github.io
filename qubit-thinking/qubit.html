@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Qubit</title><link rel="stylesheet" href="styles.css"></head>
+<body><header><a class="brand" href="index.html">🟣 Qubit Thinking</a><nav><a href="index.html">Home</a><a href="bits.html">Bits</a><a href="possibilities.html">Possibilities</a><a class="active" href="qubit.html">Qubit</a><a href="measurement.html">Lab</a><a href="challenge.html">Challenge</a></nav></header>
+<main class="page"><div class="progress">STEP 3 / 5</div><h1>Meet the <span>qubit.</span></h1><p class="lead">A qubit is a quantum system used to represent quantum information. Before measurement, its state can involve a combination of the possible outcomes 0 and 1.</p>
+<div class="experiment qubit-lab"><div class="qubit-orb" id="qorb">🟣</div><div class="slider-row"><label>More likely 0</label><input id="prob" type="range" min="0" max="100" value="50"><label>More likely 1</label></div><button class="button" id="measure">MEASURE</button><div id="qresult" class="result">Ready to measure.</div></div>
+<div class="lesson"><h2>Try changing the state.</h2><p>Move the slider, then measure. The slider is a visual model of how the likelihood of the two outcomes can change. It is not a picture of a qubit itself.</p><div class="prob-bars"><div><span>0</span><i id="bar0"></i></div><div><span>1</span><i id="bar1"></i></div></div></div>
+<div class="next"><a class="button" href="measurement.html">Next: Measurement Lab →</a></div></main>
+<script>
+const p=document.getElementById('prob'),b0=document.getElementById('bar0'),b1=document.getElementById('bar1');function bars(){let v=+p.value;b0.style.width=(100-v)+'%';b1.style.width=v+'%'}p.oninput=bars;bars();
+document.getElementById('measure').onclick=()=>{let v=+p.value;let one=Math.random()*100<v;document.getElementById('qresult').textContent='RESULT: '+(one?'1':'0')+' 🎯';};
+</script></body></html>
