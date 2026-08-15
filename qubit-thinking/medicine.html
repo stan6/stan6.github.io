@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Medicine Match — Qubit Thinking</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+    <a class="brand" href="index.html">
+        🟣 Qubit Thinking
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="bits.html">Bits</a>
+        <a href="possibilities.html">Possibilities</a>
+        <a href="qubit.html">Qubit</a>
+        <a href="measurement.html">Lab</a>
+        <a href="challenge.html">Challenge</a>
+        <a href="index.html#applications">Applications</a>
+        <a href="teachers.html">Teachers</a>
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main class="page">
+
+    <div class="eyebrow">
+        QUANTUM IN THE REAL WORLD
+    </div>
+
+    <h1>
+        Medicine <span>Match</span>
+    </h1>
+
+    <p class="lead">
+        Can a computer help scientists explore a huge
+        number of possible molecules?
+    </p>
+
+
+    <!-- =================================================
+         INTRODUCTION
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            🧬 Finding useful molecules
+        </h2>
+
+        <p>
+            Scientists sometimes look for molecules that
+            could interact with a particular biological
+            target.
+        </p>
+
+        <p>
+            The challenge is that there can be a very large
+            number of molecules to consider. Each molecule
+            can have different properties and behaviors.
+        </p>
+
+        <p>
+            Computers can help researchers explore and
+            compare these possibilities.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         SEARCH GAME
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            MOLECULE SEARCH
+        </div>
+
+        <h2>
+            🔎 Find the best match
+        </h2>
+
+        <p>
+            Imagine that scientists are looking for a
+            molecule with several useful properties.
+        </p>
+
+        <div class="target">
+
+            <strong id="target-number">
+                0
+            </strong>
+
+            <span>
+                target score
+            </span>
+
+        </div>
+
+
+        <p style="
+            margin-top:25px;
+            color:#aaaec8;
+        ">
+            Choose a molecule and see how well it matches.
+        </p>
+
+
+        <div class="choice">
+
+            <button onclick="testMolecule(1)">
+                🧪 Molecule A
+            </button>
+
+            <button onclick="testMolecule(2)">
+                🧪 Molecule B
+            </button>
+
+            <button onclick="testMolecule(3)">
+                🧪 Molecule C
+            </button>
+
+            <button onclick="testMolecule(4)">
+                🧪 Molecule D
+            </button>
+
+        </div>
+
+
+        <div class="result"
+             id="match-result">
+
+            Choose a molecule to begin.
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SEARCH SPACE
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            THE SEARCH SPACE
+        </div>
+
+        <h2>
+            How many molecules could we investigate?
+        </h2>
+
+        <p>
+            Let's imagine that every new choice creates
+            even more possibilities.
+        </p>
+
+        <div class="big-q"
+             id="search-number">
+
+            4
+
+        </div>
+
+        <p>
+            possible candidates
+        </p>
+
+        <button class="button"
+                onclick="expandSearch()">
+
+            🔬 Add More Possibilities
+
+        </button>
+
+        <div class="feedback"
+             id="search-feedback">
+
+            Start with a small search.
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         WHY THIS IS HARD
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            🤯 Why is this difficult?
+        </h2>
+
+        <p>
+            A molecule can have many properties. Scientists
+            may want to know how it behaves, how stable it is,
+            and how it interacts with other molecules.
+        </p>
+
+        <p>
+            Testing every possibility can become expensive
+            or take a very long time.
+        </p>
+
+        <p>
+            This is sometimes called a
+            <strong>search space</strong>:
+            the collection of possibilities that could
+            potentially be investigated.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         MOLECULE MATCH VISUALIZER
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            MATCH THE PROPERTIES
+        </div>
+
+        <h2>
+            🎯 What makes a good candidate?
+        </h2>
+
+        <p>
+            Imagine that researchers want a molecule with
+            three useful properties.
+        </p>
+
+
+        <div class="stats">
+
+            <div>
+
+                <strong id="property-1">
+                    ?
+                </strong>
+
+                <span>
+                    Shape
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong id="property-2">
+                    ?
+                </strong>
+
+                <span>
+                    Stability
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong id="property-3">
+                    ?
+                </strong>
+
+                <span>
+                    Interaction
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button class="button"
+                onclick="generateCandidate()">
+
+            🧬 Generate Candidate
+
+        </button>
+
+
+        <div class="feedback"
+             id="candidate-feedback">
+
+            Generate a candidate molecule.
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         QUANTUM CONNECTION
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            ⚛️ Where could quantum computing help?
+        </h2>
+
+        <p>
+            Molecules are governed by the laws of quantum
+            physics. Understanding their behavior can
+            therefore involve complicated quantum
+            calculations.
+        </p>
+
+        <p>
+            Researchers are investigating whether quantum
+            computers could eventually help with some of
+            these calculations or help explore certain
+            chemistry problems.
+        </p>
+
+        <p>
+            This does <strong>not</strong> mean that a
+            quantum computer can simply press a button and
+            discover a new medicine.
+        </p>
+
+        <p>
+            Instead, quantum computing is one of several
+            technologies scientists are studying as a
+            possible tool for difficult problems.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         THINK LIKE A RESEARCHER
+    ================================================= -->
+
+    <div class="experiment">
+
+        <div class="eyebrow">
+            THINK LIKE A RESEARCHER
+        </div>
+
+        <h2>
+            🤔 What would you do first?
+        </h2>
+
+        <p>
+            You have thousands of possible molecules.
+            Which strategy sounds most useful?
+        </p>
+
+
+        <div class="choice">
+
+            <button onclick="researchChoice('random')">
+                🎲 Pick randomly
+            </button>
+
+            <button onclick="researchChoice('compare')">
+                🔎 Compare properties
+            </button>
+
+            <button onclick="researchChoice('all')">
+                📋 Test every possibility
+            </button>
+
+        </div>
+
+
+        <div class="result"
+             id="research-result">
+
+            Choose a strategy.
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         BIG IDEA
+    ================================================= -->
+
+    <section class="section"
+             style="padding-left:0;padding-right:0;">
+
+        <div class="eyebrow">
+            THE BIG IDEA
+        </div>
+
+        <h2>
+            Medicine research can involve huge search spaces.
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    🧬
+                </div>
+
+                <b>
+                    Many possibilities
+                </b>
+
+                <p>
+                    There can be many molecules that
+                    researchers could investigate.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    🔎
+                </div>
+
+                <b>
+                    Compare candidates
+                </b>
+
+                <p>
+                    Scientists can use experiments and
+                    computational tools to compare
+                    molecular properties.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div style="font-size:38px;">
+                    ⚛️
+                </div>
+
+                <b>
+                    Explore new tools
+                </b>
+
+                <p>
+                    Quantum computing is being researched
+                    as one possible tool for certain
+                    difficult scientific calculations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         TAKEAWAY
+    ================================================= -->
+
+    <div class="lesson">
+
+        <h2>
+            🌟 The takeaway
+        </h2>
+
+        <p>
+            One of the exciting parts of science is dealing
+            with problems that have many possibilities.
+        </p>
+
+        <p>
+            Computers help researchers search, compare,
+            simulate, and reason about these possibilities.
+        </p>
+
+        <p>
+            Quantum computers may eventually become useful
+            for some problems involving molecules and
+            quantum behavior.
+        </p>
+
+        <p>
+            <strong>
+                The big question is not "Can quantum
+                computers make medicine?"
+                It is "Which scientific problems could
+                quantum computers help us explore?"
+            </strong>
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         NEXT
+    ================================================= -->
+
+    <div class="next">
+
+        <a class="button"
+           href="quantum-ai.html">
+
+            🤖 Explore Quantum AI →
+
+        </a>
+
+        <br><br>
+
+        <a class="button secondary"
+           href="index.html#applications">
+
+            ← Back to Applications
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        🟣 <strong>Qubit Thinking</strong>
+    </p>
+
+    <p>
+        A playful introduction to quantum ideas.
+    </p>
+
+    <p>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        ·
+
+        <a href="index.html#applications">
+            Applications
+        </a>
+
+        ·
+
+        <a href="teachers.html">
+            Teacher Resources
+        </a>
+
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    /*
+     * -----------------------------------------------
+     * MOLECULE MATCH
+     * -----------------------------------------------
+     */
+
+    let targetScore =
+        Math.floor(Math.random() * 40) + 60;
+
+    document.getElementById(
+        "target-number"
+    ).textContent = targetScore;
+
+
+    function testMolecule(number) {
+
+        const scores = {
+            1: 58,
+            2: 82,
+            3: 94,
+            4: 67
+        };
+
+
+        const score =
+            scores[number];
+
+
+        const result =
+            document.getElementById(
+                "match-result"
+            );
+
+
+        if (score >= targetScore) {
+
+            result.textContent =
+                "🎉 This candidate meets the target! Try another one and compare.";
+
+        } else {
+
+            result.textContent =
+                "🔎 This candidate is interesting, but it does not meet the target yet.";
+
+        }
+
+    }
+
+
+    /*
+     * -----------------------------------------------
+     * SEARCH SPACE
+     * -----------------------------------------------
+     */
+
+    let searchSize = 4;
+
+
+    function expandSearch() {
+
+        searchSize *= 2;
+
+
+        document.getElementById(
+            "search-number"
+        ).textContent = searchSize;
+
+
+        const feedback =
+            document.getElementById(
+                "search-feedback"
+            );
+
+
+        if (searchSize < 32) {
+
+            feedback.textContent =
+                "The search is getting bigger.";
+
+        } else if (searchSize < 128) {
+
+            feedback.textContent =
+                "Now there are many more candidates to investigate.";
+
+        } else if (searchSize < 512) {
+
+            feedback.textContent =
+                "The search space is becoming much larger.";
+
+        } else {
+
+            feedback.textContent =
+                "This is why efficient computational methods can be so valuable.";
+
+        }
+
+    }
+
+
+    /*
+     * -----------------------------------------------
+     * CANDIDATE GENERATOR
+     * -----------------------------------------------
+     */
+
+    function generateCandidate() {
+
+        const shape =
+            Math.floor(Math.random() * 101);
+
+        const stability =
+            Math.floor(Math.random() * 101);
+
+        const interaction =
+            Math.floor(Math.random() * 101);
+
+
+        document.getElementById(
+            "property-1"
+        ).textContent = shape;
+
+
+        document.getElementById(
+            "property-2"
+        ).textContent = stability;
+
+
+        document.getElementById(
+            "property-3"
+        ).textContent = interaction;
+
+
+        const average =
+            Math.round(
+                (shape + stability + interaction) / 3
+            );
+
+
+        let message;
+
+
+        if (average >= 80) {
+
+            message =
+                "⭐ Interesting candidate! Its simulated score is high.";
+
+        } else if (average >= 60) {
+
+            message =
+                "🔬 Promising candidate. Researchers would want to investigate further.";
+
+        } else {
+
+            message =
+                "🔎 This candidate may be less interesting, but it is still useful information.";
+
+        }
+
+
+        document.getElementById(
+            "candidate-feedback"
+        ).textContent = message;
+
+    }
+
+
+    /*
+     * -----------------------------------------------
+     * RESEARCH STRATEGY
+     * -----------------------------------------------
+     */
+
+    function researchChoice(strategy) {
+
+        const result =
+            document.getElementById(
+                "research-result"
+            );
+
+
+        if (strategy === "random") {
+
+            result.textContent =
+                "🎲 Random choices can sometimes be useful, but they may miss promising candidates.";
+
+        }
+
+
+        if (strategy === "compare") {
+
+            result.textContent =
+                "🔎 Comparing properties can help researchers focus attention on the most interesting candidates.";
+
+        }
+
+
+        if (strategy === "all") {
+
+            result.textContent =
+                "📋 Testing every possibility sounds thorough, but the number of candidates can become enormous.";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>
