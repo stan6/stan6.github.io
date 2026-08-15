@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Quantum Delivery — Qubit Thinking</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+    <a class="brand" href="index.html">
+        🟣 Qubit Thinking
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="bits.html">Bits</a>
+        <a href="possibilities.html">Possibilities</a>
+        <a href="qubit.html">Qubit</a>
+        <a href="measurement.html">Lab</a>
+        <a href="challenge.html">Challenge</a>
+        <a href="teachers.html">Teachers</a>
+    </nav>
+
+</header>
+
+
+<main class="page">
+
+    <div class="progress">
+        QUANTUM IN THE REAL WORLD · 01
+    </div>
+
+    <h1>
+        🚚 Quantum <span>Delivery</span>
+    </h1>
+
+    <p class="lead">
+        A delivery robot needs to visit every house.
+        Can you find a short route?
+    </p>
+
+
+    <!-- INTRODUCTION -->
+
+    <div class="lesson">
+
+        <h2>
+            🤔 Why is this difficult?
+        </h2>
+
+        <p>
+            Imagine you have several places to visit.
+            There can be many different routes.
+        </p>
+
+        <p>
+            Your job is to find a route that is
+            <strong>as short as possible.</strong>
+        </p>
+
+    </div>
+
+
+    <!-- GAME -->
+
+    <div class="experiment">
+
+        <div style="font-size:70px;">
+            🤖
+        </div>
+
+        <h2>
+            Plan the delivery
+        </h2>
+
+        <p>
+            Start at the robot, visit every house once,
+            and return to the robot.
+        </p>
+
+
+        <!-- MAP -->
+
+        <div class="delivery-map">
+
+            <button
+                class="house start"
+                data-place="A">
+
+                🤖
+                <small>START</small>
+
+            </button>
+
+
+            <button
+                class="house"
+                data-place="B">
+
+                🏠
+                <small>B</small>
+
+            </button>
+
+
+            <button
+                class="house"
+                data-place="C">
+
+                🏠
+                <small>C</small>
+
+            </button>
+
+
+            <button
+                class="house"
+                data-place="D">
+
+                🏠
+                <small>D</small>
+
+            </button>
+
+
+        </div>
+
+
+        <div class="route-display">
+
+            <div class="eyebrow">
+                YOUR ROUTE
+            </div>
+
+            <div id="route">
+                A
+            </div>
+
+        </div>
+
+
+        <div class="distance-display">
+
+            <span>
+                Distance
+            </span>
+
+            <strong id="distance">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="choice">
+
+            <button
+                class="button secondary"
+                id="reset">
+
+                RESET
+
+            </button>
+
+            <button
+                class="button"
+                id="check">
+
+                CHECK MY ROUTE
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="feedback"
+            class="feedback">
+        </div>
+
+    </div>
+
+
+    <!-- LESSON -->
+
+    <div class="lesson">
+
+        <h2>
+            🧠 The big idea
+        </h2>
+
+        <p>
+            Problems like this are called
+            <strong>optimization problems.</strong>
+        </p>
+
+        <p>
+            There may be many possible answers,
+            but we want to find one that works especially well.
+        </p>
+
+        <p>
+            Quantum computers are being researched for
+            certain difficult optimization problems.
+        </p>
+
+    </div>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="ad-container">
+
+        <div class="ad-label">
+            ADVERTISEMENT
+        </div>
+
+        <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-4495303340414306"
+            data-ad-slot="YOUR-AD-SLOT-ID"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+            data-tag-for-age-treatment="1">
+        </ins>
+
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+    </div>
+
+
+    <!-- NEXT -->
+
+    <div class="next">
+
+        <a
+            class="button secondary"
+            href="chemistry.html">
+
+            Next:
+            🧪 Quantum Chemistry →
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<script>
+
+const distances = {
+
+    AB: 4,
+    AC: 6,
+    AD: 3,
+
+    BC: 2,
+    BD: 5,
+
+    CD: 4
+
+};
+
+
+let route = ["A"];
+
+
+const routeElement =
+    document.getElementById("route");
+
+const distanceElement =
+    document.getElementById("distance");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+
+function getDistance(a, b) {
+
+    const key1 = a + b;
+    const key2 = b + a;
+
+    return distances[key1] ||
+           distances[key2];
+
+}
+
+
+function calculateDistance() {
+
+    let total = 0;
+
+    for (
+        let i = 0;
+        i < route.length - 1;
+        i++
+    ) {
+
+        total += getDistance(
+            route[i],
+            route[i + 1]
+        );
+
+    }
+
+    return total;
+
+}
+
+
+document
+    .querySelectorAll(".house:not(.start)")
+    .forEach(house => {
+
+        house.addEventListener("click", () => {
+
+            const place =
+                house.dataset.place;
+
+
+            // Don't add the same house twice
+
+            if (route.includes(place)) {
+                return;
+            }
+
+
+            route.push(place);
+
+
+            routeElement.textContent =
+                route.join(" → ");
+
+            distanceElement.textContent =
+                calculateDistance();
+
+        });
+
+    });
+
+
+document
+    .getElementById("reset")
+    .addEventListener("click", () => {
+
+        route = ["A"];
+
+        routeElement.textContent = "A";
+
+        distanceElement.textContent = "0";
+
+        feedbackElement.textContent = "";
+
+    });
+
+
+document
+    .getElementById("check")
+    .addEventListener("click", () => {
+
+        if (route.length < 4) {
+
+            feedbackElement.textContent =
+                "🏠 Visit all three houses first!";
+
+            return;
+
+        }
+
+
+        const finalDistance =
+            calculateDistance();
+
+
+        /*
+         * Best route for this small example:
+         *
+         * A → D → C → B → A
+         *
+         * 3 + 4 + 2 + 4 = 13
+         */
+
+        const bestDistance = 13;
+
+
+        if (finalDistance === bestDistance) {
+
+            feedbackElement.textContent =
+                "🎉 Excellent! You found one of the shortest routes.";
+
+        }
+
+        else if (finalDistance <= 16) {
+
+            feedbackElement.textContent =
+                "👏 Very close! Can you find an even shorter route?";
+
+        }
+
+        else {
+
+            feedbackElement.textContent =
+                "🤔 There may be a better route. Try rearranging the houses!";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
