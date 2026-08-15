@@ -1,27 +1,49 @@
-```html
 <!doctype html>
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Quantum Security — Communication | Qubit Thinking</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
-    <link rel="stylesheet" href="styles.css">
+    <title>
+        Quantum Security — Communication | Qubit Thinking
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
 </head>
+
 
 <body>
 
+
 <header>
 
-    <a class="brand" href="index.html">
+    <a
+        class="brand"
+        href="index.html"
+    >
         ⚛️ Qubit Thinking
     </a>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="quantum.html">Quantum</a>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="quantum.html">
+            Quantum
+        </a>
+
     </nav>
 
 </header>
@@ -29,113 +51,191 @@
 
 <main>
 
-    <section class="hero">
 
-        <div class="hero-icon">🔐</div>
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-        <h1>Quantum Security</h1>
+    <section class="quantum-hero">
+
+        <div class="quantum-icon">
+            🔐
+        </div>
+
+        <div class="eyebrow">
+            QUANTUM SECURITY
+        </div>
+
+        <h1>
+            Secret <span>Communication</span>
+        </h1>
 
         <p>
-            Can you help Alice and Bob detect when someone
-            tries to peek at their secret message?
+            Can you help Alice and Bob discover whether
+            their quantum message was disturbed?
         </p>
 
     </section>
 
 
-    <section class="activity">
+    <!-- =====================================================
+         ACTIVITY
+    ====================================================== -->
 
-        <div class="card">
+    <section class="quantum-activity">
 
-            <h2>📡 The Secret Message</h2>
+        <div class="quantum-card">
+
+            <h2>
+                📡 The Secret Message
+            </h2>
 
             <p>
                 Alice wants to send information to Bob.
-                They use special quantum states to check
-                whether their communication has been disturbed.
+                They use quantum states to check whether
+                their communication has been disturbed.
             </p>
+
+
+            <!-- Quantum Message -->
 
             <div
                 id="messageBox"
-                style="
-                    text-align: center;
-                    font-size: 3rem;
-                    margin: 30px 0;
-                ">
+                class="quantum-message"
+                aria-label="Quantum message"
+            >
                 🔵
             </div>
 
-            <p style="text-align:center;">
-                What happened to the message?
-            </p>
 
             <div
                 style="
-                    display:flex;
-                    justify-content:center;
-                    gap:12px;
-                    flex-wrap:wrap;
-                ">
+                    text-align:center;
+                "
+            >
 
-                <button onclick="checkSecurity('safe')">
-                    🛡️ It stayed safe
+                <span
+                    id="stateLabel"
+                    class="security-state"
+                >
+                    🔵 Message received
+                </span>
+
+            </div>
+
+
+            <p
+                style="
+                    text-align:center;
+                    margin-top:30px;
+                "
+            >
+                What happened to the message?
+            </p>
+
+
+            <!-- Choices -->
+
+            <div
+                class="quantum-choices"
+            >
+
+                <button
+                    class="quantum-choice"
+                    onclick="checkSecurity('safe')"
+                >
+                    🛡️
+                    <span
+                        style="
+                            font-size:16px;
+                            margin-left:5px;
+                        "
+                    >
+                        Stayed safe
+                    </span>
                 </button>
 
-                <button onclick="checkSecurity('peek')">
-                    👀 Someone peeked
+
+                <button
+                    class="quantum-choice"
+                    onclick="checkSecurity('peek')"
+                >
+                    👀
+                    <span
+                        style="
+                            font-size:16px;
+                            margin-left:5px;
+                        "
+                    >
+                        Someone peeked
+                    </span>
                 </button>
 
             </div>
 
-            <p
+
+            <!-- Feedback -->
+
+            <div
                 id="result"
-                style="
-                    text-align:center;
-                    font-weight:bold;
-                    margin-top:25px;
-                ">
-            </p>
+                class="quantum-feedback"
+            >
+            </div>
 
-            <button
-                id="nextButton"
-                style="display:none;"
-                onclick="nextRound()">
-                Try Another Message →
-            </button>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>🔬 The Big Idea</h2>
-
-            <p>
-                In quantum communication, measuring a quantum
-                state can change it. This means that attempts
-                to observe certain quantum information can
-                sometimes be detected.
-            </p>
-
-            <p>
-                Scientists study these ideas as part of
-                <strong>quantum cryptography</strong>.
-            </p>
 
             <div
                 style="
-                    padding:18px;
-                    border-radius:16px;
-                    background:rgba(120,90,255,0.08);
-                ">
+                    text-align:center;
+                "
+            >
 
-                <strong>💡 Think like a scientist</strong>
+                <button
+                    id="nextButton"
+                    class="button"
+                    style="display:none;"
+                    onclick="nextRound()"
+                >
+                    Try Another Message →
+                </button>
+
+            </div>
+
+
+            <!-- Lesson -->
+
+            <div class="quantum-lesson">
+
+                <h3>
+                    🔬 The Big Idea
+                </h3>
 
                 <p>
-                    If looking at something changes it,
+                    In quantum communication, measuring a
+                    quantum state can change it. This unusual
+                    property can help scientists detect whether
+                    information has been disturbed.
+                </p>
+
+                <p>
+                    Scientists study these ideas as part of
+                    <strong>quantum cryptography</strong>.
+                </p>
+
+            </div>
+
+
+            <!-- Think Like a Scientist -->
+
+            <div class="quantum-lesson">
+
+                <h3>
+                    💡 Think Like a Scientist
+                </h3>
+
+                <p>
+                    If looking at something can change it,
                     could that help us notice when somebody
-                    is trying to listen to a secret
-                    conversation?
+                    is trying to listen to a secret message?
                 </p>
 
             </div>
@@ -143,6 +243,7 @@
         </div>
 
     </section>
+
 
 </main>
 
@@ -158,92 +259,206 @@
 
 <script>
 
-let round = 0;
+
+/* =========================================================
+   SECURITY CHALLENGES
+========================================================= */
 
 const rounds = [
 
     {
         state: "🔵",
+        label: "🔵 Message received",
         answer: "safe"
     },
+
 
     {
         state: "🟣",
+        label: "🟣 Something changed",
         answer: "peek"
     },
 
+
     {
         state: "🟢",
+        label: "🟢 Message received",
         answer: "safe"
     },
 
+
     {
         state: "🟠",
+        label: "🟠 Something changed",
         answer: "peek"
     }
 
 ];
 
 
+let round = 0;
+
+
+/* =========================================================
+   LOAD ROUND
+========================================================= */
+
+function loadRound() {
+
+    const current =
+        rounds[round];
+
+
+    document.getElementById(
+        "messageBox"
+    ).textContent =
+        current.state;
+
+
+    document.getElementById(
+        "stateLabel"
+    ).textContent =
+        current.label;
+
+
+    document.getElementById(
+        "result"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "none";
+
+
+    document
+        .querySelectorAll(".quantum-choice")
+        .forEach(button => {
+
+            button.disabled = false;
+
+        });
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
 function checkSecurity(answer) {
 
-    const current = rounds[round];
+    const current =
+        rounds[round];
+
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
 
-    if (answer === current.answer) {
 
-        result.textContent =
-            "🎉 Correct! You detected what happened.";
+    if (
+        answer ===
+        current.answer
+    ) {
 
-        document.getElementById("nextButton")
-            .style.display = "inline-block";
+        if (answer === "peek") {
+
+            result.textContent =
+                "🎉 Correct! The changed state is a clue that the message was disturbed.";
+
+        } else {
+
+            result.textContent =
+                "🎉 Correct! The message was not disturbed.";
+
+        }
+
+
+        document.getElementById(
+            "nextButton"
+        ).style.display =
+            "inline-flex";
+
+
+        document
+            .querySelectorAll(".quantum-choice")
+            .forEach(button => {
+
+                button.disabled = true;
+
+            });
 
     } else {
 
         result.textContent =
-            "🔎 Try again! Look at the clues carefully.";
+            "🔎 Not quite! Look at the message state carefully.";
 
     }
 
 }
 
+
+/* =========================================================
+   NEXT ROUND
+========================================================= */
 
 function nextRound() {
 
     round++;
 
-    if (round >= rounds.length) {
 
-        document.getElementById("messageBox")
-            .textContent = "🏆";
+    if (
+        round >=
+        rounds.length
+    ) {
 
-        document.getElementById("result")
-            .textContent =
+        document.getElementById(
+            "messageBox"
+        ).innerHTML =
+            "🏆";
+
+
+        document.getElementById(
+            "stateLabel"
+        ).textContent =
+            "Quantum Security Explorer";
+
+
+        document.getElementById(
+            "result"
+        ).textContent =
             "Amazing! You completed the quantum security challenge!";
 
-        document.getElementById("nextButton")
-            .style.display = "none";
+
+        document.getElementById(
+            "nextButton"
+        ).style.display =
+            "none";
+
 
         return;
+
     }
 
-    document.getElementById("messageBox")
-        .textContent = rounds[round].state;
 
-    document.getElementById("result")
-        .textContent = "";
-
-    document.getElementById("nextButton")
-        .style.display = "none";
+    loadRound();
 
 }
 
 
+/* =========================================================
+   START
+========================================================= */
+
+loadRound();
+
+
 </script>
+
 
 </body>
 
 </html>
-```
