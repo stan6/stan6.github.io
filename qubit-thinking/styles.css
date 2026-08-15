@@ -1891,4 +1891,352 @@ footer a:hover {
 
 }
 
+/* =========================================================
+   QUANTUM AI & SECURITY
+========================================================= */
+
+.quantum-hero {
+    text-align: center;
+
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 75px 5% 30px;
+}
+
+.quantum-icon {
+    font-size: 80px;
+
+    margin-bottom: 15px;
+
+    filter:
+        drop-shadow(
+            0 0 25px #9e72ff
+        );
+}
+
+.quantum-hero h1 {
+    margin: 15px 0;
+
+    font-size:
+        clamp(42px, 7vw, 72px);
+
+    line-height: 1;
+}
+
+.quantum-hero p {
+    max-width: 680px;
+
+    margin: 20px auto;
+
+    color: #b9bbd0;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+}
+
+
+/* ---------------------------------------------------------
+   QUANTUM ACTIVITY CARD
+--------------------------------------------------------- */
+
+.quantum-activity {
+    max-width: 850px;
+
+    margin: 30px auto 80px;
+
+    padding: 45px 5%;
+}
+
+.quantum-card {
+    padding: 35px;
+
+    border: 1px solid #30335c;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #131632,
+            #0d0f25
+        );
+
+    box-shadow:
+        0 20px 60px #0004;
+}
+
+.quantum-card h2 {
+    margin-top: 0;
+
+    font-size: 30px;
+}
+
+.quantum-card p {
+    color: #b9bbd0;
+
+    line-height: 1.7;
+}
+
+
+/* ---------------------------------------------------------
+   PATTERN DISPLAY
+--------------------------------------------------------- */
+
+.pattern-display {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin: 35px 0;
+
+    min-height: 100px;
+
+    font-size: 42px;
+
+    font-weight: 900;
+}
+
+.pattern-item {
+    min-width: 65px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border: 1px solid #30335c;
+
+    border-radius: 16px;
+
+    background: #1a1c39;
+
+    box-shadow:
+        0 8px 20px #0004;
+}
+
+
+/* ---------------------------------------------------------
+   QUANTUM CHOICES
+--------------------------------------------------------- */
+
+.quantum-choices {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin: 25px 0;
+}
+
+.quantum-choice {
+    min-width: 75px;
+
+    padding: 14px 20px;
+
+    border: 1px solid #454873;
+
+    border-radius: 15px;
+
+    background: #1b1e3c;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.quantum-choice:hover {
+    transform: translateY(-3px);
+
+    background: #292650;
+
+    border-color: #9b7cff;
+}
+
+
+/* ---------------------------------------------------------
+   QUANTUM FEEDBACK
+--------------------------------------------------------- */
+
+.quantum-feedback {
+    min-height: 32px;
+
+    margin: 20px 0;
+
+    text-align: center;
+
+    color: #d4c8ff;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   QUANTUM LESSON
+--------------------------------------------------------- */
+
+.quantum-lesson {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border-left:
+        3px solid #8b5cf6;
+
+    border-radius:
+        0 18px 18px 0;
+
+    background: #11132b;
+}
+
+.quantum-lesson h3 {
+    margin-top: 0;
+
+    color: #f3f3ff;
+}
+
+.quantum-lesson p {
+    margin-bottom: 0;
+
+    color: #b9bbd0;
+}
+
+
+/* ---------------------------------------------------------
+   SECURITY MESSAGE
+--------------------------------------------------------- */
+
+.quantum-message {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 150px;
+
+    margin: 30px 0;
+
+    border:
+        1px solid #30335c;
+
+    border-radius: 24px;
+
+    background:
+        radial-gradient(
+            circle,
+            #211b43,
+            #10122a 70%
+        );
+
+    font-size: 80px;
+
+    box-shadow:
+        0 15px 40px #0004;
+}
+
+
+/* ---------------------------------------------------------
+   SECURITY STATES
+--------------------------------------------------------- */
+
+.security-state {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+    padding: 10px 16px;
+
+    border-radius: 999px;
+
+    background: #1a1c39;
+
+    color: #c9b6ff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   QUANTUM RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 650px) {
+
+    .quantum-hero {
+        padding:
+            55px 5% 20px;
+    }
+
+    .quantum-icon {
+        font-size: 65px;
+    }
+
+    .quantum-hero h1 {
+        font-size:
+            clamp(38px, 12vw, 58px);
+    }
+
+    .quantum-hero p {
+        font-size: 16px;
+    }
+
+    .quantum-activity {
+        padding:
+            25px 5% 60px;
+    }
+
+    .quantum-card {
+        padding: 28px 18px;
+    }
+
+    .quantum-card h2 {
+        font-size: 25px;
+    }
+
+    .pattern-display {
+        gap: 7px;
+
+        font-size: 30px;
+    }
+
+    .pattern-item {
+        min-width: 50px;
+
+        padding: 9px;
+    }
+
+    .quantum-message {
+        min-height: 120px;
+
+        font-size: 65px;
+    }
+
 }
