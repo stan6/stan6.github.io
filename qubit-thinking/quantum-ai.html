@@ -1,27 +1,49 @@
-```html
 <!doctype html>
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Quantum AI — Patterns | Qubit Thinking</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
-    <link rel="stylesheet" href="styles.css">
+    <title>
+        Quantum AI — Patterns | Qubit Thinking
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
 </head>
+
 
 <body>
 
+
 <header>
 
-    <a class="brand" href="index.html">
+    <a
+        class="brand"
+        href="index.html"
+    >
         ⚛️ Qubit Thinking
     </a>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="quantum.html">Quantum</a>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="quantum.html">
+            Quantum
+        </a>
+
     </nav>
 
 </header>
@@ -29,66 +51,117 @@
 
 <main>
 
-    <section class="hero">
 
-        <div class="hero-icon">🤖</div>
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-        <h1>Quantum AI — Patterns</h1>
+    <section class="quantum-hero">
+
+        <div class="quantum-icon">
+            🤖
+        </div>
+
+        <div class="eyebrow">
+            QUANTUM AI
+        </div>
+
+        <h1>
+            Find the <span>Pattern</span>
+        </h1>
 
         <p>
             Train your brain to spot patterns and discover
-            how computers can learn from them.
+            how computers can learn from examples.
         </p>
 
     </section>
 
 
-    <section class="activity">
+    <!-- =====================================================
+         ACTIVITY
+    ====================================================== -->
 
-        <div class="card">
+    <section class="quantum-activity">
 
-            <h2>🧠 Pattern Detective</h2>
+        <div class="quantum-card">
+
+            <h2>
+                🧠 Pattern Detective
+            </h2>
 
             <p>
-                Look carefully at the sequence below.
-                Can you figure out what comes next?
+                Look carefully at the sequence.
+                Can you figure out which symbol comes next?
             </p>
 
-            <div id="pattern"
-                 style="
-                    font-size: 2.5rem;
-                    text-align: center;
-                    margin: 30px 0;
-                 ">
+
+            <!-- Pattern -->
+
+            <div
+                id="pattern"
+                class="pattern-display"
+            >
             </div>
 
-            <div id="choices"
-                 style="
-                    display: flex;
-                    gap: 12px;
-                    justify-content: center;
-                    flex-wrap: wrap;
-                 ">
+
+            <!-- Choices -->
+
+            <div
+                id="choices"
+                class="quantum-choices"
+            >
             </div>
 
-            <p id="message"
-               style="
-                    text-align: center;
-                    font-weight: bold;
-                    margin-top: 20px;
-               ">
-            </p>
 
-            <button
-                id="nextButton"
-                style="display:none;"
-                onclick="nextPuzzle()">
-                Next Pattern →
-            </button>
+            <!-- Feedback -->
+
+            <div
+                id="message"
+                class="quantum-feedback"
+            >
+            </div>
+
+
+            <div
+                style="
+                    text-align:center;
+                "
+            >
+
+                <button
+                    id="nextButton"
+                    class="button"
+                    style="display:none;"
+                    onclick="nextPuzzle()"
+                >
+                    Next Pattern →
+                </button>
+
+            </div>
+
+
+            <!-- Lesson -->
+
+            <div class="quantum-lesson">
+
+                <h3>
+                    💡 Think Like AI
+                </h3>
+
+                <p>
+                    Computers can look at examples and search
+                    for patterns. Once they discover a pattern,
+                    they can use it to make predictions about
+                    what might happen next.
+                </p>
+
+            </div>
 
         </div>
 
     </section>
+
 
 </main>
 
@@ -104,58 +177,164 @@
 
 <script>
 
+
+/* =========================================================
+   PUZZLES
+========================================================= */
+
 const puzzles = [
 
     {
-        pattern: ["🔵", "🔴", "🔵", "🔴", "🔵"],
-        choices: ["🔵", "🔴", "🟢"],
+        pattern: [
+            "🔵",
+            "🔴",
+            "🔵",
+            "🔴",
+            "🔵"
+        ],
+
+        choices: [
+            "🔵",
+            "🔴",
+            "🟢"
+        ],
+
         answer: "🔴"
     },
 
+
     {
-        pattern: ["⭐", "⭐", "🌙", "⭐", "⭐"],
-        choices: ["🌙", "⭐", "☀️"],
+        pattern: [
+            "⭐",
+            "⭐",
+            "🌙",
+            "⭐",
+            "⭐"
+        ],
+
+        choices: [
+            "🌙",
+            "⭐",
+            "☀️"
+        ],
+
         answer: "🌙"
     },
 
+
     {
-        pattern: ["🟦", "🟩", "🟨", "🟦", "🟩"],
-        choices: ["🟦", "🟩", "🟨"],
+        pattern: [
+            "🟦",
+            "🟩",
+            "🟨",
+            "🟦",
+            "🟩"
+        ],
+
+        choices: [
+            "🟦",
+            "🟩",
+            "🟨"
+        ],
+
         answer: "🟨"
     },
 
+
     {
-        pattern: ["🐱", "🐶", "🐰", "🐱", "🐶"],
-        choices: ["🐱", "🐰", "🐶"],
+        pattern: [
+            "🐱",
+            "🐶",
+            "🐰",
+            "🐱",
+            "🐶"
+        ],
+
+        choices: [
+            "🐱",
+            "🐰",
+            "🐶"
+        ],
+
         answer: "🐰"
     }
 
 ];
 
+
 let currentPuzzle = 0;
 
 
+/* =========================================================
+   LOAD PUZZLE
+========================================================= */
+
 function loadPuzzle() {
 
-    const puzzle = puzzles[currentPuzzle];
+    const puzzle =
+        puzzles[currentPuzzle];
 
-    document.getElementById("pattern").textContent =
-        puzzle.pattern.join("  ") + "  ?";
+
+    const patternElement =
+        document.getElementById("pattern");
+
+
+    patternElement.innerHTML = "";
+
+
+    puzzle.pattern.forEach(symbol => {
+
+        const item =
+            document.createElement("span");
+
+        item.className =
+            "pattern-item";
+
+        item.textContent =
+            symbol;
+
+        patternElement.appendChild(item);
+
+    });
+
+
+    // Question mark
+
+    const question =
+        document.createElement("span");
+
+    question.className =
+        "pattern-item";
+
+    question.textContent =
+        "?";
+
+    patternElement.appendChild(question);
+
+
+    // Choices
 
     const choices =
         document.getElementById("choices");
 
     choices.innerHTML = "";
 
+
     puzzle.choices.forEach(choice => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
-        button.textContent = choice;
+        button.className =
+            "quantum-choice";
 
-        button.style.fontSize = "2rem";
-        button.style.padding = "12px 20px";
-        button.style.cursor = "pointer";
+        button.textContent =
+            choice;
+
+        button.setAttribute(
+            "aria-label",
+            "Choose " + choice
+        );
 
         button.onclick = () =>
             checkAnswer(choice);
@@ -164,27 +343,55 @@ function loadPuzzle() {
 
     });
 
-    document.getElementById("message").textContent = "";
 
-    document.getElementById("nextButton").style.display =
-        "none";
+    // Reset feedback
+
+    document.getElementById(
+        "message"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display = "none";
+
 }
 
 
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
 function checkAnswer(answer) {
 
-    const puzzle = puzzles[currentPuzzle];
+    const puzzle =
+        puzzles[currentPuzzle];
 
     const message =
         document.getElementById("message");
+
 
     if (answer === puzzle.answer) {
 
         message.textContent =
             "🎉 Great job! You found the pattern!";
 
-        document.getElementById("nextButton")
-            .style.display = "inline-block";
+
+        document.getElementById(
+            "nextButton"
+        ).style.display =
+            "inline-flex";
+
+
+        // Disable choices after correct answer
+
+        document
+            .querySelectorAll(".quantum-choice")
+            .forEach(button => {
+
+                button.disabled = true;
+
+            });
 
     } else {
 
@@ -196,36 +403,63 @@ function checkAnswer(answer) {
 }
 
 
+/* =========================================================
+   NEXT PUZZLE
+========================================================= */
+
 function nextPuzzle() {
 
     currentPuzzle++;
 
-    if (currentPuzzle >= puzzles.length) {
 
-        document.getElementById("pattern").textContent =
-            "🏆";
+    if (
+        currentPuzzle >=
+        puzzles.length
+    ) {
 
-        document.getElementById("choices").innerHTML = "";
+        document.getElementById(
+            "pattern"
+        ).innerHTML =
+            '<span class="pattern-item">🏆</span>';
 
-        document.getElementById("message").textContent =
+
+        document.getElementById(
+            "choices"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "message"
+        ).textContent =
             "Amazing! You solved all the patterns!";
 
-        document.getElementById("nextButton")
-            .style.display = "none";
+
+        document.getElementById(
+            "nextButton"
+        ).style.display =
+            "none";
+
 
         return;
+
     }
+
 
     loadPuzzle();
 
 }
 
 
+/* =========================================================
+   START
+========================================================= */
+
 loadPuzzle();
 
+
 </script>
+
 
 </body>
 
 </html>
-```
