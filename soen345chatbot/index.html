@@ -1,48 +1,66 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SOEN 345 - Software Testing, Verification and Quality Assurance Chatbot</title>
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF1NWNN97D"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      // Replace 'G-XXXXXXXXXX' with your actual Google Analytics Measurement ID
-      gtag('config', 'G-ZF1NWNN97D');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-ZF1NWNN97D');
     </script>
 
     <style>
         :root {
             --concordia-burgundy: #912338;
+            --concordia-burgundy-dark: #7a1d2f;
             --concordia-gold: #db9a35;
+            --background: #f4f4f9;
+            --light-gray: #f8f9fa;
+            --border: #dee2e6;
+            --text: #212529;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: #f4f4f9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--background);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
+
         .chat-container {
             width: 100%;
             max-width: 700px;
             height: 85vh;
+            min-height: 550px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
+
+        /* Header */
+
         .header {
             background: var(--concordia-burgundy);
             color: white;
@@ -50,15 +68,20 @@
             text-align: center;
             border-bottom: 4px solid var(--concordia-gold);
         }
+
         .header h2 {
             margin: 0;
             font-size: 1.4rem;
         }
+
         .header p {
-            margin: 5px 0 0 0;
+            margin: 5px 0 0;
             font-size: 0.9rem;
             opacity: 0.9;
         }
+
+        /* Chat messages */
+
         .messages {
             flex-grow: 1;
             padding: 20px;
@@ -68,59 +91,102 @@
             gap: 15px;
             background: #ffffff;
         }
+
         .message {
             padding: 12px 18px;
             border-radius: 8px;
-            max-width: 85%;
+            max-width: 90%;
             line-height: 1.5;
             word-wrap: break-word;
         }
+
         .user-message {
             align-self: flex-end;
             background: #e9ecef;
-            color: #212529;
+            color: var(--text);
             border-bottom-right-radius: 0;
         }
+
         .bot-message {
             align-self: flex-start;
             background: var(--concordia-burgundy);
             color: white;
             border-bottom-left-radius: 0;
         }
+
         .bot-message a {
             color: var(--concordia-gold);
             text-decoration: none;
             font-weight: bold;
         }
+
         .bot-message a:hover {
             text-decoration: underline;
         }
+
+        /* Project introduction call-to-action */
+
+        .project-intro {
+            display: block;
+            margin: 14px 0;
+            padding: 13px 16px;
+            background: var(--concordia-gold);
+            color: #212529 !important;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none !important;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .project-intro:hover {
+            background: #c8892d;
+            color: white !important;
+            transform: translateY(-1px);
+        }
+
+        .project-note {
+            background: rgba(255, 255, 255, 0.12);
+            border-left: 4px solid var(--concordia-gold);
+            padding: 10px 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+        }
+
+        /* Chips */
+
         .chips-container {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
+
         .chip {
             background: #f8f9fa;
             color: var(--concordia-burgundy);
             border: 1px solid var(--concordia-burgundy);
-            padding: 6px 12px;
+            padding: 7px 12px;
             border-radius: 16px;
             font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
         }
+
         .chip:hover {
             background: var(--concordia-burgundy);
             color: white;
         }
+
+        /* Input */
+
         .input-area {
             display: flex;
             padding: 15px;
-            background: #f8f9fa;
-            border-top: 1px solid #dee2e6;
+            background: var(--light-gray);
+            border-top: 1px solid var(--border);
         }
+
         input[type="text"] {
             flex-grow: 1;
             padding: 12px;
@@ -130,9 +196,11 @@
             outline: none;
             transition: border-color 0.2s;
         }
+
         input[type="text"]:focus {
             border-color: var(--concordia-burgundy);
         }
+
         button {
             padding: 12px 24px;
             margin-left: 10px;
@@ -145,115 +213,611 @@
             cursor: pointer;
             transition: background 0.2s;
         }
+
         button:hover {
-            background: #7a1d2f;
+            background: var(--concordia-burgundy-dark);
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+
+            .chat-container {
+                height: 100vh;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .input-area {
+                padding: 10px;
+            }
+
+            button {
+                padding: 12px 16px;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <div class="chat-container">
+
+    <!-- Header -->
     <div class="header">
         <h2>SOEN 345 Assistant</h2>
-        <p>Software Testing Q&A</p>
+        <p>Software Testing, Verification &amp; Quality Assurance Q&amp;A</p>
     </div>
+
+    <!-- Chat -->
     <div class="messages" id="chat-box">
+
         <div class="message bot-message">
-            Hello! I am the SOEN 345 Q&A bot. I can help answer your questions based on past GitHub discussions. 
-            <br><br>What do you need help with today?
+
+            Hello! I am the <strong>SOEN 345 Q&amp;A bot</strong>. I can help you
+            find answers based on previous course discussions.
+
+            <br><br>
+
+            <strong>📖 Working on the Course Project?</strong>
+
+            <div class="project-note">
+                Before asking detailed project questions, please read the
+                <strong>Project Introduction</strong> first. It explains the
+                project goals, requirements, expectations, and deliverables.
+            </div>
+
+            <a
+                class="project-intro"
+                href="https://www.shinhwei.com/soen345chatbot/soen345-projectintro.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="trackProjectIntroClick()"
+            >
+                📖 Read the SOEN 345 Project Introduction
+            </a>
+
+            After reading the introduction, use this Q&amp;A bot to find
+            answers from previous student discussions.
+
+            <br><br>
+
+            <strong>What do you need help with today?</strong>
+
             <div class="chips-container">
-                <div class="chip" onclick="sendChipMessage('Assignments (MP1, MP2)')">Assignments (MP1, MP2)</div>
-                <div class="chip" onclick="sendChipMessage('Course Project')">Course Project</div>
-                <div class="chip" onclick="sendChipMessage('Class Theories & Knowledge')">Class Theories</div>
-                <div class="chip" onclick="sendChipMessage('Other FAQs')">Other FAQs</div>
+
+                <div
+                    class="chip"
+                    onclick="sendChipMessage('Assignments (MP1, MP2)')"
+                >
+                    Assignments (MP1, MP2)
+                </div>
+
+                <div
+                    class="chip"
+                    onclick="sendChipMessage('Course Project')"
+                >
+                    Course Project
+                </div>
+
+                <div
+                    class="chip"
+                    onclick="sendChipMessage('Class Theories & Knowledge')"
+                >
+                    Class Theories
+                </div>
+
+                <div
+                    class="chip"
+                    onclick="sendChipMessage('Other FAQs')"
+                >
+                    Other FAQs
+                </div>
+
             </div>
         </div>
+
     </div>
+
+    <!-- Input -->
     <div class="input-area">
-        <input type="text" id="user-input" placeholder="Type your question here..." onkeypress="handleKeyPress(event)">
-        <button onclick="sendMessage()">Send</button>
+        <input
+            type="text"
+            id="user-input"
+            placeholder="Type your question here..."
+            onkeypress="handleKeyPress(event)"
+            autocomplete="off"
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
     </div>
+
 </div>
 
 <script>
-    // Restructured Knowledge Base
+
+    /*
+     * ============================================================
+     * SOEN 345 Q&A KNOWLEDGE BASE
+     * ============================================================
+     */
+
     const knowledgeBase = [
+
         {
             category: "Assignments",
-            keywords: ["mp1", "mp2", "mini project", "mini-project", "assignment", "assignments"],
-            response: "<strong>Assignment-Related (MP1 & MP2):</strong><br>For the mini-projects, students frequently discuss setup issues and mapping metamorphic relations.<br><br><strong>Helpful Discussions:</strong><br>&bull; For <strong>MP1</strong>, you can view the dedicated Q&A thread here: <a href='https://github.com/orgs/SOEN345-Fall24/discussions/1' target='_blank'>View MP1 Discussion</a>.<br>&bull; For <strong>MP2</strong>, please refer to the end of this discussion thread: <a href='https://github.com/orgs/SOEN345-fall25/discussions/1' target='_blank'>Discussion #1 &middot; SOEN345-fall25</a>."
+
+            keywords: [
+                "mp1",
+                "mp2",
+                "mini project",
+                "mini-project",
+                "assignment",
+                "assignments"
+            ],
+
+            response: `
+                <strong>📝 Assignment-Related (MP1 &amp; MP2)</strong>
+
+                <br><br>
+
+                For the mini-projects, students frequently discuss
+                setup issues, testing concepts, and mapping
+                metamorphic relations.
+
+                <br><br>
+
+                <strong>Helpful Discussions:</strong>
+
+                <br><br>
+
+                &bull;
+                <strong>MP1:</strong>
+                <a
+                    href="https://github.com/orgs/SOEN345-Fall24/discussions/1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View MP1 Discussion
+                </a>
+
+                <br>
+
+                &bull;
+                <strong>MP2:</strong>
+                <a
+                    href="https://github.com/orgs/SOEN345-fall25/discussions/1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Discussion #1 · SOEN345-fall25
+                </a>
+            `
         },
+
         {
             category: "Project",
-            keywords: ["project", "proposal", "progress report", "final presentation", "presentation", "course project"],
-            response: "<strong>Project-Related:</strong><br>The course project consists of three main phases: the <em>Project Proposal</em>, the <em>Progress Report</em>, and the <em>Final Presentation</em>. Please ensure you follow the rubric guidelines posted in the main repository.<br><br><strong>Helpful Discussions:</strong><br>&bull; General Project Questions: <a href='https://github.com/orgs/SOEN345-fall25/discussions/2' target='_blank'>Q&A for the Project &middot; SOEN345-fall25 &middot; Discussion #2</a><br>&bull; Progress Report Questions: <a href='https://github.com/orgs/SOEN345-Fall24/discussions/8' target='_blank'>Question on Progress Report &middot; SOEN345-Fall24 &middot; Discussion #8</a>"
+
+            keywords: [
+                "project",
+                "proposal",
+                "progress report",
+                "final presentation",
+                "presentation",
+                "course project"
+            ],
+
+            response: `
+                <strong>📖 Course Project</strong>
+
+                <br><br>
+
+                <strong>
+                    Please start with the Project Introduction before
+                    asking detailed project questions.
+                </strong>
+
+                <a
+                    class="project-intro"
+                    href="https://www.shinhwei.com/soen345chatbot/soen345-projectintro.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick="trackProjectIntroClick()"
+                >
+                    📖 Read the Project Introduction
+                </a>
+
+                <strong>Why read it first?</strong>
+
+                <br>
+
+                The Project Introduction provides the overview of the
+                project, including its goals, requirements, expectations,
+                and major deliverables.
+
+                <br><br>
+
+                <strong>Project phases include:</strong>
+
+                <br>
+
+                • Project Proposal
+                <br>
+                • Progress Report
+                <br>
+                • Final Presentation
+
+                <br><br>
+
+                <div class="project-note">
+                    <strong>💡 Tip:</strong>
+                    Read the Project Introduction first, then use this
+                    Q&amp;A bot to search for answers to questions that
+                    have already been discussed by students.
+                </div>
+
+                <strong>Helpful Discussions:</strong>
+
+                <br><br>
+
+                &bull;
+                <a
+                    href="https://github.com/orgs/SOEN345-fall25/discussions/2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Q&amp;A for the Project · SOEN345-fall25 · Discussion #2
+                </a>
+
+                <br>
+
+                &bull;
+                <a
+                    href="https://github.com/orgs/SOEN345-Fall24/discussions/8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Question on Progress Report · SOEN345-Fall24 · Discussion #8
+                </a>
+            `
         },
+
         {
             category: "Theories & Knowledge",
-            keywords: ["theory", "theories", "knowledge", "class", "lecture", "concept", "exam", "testing concepts"],
-            response: "<strong>Theories & Class Knowledge:</strong><br>If you need clarification on software testing theories taught in class (e.g., test coverage criteria, static analysis, metamorphic testing), we have threads dedicated to conceptual breakdowns. <a href='https://github.com/orgs/SOEN345-fall25/discussions/10' target='_blank'>View Theory Clarification Discussion</a>."
+
+            keywords: [
+                "theory",
+                "theories",
+                "knowledge",
+                "class",
+                "lecture",
+                "concept",
+                "exam",
+                "testing concepts"
+            ],
+
+            response: `
+                <strong>📚 Theories &amp; Class Knowledge</strong>
+
+                <br><br>
+
+                If you need clarification on software testing theories
+                taught in class, previous discussions may provide useful
+                explanations.
+
+                <br><br>
+
+                Topics may include:
+
+                <br>
+
+                • Test coverage criteria
+                <br>
+                • Static analysis
+                <br>
+                • Metamorphic testing
+                <br>
+                • Software testing concepts
+
+                <br><br>
+
+                <a
+                    href="https://github.com/orgs/SOEN345-fall25/discussions/10"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Theory Clarification Discussion
+                </a>
+            `
         },
+
         {
             category: "FAQs",
-            keywords: ["faq", "other faqs", "app a", "prompt", "chatgpt", "gpt", "bug", "unit test", "unit tests"],
-            response: "<strong>Frequently Asked Questions (FAQs):</strong><br>Here are the two most common technical FAQs:<br><br>1. <em>Designing Prompts (App A):</em> Discussions on structuring instructions to avoid over-refusal. <a href='https://github.com/orgs/SOEN345-WINTER2024/discussions/2' target='_blank'>View App A Discussion</a><br>2. <em>ChatGPT Unit Tests:</em> Comparing bugs found by AI-generated tests vs. manual GitHub issues. <a href='https://github.com/orgs/SOEN345-fall25/discussions/8' target='_blank'>View GPT Bugs Discussion</a>"
+
+            keywords: [
+                "faq",
+                "other faqs",
+                "app a",
+                "prompt",
+                "chatgpt",
+                "gpt",
+                "bug",
+                "unit test",
+                "unit tests"
+            ],
+
+            response: `
+                <strong>❓ Frequently Asked Questions</strong>
+
+                <br><br>
+
+                Here are two common technical topics from previous
+                course discussions:
+
+                <br><br>
+
+                <strong>1. Designing Prompts (App A)</strong>
+
+                <br>
+
+                Discussions on structuring instructions and avoiding
+                over-refusal.
+
+                <br>
+
+                <a
+                    href="https://github.com/orgs/SOEN345-WINTER2024/discussions/2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View App A Discussion
+                </a>
+
+                <br><br>
+
+                <strong>2. ChatGPT Unit Tests</strong>
+
+                <br>
+
+                Discussions comparing bugs found by AI-generated tests
+                with manually reported GitHub issues.
+
+                <br>
+
+                <a
+                    href="https://github.com/orgs/SOEN345-fall25/discussions/8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View GPT Bugs Discussion
+                </a>
+            `
         }
     ];
 
+
+    /*
+     * ============================================================
+     * CHAT FUNCTIONS
+     * ============================================================
+     */
+
     function handleKeyPress(event) {
+
         if (event.key === "Enter") {
             sendMessage();
         }
+
     }
+
 
     function sendChipMessage(text) {
+
         const inputElement = document.getElementById("user-input");
+
         inputElement.value = text;
+
         sendMessage();
+
     }
+
 
     function sendMessage() {
+
         const inputElement = document.getElementById("user-input");
+
         const messageText = inputElement.value.trim();
-        
-        if (messageText === "") return;
+
+        if (messageText === "") {
+            return;
+        }
 
         appendMessage(messageText, "user-message");
+
         inputElement.value = "";
 
-        // Track the user message in Google Analytics (Optional extra tracking)
-        if (typeof gtag === 'function') {
-            gtag('event', 'chat_message_sent', {
-                'event_category': 'Chatbot',
-                'event_label': messageText
+
+        /*
+         * Google Analytics event
+         */
+
+        if (typeof gtag === "function") {
+
+            gtag("event", "chat_message_sent", {
+
+                event_category: "Chatbot",
+
+                event_label: messageText
+
             });
+
         }
 
-        // Simulate network delay
+
+        /*
+         * Simulate chatbot response delay
+         */
+
         setTimeout(() => {
-            const reply = getBotResponse(messageText.toLowerCase());
+
+            const reply = getBotResponse(
+                messageText.toLowerCase()
+            );
+
             appendMessage(reply, "bot-message");
+
         }, 400);
+
     }
+
 
     function appendMessage(text, className) {
+
         const chatBox = document.getElementById("chat-box");
+
         const messageDiv = document.createElement("div");
+
         messageDiv.className = `message ${className}`;
-        messageDiv.innerHTML = text; 
+
+        messageDiv.innerHTML = text;
+
         chatBox.appendChild(messageDiv);
+
         chatBox.scrollTop = chatBox.scrollHeight;
+
     }
 
-    function getBotResponse(query) {
-        for (let item of knowledgeBase) {
-            if (item.keywords.some(keyword => query.includes(keyword))) {
-                return item.response;
-            }
+
+    /*
+     * ============================================================
+     * PROJECT INTRODUCTION TRACKING
+     * ============================================================
+     */
+
+    function trackProjectIntroClick() {
+
+        if (typeof gtag === "function") {
+
+            gtag("event", "project_intro_click", {
+
+                event_category: "Course Project",
+
+                event_label: "SOEN 345 Project Introduction"
+
+            });
+
         }
-        return "I'm not sure I understand. Try asking about <strong>Assignments (MP1/MP2)</strong>, the <strong>Course Project</strong>, <strong>Class Theories</strong>, or technical <strong>FAQs</strong>.";
+
     }
+
+
+    /*
+     * ============================================================
+     * RESPONSE MATCHING
+     * ============================================================
+     */
+
+    function getBotResponse(query) {
+
+        /*
+         * Give project-related questions priority.
+         */
+
+        const projectKeywords = [
+            "project",
+            "proposal",
+            "progress report",
+            "final presentation",
+            "course project"
+        ];
+
+        if (
+            projectKeywords.some(keyword =>
+                query.includes(keyword)
+            )
+        ) {
+
+            const projectItem = knowledgeBase.find(
+                item => item.category === "Project"
+            );
+
+            return projectItem.response;
+
+        }
+
+
+        /*
+         * Match other questions.
+         */
+
+        for (const item of knowledgeBase) {
+
+            if (
+                item.keywords.some(keyword =>
+                    query.includes(keyword)
+                )
+            ) {
+
+                return item.response;
+
+            }
+
+        }
+
+
+        /*
+         * Fallback response.
+         */
+
+        return `
+            <strong>I'm not sure I understand your question.</strong>
+
+            <br><br>
+
+            If you're working on the <strong>Course Project</strong>,
+            please start by reading the Project Introduction:
+
+            <a
+                class="project-intro"
+                href="https://www.shinhwei.com/soen345chatbot/soen345-projectintro.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="trackProjectIntroClick()"
+            >
+                📖 Read the SOEN 345 Project Introduction
+            </a>
+
+            The introduction explains the project goals, requirements,
+            expectations, and deliverables.
+
+            <br><br>
+
+            You can also try asking about:
+
+            <br><br>
+
+            • <strong>Assignments (MP1/MP2)</strong>
+            <br>
+            • <strong>Course Project</strong>
+            <br>
+            • <strong>Class Theories</strong>
+            <br>
+            • <strong>Technical FAQs</strong>
+        `;
+
+    }
+
 </script>
 
 </body>
 </html>
+```
