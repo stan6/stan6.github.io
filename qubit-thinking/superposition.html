@@ -1,0 +1,1734 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Qubit Thinking — Superposition, Entanglement & Disentanglement</title>
+
+    <meta name="description"
+          content="Learn Qubit Thinking through superposition, entanglement, disentanglement, interference, and measurement.">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* =========================================================
+           QUBIT THINKING — QUANTUM CONCEPTS
+           ========================================================= */
+
+        :root {
+            --qt-blue: #2563eb;
+            --qt-purple: #7c3aed;
+            --qt-cyan: #06b6d4;
+            --qt-green: #10b981;
+            --qt-orange: #f59e0b;
+            --qt-pink: #ec4899;
+            --qt-dark: #172033;
+            --qt-light: #f8fafc;
+            --qt-card: #ffffff;
+            --qt-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background:
+                radial-gradient(circle at top left,
+                    rgba(124, 58, 237, 0.12),
+                    transparent 35%),
+                radial-gradient(circle at top right,
+                    rgba(6, 182, 212, 0.12),
+                    transparent 35%),
+                var(--qt-light);
+            color: var(--qt-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        /* ---------------------------------------------------------
+           HERO
+           --------------------------------------------------------- */
+
+        .hero {
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 999px;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--qt-purple);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            line-height: 1.05;
+            margin: 0 0 20px;
+            background: linear-gradient(
+                90deg,
+                var(--qt-blue),
+                var(--qt-purple),
+                var(--qt-cyan)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+            font-size: 1.2rem;
+            color: var(--qt-muted);
+        }
+
+        /* ---------------------------------------------------------
+           CONCEPT NAVIGATION
+           --------------------------------------------------------- */
+
+        .concept-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 50px;
+        }
+
+        .concept-nav a {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: white;
+            color: var(--qt-dark);
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+        }
+
+        .concept-nav a:hover {
+            transform: translateY(-2px);
+            border-color: var(--qt-purple);
+            color: var(--qt-purple);
+        }
+
+        /* ---------------------------------------------------------
+           CARDS
+           --------------------------------------------------------- */
+
+        .section {
+            margin: 70px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            max-width: 700px;
+            margin: auto;
+            color: var(--qt-muted);
+        }
+
+        .card {
+            background: var(--qt-card);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow:
+                0 12px 35px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* ---------------------------------------------------------
+           BIG IDEA
+           --------------------------------------------------------- */
+
+        .big-idea {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .big-idea h3 {
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .idea-highlight {
+            padding: 22px;
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.08),
+                    rgba(124, 58, 237, 0.08)
+                );
+            border-left: 5px solid var(--qt-purple);
+            font-weight: 700;
+        }
+
+        /* ---------------------------------------------------------
+           QUBIT VISUAL
+           --------------------------------------------------------- */
+
+        .qubit-box {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(124, 58, 237, 0.1),
+                    transparent 65%
+                );
+            border-radius: 22px;
+        }
+
+        .qubit {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 5px solid var(--qt-purple);
+            box-shadow:
+                0 0 0 12px rgba(124, 58, 237, 0.06),
+                0 0 45px rgba(124, 58, 237, 0.3);
+            font-size: 2.5rem;
+            font-weight: 800;
+            transition: 0.6s;
+        }
+
+        .qubit.superposition {
+            transform: rotate(12deg) scale(1.08);
+            border-color: var(--qt-cyan);
+        }
+
+        .possibilities {
+            display: flex;
+            gap: 35px;
+            margin-top: 25px;
+            font-weight: 800;
+        }
+
+        .possibility {
+            padding: 12px 22px;
+            border-radius: 15px;
+            background: #f1f5f9;
+            transition: 0.3s;
+        }
+
+        .possibility.active {
+            transform: scale(1.08);
+            background: rgba(6, 182, 212, 0.14);
+        }
+
+        /* ---------------------------------------------------------
+           CIRCUIT
+           --------------------------------------------------------- */
+
+        .circuit {
+            margin: 25px auto;
+            max-width: 700px;
+            padding: 25px;
+            border-radius: 20px;
+            background: #111827;
+            color: white;
+            overflow-x: auto;
+        }
+
+        .circuit-line {
+            display: flex;
+            align-items: center;
+            min-width: 600px;
+            gap: 0;
+            font-family: monospace;
+            font-size: 1.05rem;
+        }
+
+        .wire {
+            flex: 1;
+            height: 3px;
+            background: #94a3b8;
+            position: relative;
+        }
+
+        .gate {
+            min-width: 55px;
+            height: 55px;
+            border: 2px solid #c4b5fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 800;
+        }
+
+        .gate.h {
+            border-color: #67e8f9;
+        }
+
+        .gate.cx {
+            border-color: #86efac;
+        }
+
+        /* ---------------------------------------------------------
+           ENTANGLEMENT
+           --------------------------------------------------------- */
+
+        .entanglement-demo {
+            text-align: center;
+        }
+
+        .particles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            margin: 40px 0;
+        }
+
+        .particle {
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            background: white;
+            border: 5px solid var(--qt-blue);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.18);
+            transition: 0.5s;
+        }
+
+        .particle.entangled {
+            border-color: var(--qt-pink);
+            box-shadow:
+                0 0 0 10px rgba(236, 72, 153, 0.08),
+                0 0 35px rgba(236, 72, 153, 0.3);
+        }
+
+        .connection {
+            position: absolute;
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(
+                90deg,
+                var(--qt-blue),
+                var(--qt-pink),
+                var(--qt-blue)
+            );
+            animation: pulseConnection 1.2s infinite alternate;
+        }
+
+        @keyframes pulseConnection {
+            from {
+                opacity: 0.35;
+                transform: scaleX(0.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        /* ---------------------------------------------------------
+           DISENTANGLEMENT
+           --------------------------------------------------------- */
+
+        .disentangle-stage {
+            text-align: center;
+        }
+
+        .state-display {
+            margin: 30px auto;
+            max-width: 700px;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 22px;
+            background: #f8fafc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .state-display.entangled-state {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(236, 72, 153, 0.12),
+                    transparent 65%
+                );
+        }
+
+        .state-display.separated-state {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(16, 185, 129, 0.12),
+                    transparent 65%
+                );
+        }
+
+        .state-particles {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            position: relative;
+        }
+
+        .state-particle {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--qt-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+
+        .state-link {
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--qt-pink);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .separated-state .state-particle {
+            border-color: var(--qt-green);
+        }
+
+        .separated-state .state-link {
+            display: none;
+        }
+
+        /* ---------------------------------------------------------
+           BUTTONS
+           --------------------------------------------------------- */
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            border-radius: 14px;
+            padding: 13px 20px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary-button {
+            background: var(--qt-purple);
+            color: white;
+        }
+
+        .secondary-button {
+            background: #e2e8f0;
+            color: var(--qt-dark);
+        }
+
+        .success-button {
+            background: var(--qt-green);
+            color: white;
+        }
+
+        /* ---------------------------------------------------------
+           LEARNING CARDS
+           --------------------------------------------------------- */
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .learning-card {
+            padding: 22px 16px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .learning-icon {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .learning-card h3 {
+            font-size: 1.05rem;
+            margin: 5px 0;
+        }
+
+        .learning-card p {
+            color: var(--qt-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* ---------------------------------------------------------
+           QUANTUM THINKING
+           --------------------------------------------------------- */
+
+        .thinking-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .flow-item {
+            padding: 15px 20px;
+            border-radius: 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            font-weight: 800;
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--qt-purple);
+        }
+
+        /* ---------------------------------------------------------
+           QUIZ
+           --------------------------------------------------------- */
+
+        .quiz {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .quiz-question {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            text-align: left;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--qt-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .quiz-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: 700;
+            display: none;
+        }
+
+        /* ---------------------------------------------------------
+           TAKEAWAY
+           --------------------------------------------------------- */
+
+        .takeaway {
+            text-align: center;
+            padding: 45px 25px;
+            border-radius: 28px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.1),
+                    rgba(124, 58, 237, 0.12)
+                );
+        }
+
+        .takeaway h2 {
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .takeaway-quote {
+            max-width: 760px;
+            margin: auto;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* ---------------------------------------------------------
+           FOOTER
+           --------------------------------------------------------- */
+
+        footer {
+            text-align: center;
+            padding: 45px 0;
+            color: var(--qt-muted);
+        }
+
+        /* ---------------------------------------------------------
+           RESPONSIVE
+           --------------------------------------------------------- */
+
+        @media (max-width: 850px) {
+
+            .big-idea {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .particles {
+                gap: 45px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .hero {
+                padding-top: 45px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .particles {
+                gap: 25px;
+            }
+
+            .particle {
+                width: 80px;
+                height: 80px;
+            }
+
+            .connection {
+                width: 75px;
+            }
+
+            .state-particles {
+                gap: 65px;
+            }
+
+            .state-link {
+                width: 65px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
+
+    <section class="hero">
+        <div class="container">
+
+            <div class="hero-badge">
+                ⚛️ QUBIT THINKING
+            </div>
+
+            <h1>
+                Explore. Connect.<br>
+                Separate. Discover.
+            </h1>
+
+            <p>
+                Learn how quantum computers think using
+                <strong>superposition</strong>,
+                <strong>entanglement</strong>,
+                <strong>disentanglement</strong>,
+                <strong>interference</strong>, and
+                <strong>measurement</strong>.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         NAVIGATION
+         ========================================================= -->
+
+    <nav class="concept-nav container">
+
+        <a href="#superposition">
+            ✨ Superposition
+        </a>
+
+        <a href="#entanglement">
+            🔗 Entanglement
+        </a>
+
+        <a href="#disentanglement">
+            🔓 Disentanglement
+        </a>
+
+        <a href="#thinking">
+            🧠 Qubit Thinking
+        </a>
+
+        <a href="#quiz">
+            🎯 Quiz
+        </a>
+
+    </nav>
+
+
+    <!-- =========================================================
+         SUPERPOSITION
+         ========================================================= -->
+
+    <section id="superposition" class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    ✨ Superposition
+                </h2>
+
+                <p>
+                    A qubit can represent a quantum combination
+                    of possible states.
+                </p>
+
+            </div>
+
+
+            <div class="big-idea">
+
+                <div class="card">
+
+                    <h3>
+                        One qubit, many possibilities
+                    </h3>
+
+                    <p>
+                        A classical bit is either
+                        <strong>0</strong> or
+                        <strong>1</strong>.
+                    </p>
+
+                    <p>
+                        A qubit can be prepared in a
+                        <strong>superposition</strong> of
+                        0 and 1.
+                    </p>
+
+                    <div class="idea-highlight">
+
+                        🧠 Qubit Thinking:
+
+                        <br><br>
+
+                        <strong>
+                            Don't ask only:
+                            "Which answer is it?"
+                        </strong>
+
+                        <br><br>
+
+                        Ask:
+
+                        <br>
+
+                        <strong>
+                            "What possibilities can I explore?"
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card qubit-box">
+
+                    <div
+                        id="superpositionQubit"
+                        class="qubit"
+                    >
+                        0
+                    </div>
+
+                    <div class="possibilities">
+
+                        <div
+                            id="possibility0"
+                            class="possibility active"
+                        >
+                            |0⟩
+                        </div>
+
+                        <div
+                            id="possibility1"
+                            class="possibility"
+                        >
+                            |1⟩
+                        </div>
+
+                    </div>
+
+                    <div class="button-row">
+
+                        <button
+                            class="primary-button"
+                            onclick="createSuperposition()"
+                        >
+                            ✨ Create Superposition
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            onclick="resetSuperposition()"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" style="margin-top:25px; text-align:center;">
+
+                <p style="font-size:1.15rem;">
+
+                    A simple example is:
+
+                </p>
+
+                <p style="font-size:1.6rem; font-weight:800;">
+
+                    |ψ⟩ =
+                    (|0⟩ + |1⟩) / √2
+
+                </p>
+
+                <p>
+
+                    This equal superposition gives a 50% probability
+                    of observing 0 and a 50% probability of observing 1
+                    when measured in the computational basis.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         ENTANGLEMENT
+         ========================================================= -->
+
+    <section id="entanglement" class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    🔗 Entanglement
+                </h2>
+
+                <p>
+                    Quantum thinking becomes more powerful when
+                    we consider relationships between qubits.
+                </p>
+
+            </div>
+
+
+            <div class="card entanglement-demo">
+
+                <h3>
+                    From possibilities to connections
+                </h3>
+
+                <p>
+                    Start with two qubits in
+                    <strong>|00⟩</strong>.
+                    A Hadamard gate followed by a CNOT gate
+                    can create an entangled Bell state.
+                </p>
+
+
+                <div class="circuit">
+
+                    <div class="circuit-line">
+
+                        <span>Q₀</span>
+
+                        <div class="wire"></div>
+
+                        <div class="gate h">
+                            H
+                        </div>
+
+                        <div class="wire"></div>
+
+                        <div class="gate cx">
+                            ●
+                        </div>
+
+                        <div class="wire"></div>
+
+                    </div>
+
+
+                    <div class="circuit-line">
+
+                        <span>Q₁</span>
+
+                        <div class="wire"></div>
+
+                        <div style="width:65px;"></div>
+
+                        <div class="wire"></div>
+
+                        <div class="gate cx">
+                            X
+                        </div>
+
+                        <div class="wire"></div>
+
+                    </div>
+
+                </div>
+
+
+                <p style="font-size:1.4rem; font-weight:800;">
+
+                    |Φ⁺⟩ =
+                    (|00⟩ + |11⟩) / √2
+
+                </p>
+
+
+                <div
+                    class="particles"
+                    id="entangledParticles"
+                >
+
+                    <div
+                        class="particle"
+                        id="particleA"
+                    >
+                        A
+                    </div>
+
+                    <div
+                        class="connection"
+                        id="connection"
+                    ></div>
+
+                    <div
+                        class="particle"
+                        id="particleB"
+                    >
+                        B
+                    </div>
+
+                </div>
+
+
+                <p>
+
+                    The important idea is not simply that
+                    the qubits are "connected."
+
+                    <br><br>
+
+                    Their quantum state must be described
+                    <strong>as a joint system</strong>.
+
+                </p>
+
+
+                <div class="button-row">
+
+                    <button
+                        class="primary-button"
+                        onclick="createEntanglement()"
+                    >
+                        🔗 Entangle the Qubits
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         DISENTANGLEMENT
+         ========================================================= -->
+
+    <section id="disentanglement" class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    🔓 Disentanglement
+                </h2>
+
+                <p>
+                    Quantum thinking isn't only about creating
+                    connections. Sometimes we need to undo them.
+                </p>
+
+            </div>
+
+
+            <div class="card disentangle-stage">
+
+                <h3>
+                    Can you separate the qubits?
+                </h3>
+
+                <p>
+                    Suppose two qubits are in an entangled state.
+                    We can apply operations that reverse the
+                    process that created the entanglement.
+                </p>
+
+
+                <div
+                    id="stateDisplay"
+                    class="state-display entangled-state"
+                >
+
+                    <div class="state-particles">
+
+                        <div class="state-particle">
+                            A
+                        </div>
+
+                        <div class="state-link"></div>
+
+                        <div class="state-particle">
+                            B
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="disentangleMessage"
+                    class="idea-highlight"
+                >
+
+                    🔗 The qubits are entangled.
+
+                    <br>
+
+                    Their state contains a quantum correlation.
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button
+                        class="primary-button"
+                        onclick="disentangle()"
+                    >
+                        🔓 Disentangle
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="resetDisentanglement()"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="reverseCircuit"
+                    style="
+                        display:none;
+                        margin-top:30px;
+                    "
+                >
+
+                    <p style="font-weight:800;">
+
+                        Reverse the operations:
+
+                    </p>
+
+                    <div class="circuit">
+
+                        <div class="circuit-line">
+
+                            <span>Q₀</span>
+
+                            <div class="wire"></div>
+
+                            <div class="gate cx">
+                                ●
+                            </div>
+
+                            <div class="wire"></div>
+
+                            <div class="gate h">
+                                H
+                            </div>
+
+                            <div class="wire"></div>
+
+                        </div>
+
+
+                        <div class="circuit-line">
+
+                            <span>Q₁</span>
+
+                            <div class="wire"></div>
+
+                            <div class="gate cx">
+                                X
+                            </div>
+
+                            <div class="wire"></div>
+
+                            <div style="width:65px;"></div>
+
+                            <div class="wire"></div>
+
+                        </div>
+
+                    </div>
+
+                    <p style="font-size:1.2rem;">
+
+                        Entangled state
+
+                        →
+
+                        CNOT
+
+                        →
+
+                        H
+
+                        →
+
+                        Separable state
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FIVE IDEAS
+         ========================================================= -->
+
+    <section id="thinking" class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    🧠 The Qubit Thinking Toolkit
+                </h2>
+
+                <p>
+                    These ideas form a mental toolkit for thinking
+                    about quantum algorithms and quantum information.
+                </p>
+
+            </div>
+
+
+            <div class="learning-grid">
+
+                <div class="learning-card">
+
+                    <div class="learning-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Superposition
+                    </h3>
+
+                    <p>
+                        Explore multiple possibilities.
+                    </p>
+
+                </div>
+
+
+                <div class="learning-card">
+
+                    <div class="learning-icon">
+                        🔗
+                    </div>
+
+                    <h3>
+                        Entanglement
+                    </h3>
+
+                    <p>
+                        Connect quantum systems.
+                    </p>
+
+                </div>
+
+
+                <div class="learning-card">
+
+                    <div class="learning-icon">
+                        🌊
+                    </div>
+
+                    <h3>
+                        Interference
+                    </h3>
+
+                    <p>
+                        Shape the possibilities.
+                    </p>
+
+                </div>
+
+
+                <div class="learning-card">
+
+                    <div class="learning-icon">
+                        🔓
+                    </div>
+
+                    <h3>
+                        Disentanglement
+                    </h3>
+
+                    <p>
+                        Undo quantum connections.
+                    </p>
+
+                </div>
+
+
+                <div class="learning-card">
+
+                    <div class="learning-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Measurement
+                    </h3>
+
+                    <p>
+                        Observe a classical result.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" style="margin-top:35px;">
+
+                <h3 style="text-align:center;">
+                    Think like a quantum programmer
+                </h3>
+
+                <div class="thinking-flow">
+
+                    <div class="flow-item">
+                        ✨ Explore
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🔗 Connect
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🌊 Shape
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🔓 Separate
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🎯 Discover
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         QUIZ
+         ========================================================= -->
+
+    <section id="quiz" class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    🎯 Quick Qubit Thinking Challenge
+                </h2>
+
+                <p>
+                    Test your understanding.
+                </p>
+
+            </div>
+
+
+            <div class="card quiz">
+
+                <div class="quiz-question">
+
+                    Which idea describes undoing a quantum
+                    correlation so that systems can once again
+                    be described independently?
+
+                </div>
+
+
+                <div class="quiz-options">
+
+                    <button
+                        class="quiz-option"
+                        onclick="answerQuiz(this, false)"
+                    >
+                        ✨ Superposition
+                    </button>
+
+                    <button
+                        class="quiz-option"
+                        onclick="answerQuiz(this, false)"
+                    >
+                        🔗 Entanglement
+                    </button>
+
+                    <button
+                        class="quiz-option"
+                        onclick="answerQuiz(this, true)"
+                    >
+                        🔓 Disentanglement
+                    </button>
+
+                    <button
+                        class="quiz-option"
+                        onclick="answerQuiz(this, false)"
+                    >
+                        🎯 Measurement
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="quizResult"
+                    class="quiz-result"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         TAKEAWAY
+         ========================================================= -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="takeaway">
+
+                <h2>
+                    🌌 Think in Possibilities
+                </h2>
+
+                <p class="takeaway-quote">
+
+                    "Qubit Thinking means exploring possibilities,
+                    connecting them, shaping them, separating them,
+                    and finally discovering an outcome."
+
+                </p>
+
+                <div class="thinking-flow">
+
+                    <div class="flow-item">
+                        ✨ Superpose
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🔗 Entangle
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🌊 Interfere
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🔓 Disentangle
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        🎯 Measure
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            ⚛️ Qubit Thinking — Learn quantum ideas by thinking
+            differently.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    /* =========================================================
+       SUPERPOSITION
+       ========================================================= */
+
+    function createSuperposition() {
+
+        const qubit =
+            document.getElementById("superpositionQubit");
+
+        const p0 =
+            document.getElementById("possibility0");
+
+        const p1 =
+            document.getElementById("possibility1");
+
+        qubit.classList.add("superposition");
+
+        qubit.textContent = "|+⟩";
+
+        p0.classList.add("active");
+
+        p1.classList.add("active");
+
+    }
+
+
+    function resetSuperposition() {
+
+        const qubit =
+            document.getElementById("superpositionQubit");
+
+        const p0 =
+            document.getElementById("possibility0");
+
+        const p1 =
+            document.getElementById("possibility1");
+
+        qubit.classList.remove("superposition");
+
+        qubit.textContent = "0";
+
+        p0.classList.add("active");
+
+        p1.classList.remove("active");
+
+    }
+
+
+    /* =========================================================
+       ENTANGLEMENT
+       ========================================================= */
+
+    function createEntanglement() {
+
+        const a =
+            document.getElementById("particleA");
+
+        const b =
+            document.getElementById("particleB");
+
+        const connection =
+            document.getElementById("connection");
+
+        a.classList.add("entangled");
+
+        b.classList.add("entangled");
+
+        connection.style.display = "block";
+
+        a.textContent = "0";
+
+        b.textContent = "0";
+
+        setTimeout(() => {
+
+            a.textContent = "1";
+            b.textContent = "1";
+
+        }, 900);
+
+    }
+
+
+    /* =========================================================
+       DISENTANGLEMENT
+       ========================================================= */
+
+    function disentangle() {
+
+        const display =
+            document.getElementById("stateDisplay");
+
+        const message =
+            document.getElementById("disentangleMessage");
+
+        const circuit =
+            document.getElementById("reverseCircuit");
+
+        display.classList.remove("entangled-state");
+
+        display.classList.add("separated-state");
+
+        message.innerHTML = `
+            🔓 The quantum connection has been undone.
+            <br><br>
+            The two systems can now be described
+            independently in this example.
+        `;
+
+        circuit.style.display = "block";
+
+    }
+
+
+    function resetDisentanglement() {
+
+        const display =
+            document.getElementById("stateDisplay");
+
+        const message =
+            document.getElementById("disentangleMessage");
+
+        const circuit =
+            document.getElementById("reverseCircuit");
+
+        display.classList.remove("separated-state");
+
+        display.classList.add("entangled-state");
+
+        message.innerHTML = `
+            🔗 The qubits are entangled.
+            <br>
+            Their state contains a quantum correlation.
+        `;
+
+        circuit.style.display = "none";
+
+    }
+
+
+    /* =========================================================
+       QUIZ
+       ========================================================= */
+
+    function answerQuiz(button, correct) {
+
+        const buttons =
+            document.querySelectorAll(".quiz-option");
+
+        const result =
+            document.getElementById("quizResult");
+
+        buttons.forEach(item => {
+
+            item.classList.remove(
+                "correct",
+                "incorrect"
+            );
+
+        });
+
+        if (correct) {
+
+            button.classList.add("correct");
+
+            result.style.display = "block";
+
+            result.innerHTML =
+                "🎉 Correct! Disentanglement is about undoing or removing the quantum correlation.";
+
+        } else {
+
+            button.classList.add("incorrect");
+
+            result.style.display = "block";
+
+            result.innerHTML =
+                "💡 Not quite. Think about which concept describes separating a previously connected quantum system.";
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
+```
