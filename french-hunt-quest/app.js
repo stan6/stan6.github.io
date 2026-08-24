@@ -8,7 +8,7 @@ function load(){try{return {...initial,...JSON.parse(localStorage.getItem(KEY)||
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function word(id){return D.words.find(w=>w.id===id)}
 function mission(id){return D.missions.find(m=>m.id===id)}
-function location(id){return D.locations.find(l=>l.id===id)}
+function getLocation(id){return D.locations.find(l=>l.id===id)}
 function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function speak(text){if(!("speechSynthesis"in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="fr-FR";u.rate=.82;speechSynthesis.speak(u)}
 function setScreen(s,arg=null){screen=s;selected=arg;render();window.scrollTo({top:0,behavior:"smooth"})}
@@ -56,7 +56,7 @@ function renderHome(){
 }
 
 function renderChapter(id){
- const l=location(id), m=mission(l.missionId), s=D.stories.find(x=>x.missionId===m.id), done=state.completed.includes(m.id);
+ const l=getLocation(id), m=mission(l.missionId), s=D.stories.find(x=>x.missionId===m.id), done=state.completed.includes(m.id);
  return `<div class="story-title"><div class="big">${l.emoji}</div><h1>${esc(l.title)}</h1><p>${esc(l.subtitle)}</p></div>
  <div class="card"><h2>${esc(s?.title||m.title)}</h2>${s?`<div class="language-card fr"><h3>🇫🇷 Français</h3><div class="story-text">${esc(s.frenchText)}</div></div><div class="language-card en"><h3>🇬🇧 English</h3><div class="story-text">${esc(s.englishText)}</div></div>`:""}</div>
  <div class="card"><h3>💎 Mission</h3><p>${esc(m.description)}</p><p><b>⭐ ${m.xpReward} XP</b></p><button class="btn primary" onclick="setScreen('mission','${m.id}')">${done?"Review Mission":"Start Treasure Hunt"} 🔎</button>${done?`<button class="btn secondary" onclick="setScreen('story','${m.id}')">Read Mission Story 📖</button>`:""}</div>`;
