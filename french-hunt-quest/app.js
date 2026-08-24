@@ -64,6 +64,12 @@ function renderChapter(id){
 
 function renderMission(id){
  const m=mission(id);
+ console.log("Mission:", m);
+console.log("Word IDs:", m.wordIds);
+console.log(
+  "Missing words:",
+  m.wordIds.filter(wordId => !word(wordId))
+);
 
  if(!m){
    return `<div class="card">
