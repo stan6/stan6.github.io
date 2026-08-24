@@ -8,7 +8,15 @@ window.FHQ_DATA = {
       "pronunciationHint": "papillon",
       "clue": "Find something colorful that flies around a garden.",
       "category": "NATURE"
-    },
+    },{
+  "id": "nature_flower",
+  "french": "fleur",
+  "english": "flower",
+  "article": "une",
+  "pronunciationHint": "flur",
+  "clue": "Find something colorful that grows in a garden.",
+  "category": "NATURE"
+},
     {
       "id": "nature_tree",
       "french": "arbre",
