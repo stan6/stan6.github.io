@@ -63,10 +63,80 @@ function renderChapter(id){
 }
 
 function renderMission(id){
- const m=mission(id), found=m.wordIds.filter(x=>state.discovered.includes(x)).length, done=state.completed.includes(id);
- return `<div class="hero"><div style="font-size:52px">${m.emoji}</div><h1>${esc(m.title)}</h1><p>${esc(m.description)}</p></div>
- <div class="card"><div style="display:flex;justify-content:space-between"><b>🔎 Progress</b><b>${found}/${m.wordIds.length}</b></div><div class="progressbar" style="margin:10px 0"><span style="width:${found/m.wordIds.length*100}%"></span></div><p>${done?"🏆 Amazing! You found every treasure.":"Find each treasure and take a photo or draw it."}</p></div>
- ${m.wordIds.map(id=>{const w=word(id),d=state.discovered.includes(id);return `<div class="word"><div><strong>${esc(w.article||"")} ${esc(w.french)}</strong><small>${esc(w.english)} · ${esc(w.clue||"")}</small></div><button class="listen" onclick="speak('${esc(w.french)}')">🔊</button></div>${d?`<div style="text-align:right;color:var(--green);font-weight:800">✓ Found</div>`:`<button class="btn blue" onclick="setScreen('capture','${id}|${id}')">Find ${esc(w.french)} 📸</button>`}`}).join("")}`;
+ const m=mission(id);
+
+ if(!m){
+   return `<div class="card">
+     <h2>Mission not found</h2>
+     <p>Sorry, we couldn't find this treasure hunt.</p>
+     <button class="btn primary" onclick="goHome()">Back to Adventure</button>
+   </div>`;
+ }
+
+ const found=m.wordIds.filter(x=>state.discovered.includes(x)).length;
+ const done=state.completed.includes(id);
+
+ return `<div class="hero">
+   <div style="font-size:52px">${m.emoji||"🔎"}</div>
+   <h1>${esc(m.title)}</h1>
+   <p>${esc(m.description)}</p>
+ </div>
+
+ <div class="card">
+   <div style="display:flex;justify-content:space-between">
+     <b>🔎 Progress</b>
+     <b>${found}/${m.wordIds.length}</b>
+   </div>
+
+   <div class="progressbar" style="margin:10px 0">
+     <span style="width:${m.wordIds.length ? found/m.wordIds.length*100 : 0}%"></span>
+   </div>
+
+   <p>${done
+     ?"🏆 Amazing! You found every treasure."
+     :"Find each treasure and take a photo or draw it."
+   }</p>
+ </div>
+
+ ${m.wordIds.map(wordId=>{
+   const w=word(wordId);
+
+   // Protect the UI if the data contains an invalid word ID.
+   if(!w){
+     console.error("French Hunt Quest: word not found:", wordId, "in mission:", id);
+
+     return `<div class="card" style="border:2px solid #e8b4b4">
+       <b>⚠️ Treasure data missing</b>
+       <p>Word ID: <code>${esc(String(wordId))}</code></p>
+     </div>`;
+   }
+
+   const d=state.discovered.includes(wordId);
+
+   return `
+     <div class="word">
+       <div>
+         <strong>${esc(w.article||"")} ${esc(w.french)}</strong>
+         <small>${esc(w.english||"")} · ${esc(w.clue||"")}</small>
+       </div>
+
+       <button class="listen"
+         onclick="speak('${esc(w.french)}')">
+         🔊
+       </button>
+     </div>
+
+     ${d
+       ? `<div style="text-align:right;color:var(--green);font-weight:800">
+            ✓ Found
+          </div>`
+       : `<button class="btn blue"
+            onclick="setScreen('capture','${wordId}|${wordId}')">
+            Find ${esc(w.french)} 📸
+          </button>`
+     }
+   `;
+ }).join("")}`;
 }
 
 function renderCapture(key){
