@@ -1,0 +1,19 @@
+{
+  "name": "French Hunt Quest",
+  "short_name": "French Hunt Quest",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFF4D8",
+  "theme_color": "#1749A5",
+  "orientation": "portrait-primary",
+  "description": "A storybook treasure hunt for learning French.",
+  "icons": [
+    {
+      "src": "assets/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
