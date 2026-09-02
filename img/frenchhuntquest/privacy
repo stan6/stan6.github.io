@@ -1,86 +1,306 @@
-# Privacy Policy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-**Last updated: August 12, 2026**
+    <title>Privacy Policy - French Hunt Quest</title>
 
-French Hunt Quest ("French Hunt Quest", "the App", "we", "us", or "our") is an educational application that provides interactive French learning activities and games.
+    <meta name="description"
+          content="Privacy Policy for French Hunt Quest, an educational application providing interactive French learning activities and games.">
 
-We respect your privacy. This Privacy Policy explains how French Hunt Quest handles information when you use the App.
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-## 1. Information We Collect
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f7f7f7;
+        }
 
-French Hunt Quest does **not collect, store, or share personal information** such as your name, email address, phone number, physical address, or account credentials.
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 40px 50px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
 
-The App does not require users to create an account or provide personal information to use its educational features.
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #222;
+            font-size: 2.2rem;
+        }
 
-The App does not operate a personal user database or transmit users' personal information to our servers.
+        .updated {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
 
-## 2. Analytics, Advertising, and Tracking
+        h2 {
+            margin-top: 35px;
+            margin-bottom: 12px;
+            color: #222;
+            font-size: 1.35rem;
+        }
 
-French Hunt Quest does not use:
+        p {
+            margin: 0 0 16px;
+        }
 
-* Advertising networks
-* Analytics services
-* Behavioral tracking
-* Advertising identifiers
-* User profiling services
-* Third-party tracking technologies
+        ul {
+            margin-top: 0;
+            margin-bottom: 18px;
+            padding-left: 25px;
+        }
 
-We do not use personal information for advertising, marketing, or user profiling.
+        li {
+            margin-bottom: 6px;
+        }
 
-## 3. App Functionality and Internet Access
+        a {
+            color: #1565c0;
+            text-decoration: none;
+        }
 
-The educational games and core functionality of French Hunt Quest are designed to work without requiring an online account.
+        a:hover {
+            text-decoration: underline;
+        }
 
-Certain functionality, such as optional in-app purchases, may require an internet connection and interaction with Google Play services.
+        .contact {
+            padding: 18px 20px;
+            margin-top: 15px;
+            background: #f5f8fc;
+            border-left: 4px solid #1565c0;
+            border-radius: 4px;
+        }
 
-## 4. In-App Purchases
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                padding: 25px 20px;
+                border-radius: 0;
+                box-shadow: none;
+            }
 
-French Hunt Quest offers optional premium content or features through Google Play's billing system.
+            h1 {
+                font-size: 1.8rem;
+            }
 
-Payments are processed by Google Play. French Hunt Quest does not collect or store users' payment card numbers, bank account information, or other payment credentials.
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
 
-French Hunt Quest may receive information from Google Play that is necessary to determine the status of an in-app purchase and provide the purchased features.
+<body>
 
-Google handles payment and transaction information according to its own privacy practices and policies.
+<main class="container">
 
-## 5. Children's Privacy
+    <h1>Privacy Policy</h1>
 
-French Hunt Quest is an educational application that may be used by children.
+    <div class="updated">
+        <strong>Last updated:</strong> August 12, 2026
+    </div>
 
-The App does not require children to create accounts or provide personal information to use its educational features.
+    <p>
+        French Hunt Quest ("French Hunt Quest", "the App", "we", "us",
+        or "our") is an educational application that provides
+        interactive French learning activities and games.
+    </p>
 
-We do not knowingly collect personal information from children.
+    <p>
+        We respect your privacy. This Privacy Policy explains how
+        French Hunt Quest handles information when you use the App.
+    </p>
 
-French Hunt Quest does not contain behavioral advertising or use personal information from children for advertising or tracking.
 
-## 6. Data Storage
+    <h2>1. Information We Collect</h2>
 
-French Hunt Quest may store app-related settings and game progress locally on the user's device so that the App can provide its functionality.
+    <p>
+        French Hunt Quest does <strong>not collect, store, or share
+        personal information</strong> such as your name, email address,
+        phone number, physical address, or account credentials.
+    </p>
 
-Such local app data is not collected by us or transmitted to our servers as personal information.
+    <p>
+        The App does not require users to create an account or provide
+        personal information to use its educational features.
+    </p>
 
-## 7. Third-Party Services
+    <p>
+        The App does not operate a personal user database or transmit
+        users' personal information to our servers.
+    </p>
 
-French Hunt Quest uses Google Play services for distributing the application and processing optional in-app purchases.
 
-Google Play may process information in connection with purchases and the operation of Google Play services. Such processing is governed by Google's applicable privacy policies.
+    <h2>2. Analytics, Advertising, and Tracking</h2>
 
-French Hunt Quest does not control the privacy practices of third-party services.
+    <p>French Hunt Quest does not use:</p>
 
-## 8. Data Security
+    <ul>
+        <li>Advertising networks</li>
+        <li>Analytics services</li>
+        <li>Behavioral tracking</li>
+        <li>Advertising identifiers</li>
+        <li>User profiling services</li>
+        <li>Third-party tracking technologies</li>
+    </ul>
 
-French Hunt Quest does not maintain a server-side database containing users' personal information.
+    <p>
+        We do not use personal information for advertising, marketing,
+        or user profiling.
+    </p>
 
-Because we do not collect or maintain personal information on our servers, there is no personal information database maintained by French Hunt Quest.
 
-## 9. Changes to This Privacy Policy
+    <h2>3. App Functionality and Internet Access</h2>
 
-We may update this Privacy Policy if the App's functionality, services, or applicable requirements change.
+    <p>
+        The educational games and core functionality of French Hunt Quest
+        are designed to work without requiring an online account.
+    </p>
 
-The updated Privacy Policy will be made available through the privacy policy page associated with French Hunt Quest.
+    <p>
+        Certain functionality, such as optional in-app purchases,
+        may require an internet connection and interaction with
+        Google Play services.
+    </p>
 
-## 10. Contact Us
 
-If you have questions about this Privacy Policy or French Hunt Quest's privacy practices, please contact us at:
+    <h2>4. In-App Purchases</h2>
 
-**Email:** [profapp3@gmail.com](mailto:profapp3@gmail.com)
+    <p>
+        French Hunt Quest offers optional premium content or features
+        through Google Play's billing system.
+    </p>
+
+    <p>
+        Payments are processed by Google Play. French Hunt Quest does
+        not collect or store users' payment card numbers, bank account
+        information, or other payment credentials.
+    </p>
+
+    <p>
+        French Hunt Quest may receive information from Google Play that
+        is necessary to determine the status of an in-app purchase and
+        provide the purchased features.
+    </p>
+
+    <p>
+        Google handles payment and transaction information according
+        to its own privacy practices and policies.
+    </p>
+
+
+    <h2>5. Children's Privacy</h2>
+
+    <p>
+        French Hunt Quest is an educational application that may be
+        used by children.
+    </p>
+
+    <p>
+        The App does not require children to create accounts or
+        provide personal information to use its educational features.
+    </p>
+
+    <p>
+        We do not knowingly collect personal information from children.
+    </p>
+
+    <p>
+        French Hunt Quest does not contain behavioral advertising or
+        use personal information from children for advertising or
+        tracking.
+    </p>
+
+
+    <h2>6. Data Storage</h2>
+
+    <p>
+        French Hunt Quest may store app-related settings and game
+        progress locally on the user's device so that the App can
+        provide its functionality.
+    </p>
+
+    <p>
+        Such local app data is not collected by us or transmitted to
+        our servers as personal information.
+    </p>
+
+
+    <h2>7. Third-Party Services</h2>
+
+    <p>
+        French Hunt Quest uses Google Play services for distributing
+        the application and processing optional in-app purchases.
+    </p>
+
+    <p>
+        Google Play may process information in connection with
+        purchases and the operation of Google Play services. Such
+        processing is governed by Google's applicable privacy policies.
+    </p>
+
+    <p>
+        French Hunt Quest does not control the privacy practices of
+        third-party services.
+    </p>
+
+
+    <h2>8. Data Security</h2>
+
+    <p>
+        French Hunt Quest does not maintain a server-side database
+        containing users' personal information.
+    </p>
+
+    <p>
+        Because we do not collect or maintain personal information
+        on our servers, there is no personal information database
+        maintained by French Hunt Quest.
+    </p>
+
+
+    <h2>9. Changes to This Privacy Policy</h2>
+
+    <p>
+        We may update this Privacy Policy if the App's functionality,
+        services, or applicable requirements change.
+    </p>
+
+    <p>
+        The updated Privacy Policy will be made available through
+        the privacy policy page associated with French Hunt Quest.
+    </p>
+
+
+    <h2>10. Contact Us</h2>
+
+    <p>
+        If you have questions about this Privacy Policy or French Hunt
+        Quest's privacy practices, please contact us at:
+    </p>
+
+    <div class="contact">
+        <strong>Email:</strong>
+        <a href="mailto:profapp3@gmail.com">
+            profapp3@gmail.com
+        </a>
+    </div>
+
+</main>
+
+</body>
+</html>
+
